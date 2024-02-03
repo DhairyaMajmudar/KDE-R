@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="SEC_Contents">
+<h2 class="contents-heading" id="calibre_pb_1">Table of Contents</h2>
+
+<div class="top-level-extent">
+
+<ul class="toc-numbered-mark">
+  <li class="calibre3"><a id="toc-Preface-1" href="R-intro_split_002.html#Preface">Preface</a></li>
+  <li class="calibre3"><a id="toc-Introduction-and-preliminaries-1" href="R-intro_split_002.html#Introduction-and-preliminaries">1 Introduction and preliminaries</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-The-R-environment-1" href="R-intro_split_003.html#The-R-environment">1.1 The R environment</a></li>
+    <li class="calibre3"><a id="toc-Related-software-and-documentation-1" href="R-intro_split_003.html#Related-software-and-documentation">1.2 Related software and documentation</a></li>
+    <li class="calibre3"><a id="toc-R-and-statistics-1" href="R-intro_split_003.html#R-and-statistics">1.3 R and statistics</a></li>
+    <li class="calibre3"><a id="toc-R-and-the-window-system-1" href="R-intro_split_003.html#R-and-the-window-system">1.4 R and the window system</a></li>
+    <li class="calibre3"><a id="toc-Using-R-interactively-1" href="R-intro_split_003.html#Using-R-interactively">1.5 Using R interactively</a></li>
+    <li class="calibre3"><a id="toc-An-introductory-session" href="R-intro_split_003.html#An-introductory-session">1.6 An introductory session</a></li>
+    <li class="calibre3"><a id="toc-Getting-help-with-functions-and-features" href="R-intro_split_003.html#Getting-help">1.7 Getting help with functions and features</a></li>
+    <li class="calibre3"><a id="toc-R-commands_002c-case-sensitivity_002c-etc_002e" href="R-intro_split_003.html#R-commands_003b-case-sensitivity-etc">1.8 R commands, case sensitivity, etc.</a></li>
+    <li class="calibre3"><a id="toc-Recall-and-correction-of-previous-commands-1" href="R-intro_split_003.html#Recall-and-correction-of-previous-commands">1.9 Recall and correction of previous commands</a></li>
+    <li class="calibre3"><a id="toc-Executing-commands-from-or-diverting-output-to-a-file-1" href="R-intro_split_003.html#Executing-commands-from-or-diverting-output-to-a-file">1.10 Executing commands from or diverting output to a file</a></li>
+    <li class="calibre3"><a id="toc-Data-permanency-and-removing-objects-1" href="R-intro_split_003.html#Data-permanency-and-removing-objects">1.11 Data permanency and removing objects</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Simple-manipulations_003b-numbers-and-vectors" href="R-intro_split_003.html#Simple-manipulations-numbers-and-vectors">2 Simple manipulations; numbers and vectors</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Vectors-and-assignment-1" href="R-intro_split_004.html#Vectors-and-assignment">2.1 Vectors and assignment</a></li>
+    <li class="calibre3"><a id="toc-Vector-arithmetic-1" href="R-intro_split_004.html#Vector-arithmetic">2.2 Vector arithmetic</a></li>
+    <li class="calibre3"><a id="toc-Generating-regular-sequences-1" href="R-intro_split_004.html#Generating-regular-sequences">2.3 Generating regular sequences</a></li>
+    <li class="calibre3"><a id="toc-Logical-vectors-1" href="R-intro_split_004.html#Logical-vectors">2.4 Logical vectors</a></li>
+    <li class="calibre3"><a id="toc-Missing-values-1" href="R-intro_split_004.html#Missing-values">2.5 Missing values</a></li>
+    <li class="calibre3"><a id="toc-Character-vectors-1" href="R-intro_split_004.html#Character-vectors">2.6 Character vectors</a></li>
+    <li class="calibre3"><a id="toc-Index-vectors_003b-selecting-and-modifying-subsets-of-a-data-set" href="R-intro_split_004.html#Index-vectors">2.7 Index vectors; selecting and modifying subsets of a data set</a></li>
+    <li class="calibre3"><a id="toc-Other-types-of-objects-1" href="R-intro_split_004.html#Other-types-of-objects">2.8 Other types of objects</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Objects_002c-their-modes-and-attributes" href="R-intro_split_004.html#Objects">3 Objects, their modes and attributes</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Intrinsic-attributes_003a-mode-and-length" href="R-intro_split_005.html#The-intrinsic-attributes-mode-and-length">3.1 Intrinsic attributes: mode and length</a></li>
+    <li class="calibre3"><a id="toc-Changing-the-length-of-an-object-1" href="R-intro_split_005.html#Changing-the-length-of-an-object">3.2 Changing the length of an object</a></li>
+    <li class="calibre3"><a id="toc-Getting-and-setting-attributes-1" href="R-intro_split_005.html#Getting-and-setting-attributes">3.3 Getting and setting attributes</a></li>
+    <li class="calibre3"><a id="toc-The-class-of-an-object-1" href="R-intro_split_005.html#The-class-of-an-object">3.4 The class of an object</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Ordered-and-unordered-factors" href="R-intro_split_005.html#Factors">4 Ordered and unordered factors</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-A-specific-example" href="R-intro_split_006.html#A-specific-example">4.1 A specific example</a></li>
+    <li class="calibre3"><a id="toc-The-function-tapply_0028_0029-and-ragged-arrays-1" href="R-intro_split_006.html#The-function-tapply_0028_0029-and-ragged-arrays">4.2 The function <code class="code">tapply()</code> and ragged arrays</a></li>
+    <li class="calibre3"><a id="toc-Ordered-factors-1" href="R-intro_split_006.html#Ordered-factors">4.3 Ordered factors</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Arrays-and-matrices-1" href="R-intro_split_006.html#Arrays-and-matrices">5 Arrays and matrices</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Arrays-1" href="R-intro_split_007.html#Arrays">5.1 Arrays</a></li>
+    <li class="calibre3"><a id="toc-Array-indexing_002e-Subsections-of-an-array" href="R-intro_split_007.html#Array-indexing">5.2 Array indexing.  Subsections of an array</a></li>
+    <li class="calibre3"><a id="toc-Index-matrices-1" href="R-intro_split_007.html#Index-matrices">5.3 Index matrices</a></li>
+    <li class="calibre3"><a id="toc-The-array_0028_0029-function-1" href="R-intro_split_007.html#The-array_0028_0029-function">5.4 The <code class="code">array()</code> function</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Mixed-vector-and-array-arithmetic_002e-The-recycling-rule" href="R-intro_split_007.html#The-recycling-rule">5.4.1 Mixed vector and array arithmetic.  The recycling rule</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-The-outer-product-of-two-arrays-1" href="R-intro_split_007.html#The-outer-product-of-two-arrays">5.5 The outer product of two arrays</a></li>
+    <li class="calibre3"><a id="toc-Generalized-transpose-of-an-array-1" href="R-intro_split_007.html#Generalized-transpose-of-an-array">5.6 Generalized transpose of an array</a></li>
+    <li class="calibre3"><a id="toc-Matrix-facilities-1" href="R-intro_split_007.html#Matrix-facilities">5.7 Matrix facilities</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Matrix-multiplication" href="R-intro_split_007.html#Multiplication">5.7.1 Matrix multiplication</a></li>
+      <li class="calibre3"><a id="toc-Linear-equations-and-inversion-1" href="R-intro_split_007.html#Linear-equations-and-inversion">5.7.2 Linear equations and inversion</a></li>
+      <li class="calibre3"><a id="toc-Eigenvalues-and-eigenvectors-1" href="R-intro_split_007.html#Eigenvalues-and-eigenvectors">5.7.3 Eigenvalues and eigenvectors</a></li>
+      <li class="calibre3"><a id="toc-Singular-value-decomposition-and-determinants-1" href="R-intro_split_007.html#Singular-value-decomposition-and-determinants">5.7.4 Singular value decomposition and determinants</a></li>
+      <li class="calibre3"><a id="toc-Least-squares-fitting-and-the-QR-decomposition-1" href="R-intro_split_007.html#Least-squares-fitting-and-the-QR-decomposition">5.7.5 Least squares fitting and the QR decomposition</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Forming-partitioned-matrices_002c-cbind_0028_0029-and-rbind_0028_0029" href="R-intro_split_007.html#Forming-partitioned-matrices">5.8 Forming partitioned matrices, <code class="code">cbind()</code> and <code class="code">rbind()</code></a></li>
+    <li class="calibre3"><a id="toc-The-concatenation-function_002c-c_0028_0029_002c-with-arrays" href="R-intro_split_007.html#The-concatenation-function-c_0028_0029-with-arrays">5.9 The concatenation function, <code class="code">c()</code>, with arrays</a></li>
+    <li class="calibre3"><a id="toc-Frequency-tables-from-factors-1" href="R-intro_split_007.html#Frequency-tables-from-factors">5.10 Frequency tables from factors</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Lists-and-data-frames-1" href="R-intro_split_007.html#Lists-and-data-frames">6 Lists and data frames</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Lists-1" href="R-intro_split_008.html#Lists">6.1 Lists</a></li>
+    <li class="calibre3"><a id="toc-Constructing-and-modifying-lists-1" href="R-intro_split_008.html#Constructing-and-modifying-lists">6.2 Constructing and modifying lists</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Concatenating-lists-1" href="R-intro_split_008.html#Concatenating-lists">6.2.1 Concatenating lists</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Data-frames-1" href="R-intro_split_008.html#Data-frames">6.3 Data frames</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Making-data-frames-1" href="R-intro_split_008.html#Making-data-frames">6.3.1 Making data frames</a></li>
+      <li class="calibre3"><a id="toc-attach_0028_0029-and-detach_0028_0029-1" href="R-intro_split_008.html#attach_0028_0029-and-detach_0028_0029">6.3.2 <code class="code">attach()</code> and <code class="code">detach()</code></a></li>
+      <li class="calibre3"><a id="toc-Working-with-data-frames-1" href="R-intro_split_008.html#Working-with-data-frames">6.3.3 Working with data frames</a></li>
+      <li class="calibre3"><a id="toc-Attaching-arbitrary-lists-1" href="R-intro_split_008.html#Attaching-arbitrary-lists">6.3.4 Attaching arbitrary lists</a></li>
+      <li class="calibre3"><a id="toc-Managing-the-search-path-1" href="R-intro_split_008.html#Managing-the-search-path">6.3.5 Managing the search path</a></li>
+    </ul></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Reading-data-from-files-1" href="R-intro_split_008.html#Reading-data-from-files">7 Reading data from files</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-The-read_002etable_0028_0029-function-1" href="R-intro_split_009.html#The-read_002etable_0028_0029-function">7.1 The <code class="code">read.table()</code> function</a></li>
+    <li class="calibre3"><a id="toc-The-scan_0028_0029-function-1" href="R-intro_split_009.html#The-scan_0028_0029-function">7.2 The <code class="code">scan()</code> function</a></li>
+    <li class="calibre3"><a id="toc-Accessing-builtin-datasets-1" href="R-intro_split_009.html#Accessing-builtin-datasets">7.3 Accessing builtin datasets</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Loading-data-from-other-R-packages" href="R-intro_split_009.html#Loading-data-from-other-R-packages">7.3.1 Loading data from other R packages</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Editing-data-1" href="R-intro_split_009.html#Editing-data">7.4 Editing data</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Probability-distributions-1" href="R-intro_split_009.html#Probability-distributions">8 Probability distributions</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-R-as-a-set-of-statistical-tables-1" href="R-intro_split_010.html#R-as-a-set-of-statistical-tables">8.1 R as a set of statistical tables</a></li>
+    <li class="calibre3"><a id="toc-Examining-the-distribution-of-a-set-of-data-1" href="R-intro_split_010.html#Examining-the-distribution-of-a-set-of-data">8.2 Examining the distribution of a set of data</a></li>
+    <li class="calibre3"><a id="toc-One_002d-and-two_002dsample-tests-1" href="R-intro_split_010.html#One_002d-and-two_002dsample-tests">8.3 One- and two-sample tests</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Grouping_002c-loops-and-conditional-execution" href="R-intro_split_010.html#Loops-and-conditional-execution">9 Grouping, loops and conditional execution</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Grouped-expressions-1" href="R-intro_split_011.html#Grouped-expressions">9.1 Grouped expressions</a></li>
+    <li class="calibre3"><a id="toc-Control-statements-1" href="R-intro_split_011.html#Control-statements">9.2 Control statements</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Conditional-execution_003a-if-statements" href="R-intro_split_011.html#Conditional-execution">9.2.1 Conditional execution: <code class="code">if</code> statements</a></li>
+      <li class="calibre3"><a id="toc-Repetitive-execution_003a-for-loops_002c-repeat-and-while" href="R-intro_split_011.html#Repetitive-execution">9.2.2 Repetitive execution: <code class="code">for</code> loops, <code class="code">repeat</code> and <code class="code">while</code></a></li>
+    </ul></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Writing-your-own-functions-1" href="R-intro_split_011.html#Writing-your-own-functions">10 Writing your own functions</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Simple-examples-1" href="R-intro_split_012.html#Simple-examples">10.1 Simple examples</a></li>
+    <li class="calibre3"><a id="toc-Defining-new-binary-operators-1" href="R-intro_split_012.html#Defining-new-binary-operators">10.2 Defining new binary operators</a></li>
+    <li class="calibre3"><a id="toc-Named-arguments-and-defaults-1" href="R-intro_split_012.html#Named-arguments-and-defaults">10.3 Named arguments and defaults</a></li>
+    <li class="calibre3"><a id="toc-The-_2026-argument" href="R-intro_split_012.html#The-three-dots-argument">10.4 The ‘<samp class="code">…</samp>’ argument</a></li>
+    <li class="calibre3"><a id="toc-Assignments-within-functions" href="R-intro_split_012.html#Assignment-within-functions">10.5 Assignments within functions</a></li>
+    <li class="calibre3"><a id="toc-More-advanced-examples-1" href="R-intro_split_012.html#More-advanced-examples">10.6 More advanced examples</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Efficiency-factors-in-block-designs-1" href="R-intro_split_012.html#Efficiency-factors-in-block-designs">10.6.1 Efficiency factors in block designs</a></li>
+      <li class="calibre3"><a id="toc-Dropping-all-names-in-a-printed-array-1" href="R-intro_split_012.html#Dropping-all-names-in-a-printed-array">10.6.2 Dropping all names in a printed array</a></li>
+      <li class="calibre3"><a id="toc-Recursive-numerical-integration-1" href="R-intro_split_012.html#Recursive-numerical-integration">10.6.3 Recursive numerical integration</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Scope-1" href="R-intro_split_012.html#Scope">10.7 Scope</a></li>
+    <li class="calibre3"><a id="toc-Customizing-the-environment-1" href="R-intro_split_012.html#Customizing-the-environment">10.8 Customizing the environment</a></li>
+    <li class="calibre3"><a id="toc-Classes_002c-generic-functions-and-object-orientation" href="R-intro_split_012.html#Object-orientation">10.9 Classes, generic functions and object orientation</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Statistical-models-in-R-1" href="R-intro_split_012.html#Statistical-models-in-R">11 Statistical models in R</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Defining-statistical-models_003b-formulae" href="R-intro_split_013.html#Formulae-for-statistical-models">11.1 Defining statistical models; formulae</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Contrasts-1" href="R-intro_split_013.html#Contrasts">11.1.1 Contrasts</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Linear-models-1" href="R-intro_split_013.html#Linear-models">11.2 Linear models</a></li>
+    <li class="calibre3"><a id="toc-Generic-functions-for-extracting-model-information-1" href="R-intro_split_013.html#Generic-functions-for-extracting-model-information">11.3 Generic functions for extracting model information</a></li>
+    <li class="calibre3"><a id="toc-Analysis-of-variance-and-model-comparison-1" href="R-intro_split_013.html#Analysis-of-variance-and-model-comparison">11.4 Analysis of variance and model comparison</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-ANOVA-tables-1" href="R-intro_split_013.html#ANOVA-tables">11.4.1 ANOVA tables</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Updating-fitted-models-1" href="R-intro_split_013.html#Updating-fitted-models">11.5 Updating fitted models</a></li>
+    <li class="calibre3"><a id="toc-Generalized-linear-models-1" href="R-intro_split_013.html#Generalized-linear-models">11.6 Generalized linear models</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Families-1" href="R-intro_split_013.html#Families">11.6.1 Families</a></li>
+      <li class="calibre3"><a id="toc-The-glm_0028_0029-function-1" href="R-intro_split_013.html#The-glm_0028_0029-function">11.6.2 The <code class="code">glm()</code> function</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Nonlinear-least-squares-and-maximum-likelihood-models-1" href="R-intro_split_013.html#Nonlinear-least-squares-and-maximum-likelihood-models">11.7 Nonlinear least squares and maximum likelihood models</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Least-squares-1" href="R-intro_split_013.html#Least-squares">11.7.1 Least squares</a></li>
+      <li class="calibre3"><a id="toc-Maximum-likelihood-1" href="R-intro_split_013.html#Maximum-likelihood">11.7.2 Maximum likelihood</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Some-non_002dstandard-models-1" href="R-intro_split_013.html#Some-non_002dstandard-models">11.8 Some non-standard models</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Graphical-procedures" href="R-intro_split_013.html#Graphics">12 Graphical procedures</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-High_002dlevel-plotting-commands-1" href="R-intro_split_014.html#High_002dlevel-plotting-commands">12.1 High-level plotting commands</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-The-plot_0028_0029-function-1" href="R-intro_split_014.html#The-plot_0028_0029-function">12.1.1 The <code class="code">plot()</code> function</a></li>
+      <li class="calibre3"><a id="toc-Displaying-multivariate-data-1" href="R-intro_split_014.html#Displaying-multivariate-data">12.1.2 Displaying multivariate data</a></li>
+      <li class="calibre3"><a id="toc-Display-graphics-1" href="R-intro_split_014.html#Display-graphics">12.1.3 Display graphics</a></li>
+      <li class="calibre3"><a id="toc-Arguments-to-high_002dlevel-plotting-functions-1" href="R-intro_split_014.html#Arguments-to-high_002dlevel-plotting-functions">12.1.4 Arguments to high-level plotting functions</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Low_002dlevel-plotting-commands-1" href="R-intro_split_014.html#Low_002dlevel-plotting-commands">12.2 Low-level plotting commands</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Mathematical-annotation-1" href="R-intro_split_014.html#Mathematical-annotation">12.2.1 Mathematical annotation</a></li>
+      <li class="calibre3"><a id="toc-Hershey-vector-fonts-1" href="R-intro_split_014.html#Hershey-vector-fonts">12.2.2 Hershey vector fonts</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Interacting-with-graphics-1" href="R-intro_split_014.html#Interacting-with-graphics">12.3 Interacting with graphics</a></li>
+    <li class="calibre3"><a id="toc-Using-graphics-parameters-1" href="R-intro_split_014.html#Using-graphics-parameters">12.4 Using graphics parameters</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Permanent-changes_003a-The-par_0028_0029-function" href="R-intro_split_014.html#The-par_0028_0029-function">12.4.1 Permanent changes: The <code class="code">par()</code> function</a></li>
+      <li class="calibre3"><a id="toc-Temporary-changes_003a-Arguments-to-graphics-functions" href="R-intro_split_014.html#Arguments-to-graphics-functions">12.4.2 Temporary changes: Arguments to graphics functions</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Graphics-parameters-list" href="R-intro_split_014.html#Graphics-parameters">12.5 Graphics parameters list</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-Graphical-elements-1" href="R-intro_split_014.html#Graphical-elements">12.5.1 Graphical elements</a></li>
+      <li class="calibre3"><a id="toc-Axes-and-tick-marks-1" href="R-intro_split_014.html#Axes-and-tick-marks">12.5.2 Axes and tick marks</a></li>
+      <li class="calibre3"><a id="toc-Figure-margins-1" href="R-intro_split_014.html#Figure-margins">12.5.3 Figure margins</a></li>
+      <li class="calibre3"><a id="toc-Multiple-figure-environment-1" href="R-intro_split_014.html#Multiple-figure-environment">12.5.4 Multiple figure environment</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Device-drivers-1" href="R-intro_split_014.html#Device-drivers">12.6 Device drivers</a>
+    <ul class="toc-numbered-mark">
+      <li class="calibre3"><a id="toc-PostScript-diagrams-for-typeset-documents-1" href="R-intro_split_014.html#PostScript-diagrams-for-typeset-documents">12.6.1 PostScript diagrams for typeset documents</a></li>
+      <li class="calibre3"><a id="toc-Multiple-graphics-devices-1" href="R-intro_split_014.html#Multiple-graphics-devices">12.6.2 Multiple graphics devices</a></li>
+    </ul></li>
+    <li class="calibre3"><a id="toc-Dynamic-graphics-1" href="R-intro_split_014.html#Dynamic-graphics">12.7 Dynamic graphics</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Packages-1" href="R-intro_split_014.html#Packages">13 Packages</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Standard-packages-1" href="R-intro_split_015.html#Standard-packages">13.1 Standard packages</a></li>
+    <li class="calibre3"><a id="toc-Contributed-packages-and-CRAN-1" href="R-intro_split_015.html#Contributed-packages-and-CRAN">13.2 Contributed packages and <abbr>CRAN</abbr></a></li>
+    <li class="calibre3"><a id="toc-Namespaces-1" href="R-intro_split_015.html#Namespaces">13.3 Namespaces</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-OS-facilities-1" href="R-intro_split_015.html#OS-facilities">14 OS facilities</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Files-and-directories-1" href="R-intro_split_016.html#Files-and-directories">14.1 Files and directories</a></li>
+    <li class="calibre3"><a id="toc-Filepaths-1" href="R-intro_split_016.html#Filepaths">14.2 Filepaths</a></li>
+    <li class="calibre3"><a id="toc-System-commands-1" href="R-intro_split_016.html#System-commands">14.3 System commands</a></li>
+    <li class="calibre3"><a id="toc-Compression-and-Archives-1" href="R-intro_split_016.html#Compression-and-Archives">14.4 Compression and Archives</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-A-sample-session-1" href="R-intro_split_017.html#A-sample-session">Appendix A A sample session</a></li>
+  <li class="calibre3"><a id="toc-Invoking-R-1" href="R-intro_split_018.html#Invoking-R">Appendix B Invoking R</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Invoking-R-from-the-command-line-1" href="R-intro_split_018.html#Invoking-R-from-the-command-line">B.1 Invoking R from the command line</a></li>
+    <li class="calibre3"><a id="toc-Invoking-R-under-Windows-1" href="R-intro_split_018.html#Invoking-R-under-Windows">B.2 Invoking R under Windows</a></li>
+    <li class="calibre3"><a id="toc-Invoking-R-under-macOS-1" href="R-intro_split_018.html#Invoking-R-under-macOS">B.3 Invoking R under macOS</a></li>
+    <li class="calibre3"><a id="toc-Scripting-with-R-1" href="R-intro_split_018.html#Scripting-with-R">B.4 Scripting with R</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-The-command_002dline-editor-1" href="R-intro_split_019.html#The-command_002dline-editor">Appendix C The command-line editor</a>
+  <ul class="toc-numbered-mark">
+    <li class="calibre3"><a id="toc-Preliminaries" href="R-intro_split_019.html#Preliminaries">C.1 Preliminaries</a></li>
+    <li class="calibre3"><a id="toc-Editing-actions" href="R-intro_split_019.html#Editing-actions">C.2 Editing actions</a></li>
+    <li class="calibre3"><a id="toc-Command_002dline-editor-summary" href="R-intro_split_019.html#Command_002dline-editor-summary">C.3 Command-line editor summary</a></li>
+  </ul></li>
+  <li class="calibre3"><a id="toc-Function-and-variable-index-1" href="R-intro_split_020.html#Function-and-variable-index" rel="index">Appendix D Function and variable index</a></li>
+  <li class="calibre3"><a id="toc-Concept-index-1" href="R-intro_split_021.html#Concept-index" rel="index">Appendix E Concept index</a></li>
+  <li class="calibre3"><a id="toc-References-1" href="R-intro_split_022.html#References">Appendix F References</a></li>
+</ul>
+</div>
+</div>
+<hr class="calibre4"/>
+</div>
+</body></html>

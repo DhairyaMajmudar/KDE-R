@@ -1,0 +1,1159 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Graphics">
+<h2 class="contents-heading" id="Graphical-procedures">12 Graphical procedures</h2>
+
+<p class="calibre1">Graphical facilities are an important and extremely versatile component
+of the R environment.  It is possible to use the facilities to
+display a wide variety of statistical graphs and also to build entirely
+new types of graph.
+</p>
+<p class="calibre1">The graphics facilities can be used in both interactive and batch modes,
+but in most cases, interactive use is more productive.  Interactive use
+is also easy because at startup time R initiates a graphics
+<em class="emph">device driver</em> which opens a special <em class="emph">graphics window</em> for
+the display of interactive graphics.  Although this is done
+automatically, it may useful to know that the command used is
+<code class="code">X11()</code> under UNIX, <code class="code">windows()</code> under Windows and
+<code class="code">quartz()</code> under macOS.  A new device can always be opened by
+<code class="code">dev.new()</code>.
+</p>
+<p class="calibre1">Once the device driver is running, R plotting commands can be used to
+produce a variety of graphical displays and to create entirely new kinds
+of display.
+</p>
+<p class="calibre1">Plotting commands are divided into three basic groups:
+</p>
+<ul class="itemize">
+<li class="calibre3"><strong class="strong">High-level</strong> plotting functions create a new plot on the graphics
+device, possibly with axes, labels, titles and so on.
+</li><li class="calibre3"><strong class="strong">Low-level</strong> plotting functions add more information to an
+existing plot, such as extra points, lines and labels.
+</li><li class="calibre3"><strong class="strong">Interactive</strong> graphics functions allow you interactively add
+information to, or extract information from, an existing plot, using a
+pointing device such as a mouse.
+</li></ul>
+
+<p class="calibre1">In addition, R maintains a list of <em class="emph">graphical parameters</em> which
+can be manipulated to customize your plots.
+</p>
+<p class="calibre1">This manual only describes what are known as ‘base’ graphics.  A
+separate graphics sub-system in package <strong class="strong">grid</strong> coexists with base –
+it is more powerful but harder to use.  There is a recommended package
+<a href="https://CRAN.R-project.org/package=lattice"><strong class="strong">lattice</strong></a> which builds on <strong class="strong">grid</strong> and provides ways to produce
+multi-panel plots akin to those in the <em class="emph">Trellis</em> system in S.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="High_002dlevel-plotting-commands">
+<h3 class="section" id="High_002dlevel-plotting-commands-1">12.1 High-level plotting commands</h3>
+
+<p class="calibre1">High-level plotting functions are designed to generate a complete plot
+of the data passed as arguments to the function.  Where appropriate,
+axes, labels and titles are automatically generated (unless you request
+otherwise.) High-level plotting commands always start a new plot,
+erasing the current plot if necessary.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="The-plot_0028_0029-function">
+<h4 class="subheading" id="The-plot_0028_0029-function-1">12.1.1 The <code class="code">plot()</code> function</h4>
+<a id="index-plot-1"></a>
+
+<p class="calibre1">One of the most frequently used plotting functions in R is the
+<code class="code">plot()</code> function.  This is a <em class="emph">generic</em> function: the type of
+plot produced is dependent on the type or <em class="emph">class</em> of the first
+argument.
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">plot(<var class="emph">x</var>, <var class="emph">y</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">plot(<var class="emph">xy</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">If <var class="emph">x</var> and <var class="emph">y</var> are vectors, <code class="code">plot(<var class="emph">x</var>, <var class="emph">y</var>)</code>
+produces a scatterplot of <var class="emph">y</var> against <var class="emph">x</var>.  The same effect can
+be produced by supplying one argument (second form) as either a list
+containing two elements <var class="emph">x</var> and <var class="emph">y</var> or a two-column matrix.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(<var class="emph">x</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">If <var class="emph">x</var> is a time series, this produces a time-series plot. If
+<var class="emph">x</var> is a numeric vector, it produces a plot of the values in the
+vector against their index in the vector.  If <var class="emph">x</var> is a complex
+vector, it produces a plot of imaginary versus real parts of the vector
+elements.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(<var class="emph">f</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">plot(<var class="emph">f</var>, <var class="emph">y</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1"><var class="emph">f</var> is a factor object, <var class="emph">y</var> is a numeric vector.  The first form
+generates a bar plot of <var class="emph">f</var>; the second form produces boxplots of
+<var class="emph">y</var> for each level of <var class="emph">f</var>.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(<var class="emph">df</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">plot(~ <var class="emph">expr</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">plot(<var class="emph">y</var> ~ <var class="emph">expr</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1"><var class="emph">df</var> is a data frame, <var class="emph">y</var> is any object, <var class="emph">expr</var> is a list
+of object names separated by ‘<code class="code">+</code>’ (e.g., <code class="code">a + b + c</code>).  The
+first two forms produce distributional plots of the variables in a data
+frame (first form) or of a number of named objects (second form).  The
+third form plots <var class="emph">y</var> against every object named in <var class="emph">expr</var>.
+</p></dd>
+</dl>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Displaying-multivariate-data">
+<h4 class="subheading" id="Displaying-multivariate-data-1">12.1.2 Displaying multivariate data</h4>
+
+<p class="calibre1">R provides two very useful functions for representing multivariate
+data.  If <code class="code">X</code> is a numeric matrix or data frame, the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; pairs(X)
+</pre></div>
+<a id="index-pairs"></a>
+
+<p class="calibre1">produces a pairwise scatterplot matrix of the variables defined by the
+columns of <code class="code">X</code>, that is, every column of <code class="code">X</code> is plotted
+against every other column of <code class="code">X</code> and the resulting <em class="emph">n(n-1)</em>
+plots are arranged in a matrix with plot scales constant over the rows
+and columns of the matrix.
+</p>
+<p class="calibre1">When three or four variables are involved a <em class="emph">coplot</em> may be more
+enlightening.  If <code class="code">a</code> and <code class="code">b</code> are numeric vectors and <code class="code">c</code>
+is a numeric vector or factor object (all of the same length), then
+the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; coplot(a ~ b | c)
+</pre></div>
+<a id="index-coplot"></a>
+
+<p class="calibre1">produces a number of scatterplots of <code class="code">a</code> against <code class="code">b</code> for given
+values of <code class="code">c</code>.  If <code class="code">c</code> is a factor, this simply means that
+<code class="code">a</code> is plotted against <code class="code">b</code> for every level of <code class="code">c</code>.  When
+<code class="code">c</code> is numeric, it is divided into a number of <em class="emph">conditioning
+intervals</em> and for each interval <code class="code">a</code> is plotted against <code class="code">b</code>
+for values of <code class="code">c</code> within the interval.  The number and position of
+intervals can be controlled with <code class="code">given.values=</code> argument to
+<code class="code">coplot()</code>—the function <code class="code">co.intervals()</code> is useful for
+selecting intervals.  You can also use two <em class="emph">given</em> variables with a
+command like
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; coplot(a ~ b | c + d)
+</pre></div>
+
+<p class="calibre1">which produces scatterplots of <code class="code">a</code> against <code class="code">b</code> for every joint
+conditioning interval of <code class="code">c</code> and <code class="code">d</code>.
+</p>
+<p class="calibre1">The <code class="code">coplot()</code> and <code class="code">pairs()</code> function both take an argument
+<code class="code">panel=</code> which can be used to customize the type of plot which
+appears in each panel.  The default is <code class="code">points()</code> to produce a
+scatterplot but by supplying some other low-level graphics function of
+two vectors <code class="code">x</code> and <code class="code">y</code> as the value of <code class="code">panel=</code> you can
+produce any type of plot you wish.  An example panel function useful for
+coplots is <code class="code">panel.smooth()</code>.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Display-graphics">
+<h4 class="subheading" id="Display-graphics-1">12.1.3 Display graphics</h4>
+
+<p class="calibre1">Other high-level graphics functions produce different types of plots.
+Some examples are:
+</p>
+<dl class="table">
+<dt id="index-qqnorm-1" class="top-level-extent"><span><code class="code">qqnorm(x)</code><a class="pcalibre copiable-link" href="#index-qqnorm-1"> ¶</a></span></dt>
+<dt class="top-level-extent"><code class="code">qqline(x)</code></dt>
+<dt class="top-level-extent"><code class="code">qqplot(x, y)</code></dt>
+<dd class="calibre11"><a id="index-qqline-1"></a>
+<a id="index-qqplot"></a>
+<p class="calibre1">Distribution-comparison plots.  The first form plots the numeric vector
+<code class="code">x</code> against the expected Normal order scores (a normal scores plot)
+and the second adds a straight line to such a plot by drawing a line
+through the distribution and data quartiles.  The third form plots the
+quantiles of <code class="code">x</code> against those of <code class="code">y</code> to compare their
+respective distributions.
+</p>
+</dd>
+<dt id="index-hist-1" class="top-level-extent"><span><code class="code">hist(x)</code><a class="pcalibre copiable-link" href="#index-hist-1"> ¶</a></span></dt>
+<dt class="top-level-extent"><code class="code">hist(x, nclass=<var class="emph">n</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">hist(x, breaks=<var class="emph">b</var>, …)</code></dt>
+<dd class="calibre11"><p class="calibre1">Produces a histogram of the numeric vector <code class="code">x</code>.  A sensible number
+of classes is usually chosen, but a recommendation can be given with the
+<code class="code">nclass=</code> argument.  Alternatively, the breakpoints can be
+specified exactly with the <code class="code">breaks=</code> argument.  If the
+<code class="code">probability=TRUE</code> argument is given, the bars represent relative
+frequencies divided by bin width instead of counts.
+</p>
+</dd>
+<dt id="index-dotchart" class="top-level-extent"><span><code class="code">dotchart(x, …)</code><a class="pcalibre copiable-link" href="#index-dotchart"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Constructs a dotchart of the data in <code class="code">x</code>.  In a dotchart the
+<em class="emph">y</em>-axis gives a labelling of the data in <code class="code">x</code> and the
+<em class="emph">x</em>-axis gives its value.  For example it allows easy visual
+selection of all data entries with values lying in specified ranges.
+</p>
+</dd>
+<dt id="index-image" class="top-level-extent"><span><code class="code">image(x, y, z, …)</code><a class="pcalibre copiable-link" href="#index-image"> ¶</a></span></dt>
+<dt class="top-level-extent"><code class="code">contour(x, y, z, …)</code></dt>
+<dt class="top-level-extent"><code class="code">persp(x, y, z, …)</code></dt>
+<dd class="calibre11"><a id="index-contour"></a>
+<a id="index-persp"></a>
+<p class="calibre1">Plots of three variables.  The <code class="code">image</code> plot draws a grid of rectangles
+using different colours to represent the value of <code class="code">z</code>, the <code class="code">contour</code>
+plot draws contour lines to represent the value of <code class="code">z</code>, and the
+<code class="code">persp</code> plot draws a 3D surface.
+</p></dd>
+</dl>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Arguments-to-high_002dlevel-plotting-functions">
+<h4 class="subheading" id="Arguments-to-high_002dlevel-plotting-functions-1">12.1.4 Arguments to high-level plotting functions</h4>
+
+<p class="calibre1">There are a number of arguments which may be passed to high-level
+graphics functions, as follows:
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">add=TRUE</code></dt>
+<dd class="calibre11"><p class="calibre1">Forces the function to act as a low-level graphics function,
+superimposing the plot on the current plot (some functions only).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">axes=FALSE</code></dt>
+<dd class="calibre11"><p class="calibre1">Suppresses generation of axes—useful for adding your own custom axes
+with the <code class="code">axis()</code> function.  The default, <code class="code">axes=TRUE</code>, means
+include axes.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">log="x"</code></dt>
+<dt class="top-level-extent"><code class="code">log="y"</code></dt>
+<dt class="top-level-extent"><code class="code">log="xy"</code></dt>
+<dd class="calibre11"><p class="calibre1">Causes the <em class="emph">x</em>, <em class="emph">y</em> or both axes to be logarithmic.  This will
+work for many, but not all, types of plot.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">type=</code></dt>
+<dd class="calibre11"><p class="calibre1">The <code class="code">type=</code> argument controls the type of plot produced, as
+follows:
+</p>
+<dl class="table1">
+<dt class="top-level-extent"><code class="code">type="p"</code></dt>
+<dd class="calibre11"><p class="calibre1">Plot individual points (the default)
+</p></dd>
+<dt class="top-level-extent"><code class="code">type="l"</code></dt>
+<dd class="calibre11"><p class="calibre1">Plot lines
+</p></dd>
+<dt class="top-level-extent"><code class="code">type="b"</code></dt>
+<dd class="calibre11"><p class="calibre1">Plot points connected by lines (<em class="emph">both</em>)
+</p></dd>
+<dt class="top-level-extent"><code class="code">type="o"</code></dt>
+<dd class="calibre11"><p class="calibre1">Plot points overlaid by lines
+</p></dd>
+<dt class="top-level-extent"><code class="code">type="h"</code></dt>
+<dd class="calibre11"><p class="calibre1">Plot vertical lines from points to the zero axis (<em class="emph">high-density</em>)
+</p></dd>
+<dt class="top-level-extent"><code class="code">type="s"</code></dt>
+<dt class="top-level-extent"><code class="code">type="S"</code></dt>
+<dd class="calibre11"><p class="calibre1">Step-function plots.  In the first form, the top of the vertical defines
+the point; in the second, the bottom.
+</p></dd>
+<dt class="top-level-extent"><code class="code">type="n"</code></dt>
+<dd class="calibre11"><p class="calibre1">No plotting at all.  However axes are still drawn (by default) and the
+coordinate system is set up according to the data.  Ideal for creating
+plots with subsequent low-level graphics functions.
+</p></dd>
+</dl>
+
+</dd>
+<dt class="top-level-extent"><code class="code">xlab=<var class="emph">string</var></code></dt>
+<dt class="top-level-extent"><code class="code">ylab=<var class="emph">string</var></code></dt>
+<dd class="calibre11"><p class="calibre1">Axis labels for the <em class="emph">x</em> and <em class="emph">y</em> axes.  Use these arguments to
+change the default labels, usually the names of the objects used in the
+call to the high-level plotting function.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">main=<var class="emph">string</var></code></dt>
+<dd class="calibre11"><p class="calibre1">Figure title, placed at the top of the plot in a large font.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">sub=<var class="emph">string</var></code></dt>
+<dd class="calibre11"><p class="calibre1">Sub-title, placed just below the <em class="emph">x</em>-axis in a smaller font.
+</p></dd>
+</dl>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Low_002dlevel-plotting-commands">
+<h3 class="section" id="Low_002dlevel-plotting-commands-1">12.2 Low-level plotting commands</h3>
+
+<p class="calibre1">Sometimes the high-level plotting functions don’t produce exactly the
+kind of plot you desire.  In this case, low-level plotting commands can
+be used to add extra information (such as points, lines or text) to the
+current plot.
+</p>
+<p class="calibre1">Some of the more useful low-level plotting functions are:
+</p>
+<dl class="table">
+<dt id="index-points" class="top-level-extent"><span><code class="code">points(x, y)</code><a class="pcalibre copiable-link" href="#index-points"> ¶</a></span></dt>
+<dt class="top-level-extent"><code class="code">lines(x, y)</code></dt>
+<dd class="calibre11"><a id="index-lines"></a>
+<p class="calibre1">Adds points or connected lines to the current plot.  <code class="code">plot()</code>’s
+<code class="code">type=</code> argument can also be passed to these functions (and
+defaults to <code class="code">"p"</code> for <code class="code">points()</code> and <code class="code">"l"</code> for
+<code class="code">lines()</code>.)
+</p>
+</dd>
+<dt id="index-text" class="top-level-extent"><span><code class="code">text(x, y, labels, …)</code><a class="pcalibre copiable-link" href="#index-text"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Add text to a plot at points given by <code class="code">x, y</code>.  Normally
+<code class="code">labels</code> is an integer or character vector in which case
+<code class="code">labels[i]</code> is plotted at point <code class="code">(x[i], y[i])</code>.  The default
+is <code class="code">1:length(x)</code>.
+</p>
+<p class="calibre1"><strong class="strong">Note</strong>: This function is often used in the sequence
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; plot(x, y, type="n"); text(x, y, names)
+</pre></div>
+
+<p class="calibre1">The graphics parameter <code class="code">type="n"</code> suppresses the points but sets up
+the axes, and the <code class="code">text()</code> function supplies special characters, as
+specified by the character vector <code class="code">names</code> for the points.
+</p>
+</dd>
+<dt id="index-abline" class="top-level-extent"><span><code class="code">abline(a, b)</code><a class="pcalibre copiable-link" href="#index-abline"> ¶</a></span></dt>
+<dt class="top-level-extent"><code class="code">abline(h=<var class="emph">y</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">abline(v=<var class="emph">x</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">abline(<var class="emph">lm.obj</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">Adds a line of slope <code class="code">b</code> and intercept <code class="code">a</code> to the current
+plot.  <code class="code">h=<var class="emph">y</var></code> may be used to specify <em class="emph">y</em>-coordinates for
+the heights of horizontal lines to go across a plot, and
+<code class="code">v=<var class="emph">x</var></code> similarly for the <em class="emph">x</em>-coordinates for vertical
+lines.  Also <var class="emph">lm.obj</var> may be list with a <code class="code">coefficients</code>
+component of length 2 (such as the result of model-fitting functions,)
+which are taken as an intercept and slope, in that order.
+</p>
+</dd>
+<dt id="index-polygon" class="top-level-extent"><span><code class="code">polygon(x, y, …)</code><a class="pcalibre copiable-link" href="#index-polygon"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Draws a polygon defined by the ordered vertices in (<code class="code">x</code>, <code class="code">y</code>)
+and (optionally) shade it in with hatch lines, or fill it if the
+graphics device allows the filling of figures.
+</p>
+</dd>
+<dt id="index-legend" class="top-level-extent"><span><code class="code">legend(x, y, legend, …)</code><a class="pcalibre copiable-link" href="#index-legend"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Adds a legend to the current plot at the specified position.  Plotting
+characters, line styles, colors etc., are identified with the labels in
+the character vector <code class="code">legend</code>.  At least one other argument <var class="emph">v</var>
+(a vector the same length as <code class="code">legend</code>) with the corresponding
+values of the plotting unit must also be given, as follows:
+</p>
+<dl class="table1">
+<dt class="top-level-extent"><code class="code">legend( , fill=<var class="emph">v</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">Colors for filled boxes
+</p></dd>
+<dt class="top-level-extent"><code class="code">legend( , col=<var class="emph">v</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">Colors in which points or lines will be drawn
+</p></dd>
+<dt class="top-level-extent"><code class="code">legend( , lty=<var class="emph">v</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">Line styles
+</p></dd>
+<dt class="top-level-extent"><code class="code">legend( , lwd=<var class="emph">v</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">Line widths
+</p></dd>
+<dt class="top-level-extent"><code class="code">legend( , pch=<var class="emph">v</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">Plotting characters (character vector)
+</p></dd>
+</dl>
+
+</dd>
+<dt id="index-title" class="top-level-extent"><span><code class="code">title(main, sub)</code><a class="pcalibre copiable-link" href="#index-title"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Adds a title <code class="code">main</code> to the top of the current plot in a large font
+and (optionally) a sub-title <code class="code">sub</code> at the bottom in a smaller font.
+</p>
+</dd>
+<dt id="index-axis" class="top-level-extent"><span><code class="code">axis(side, …)</code><a class="pcalibre copiable-link" href="#index-axis"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Adds an axis to the current plot on the side given by the first argument
+(1 to 4, counting clockwise from the bottom.)  Other arguments control
+the positioning of the axis within or beside the plot, and tick
+positions and labels.  Useful for adding custom axes after calling
+<code class="code">plot()</code> with the <code class="code">axes=FALSE</code> argument.
+</p></dd>
+</dl>
+
+<p class="calibre1">Low-level plotting functions usually require some positioning
+information (e.g., <em class="emph">x</em> and <em class="emph">y</em> coordinates) to determine where
+to place the new plot elements.  Coordinates are given in terms of
+<em class="emph">user coordinates</em> which are defined by the previous high-level
+graphics command and are chosen based on the supplied data.
+</p>
+<p class="calibre1">Where <code class="code">x</code> and <code class="code">y</code> arguments are required, it is also
+sufficient to supply a single argument being a list with elements named
+<code class="code">x</code> and <code class="code">y</code>.  Similarly a matrix with two columns is also
+valid input.  In this way functions such as <code class="code">locator()</code> (see below)
+may be used to specify positions on a plot interactively.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Mathematical-annotation">
+<h4 class="subheading" id="Mathematical-annotation-1">12.2.1 Mathematical annotation</h4>
+
+<p class="calibre1">In some cases, it is useful to add mathematical symbols and formulae to a
+plot.  This can be achieved in R by specifying an <em class="emph">expression</em> rather
+than a character string in any one of <code class="code">text</code>, <code class="code">mtext</code>, <code class="code">axis</code>,
+or <code class="code">title</code>.   For example, the following code draws the formula for
+the Binomial probability function:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; text(x, y, expression(paste(bgroup("(", atop(n, x), ")"), p^x, q^{n-x})))
+</pre></div>
+
+<p class="calibre1">More information, including a full listing of the features available can
+obtained from within R using the commands:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; help(plotmath)
+&gt; example(plotmath)
+&gt; demo(plotmath)
+</pre></div>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Hershey-vector-fonts">
+<h4 class="subheading" id="Hershey-vector-fonts-1">12.2.2 Hershey vector fonts</h4>
+
+<p class="calibre1">It is possible to specify Hershey vector fonts for rendering text when using
+the <code class="code">text</code> and <code class="code">contour</code> functions.  There are three reasons for
+using the Hershey fonts:
+</p><ul class="itemize">
+<li class="calibre3">Hershey fonts can produce better
+output, especially on a computer screen, for rotated and/or small text.
+</li><li class="calibre3">Hershey fonts
+provide certain symbols that may not be available
+in the standard fonts.  In particular, there are zodiac signs, cartographic
+symbols and astronomical symbols.
+</li><li class="calibre3">Hershey fonts provide Cyrillic and Japanese (Kana and Kanji) characters.
+</li></ul>
+
+<p class="calibre1">More information, including tables of Hershey characters can be obtained from
+within R using the commands:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; help(Hershey)
+&gt; demo(Hershey)
+&gt; help(Japanese)
+&gt; demo(Japanese)
+</pre></div>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Interacting-with-graphics">
+<h3 class="section" id="Interacting-with-graphics-1">12.3 Interacting with graphics</h3>
+
+<p class="calibre1">R also provides functions which allow users to extract or add
+information to a plot using a mouse.  The simplest of these is the
+<code class="code">locator()</code> function:
+</p>
+<dl class="table">
+<dt id="index-locator" class="top-level-extent"><span><code class="code">locator(n, type)</code><a class="pcalibre copiable-link" href="#index-locator"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Waits for the user to select locations on the current plot using the
+left mouse button.  This continues until <code class="code">n</code> (default 512) points
+have been selected, or another mouse button is pressed.  The
+<code class="code">type</code> argument allows for plotting at the selected points and has
+the same effect as for high-level graphics commands; the default is no
+plotting.  <code class="code">locator()</code> returns the locations of the points selected
+as a list with two components <code class="code">x</code> and <code class="code">y</code>.
+</p></dd>
+</dl>
+
+<p class="calibre1"><code class="code">locator()</code> is usually called with no arguments.  It is
+particularly useful for interactively selecting positions for graphic
+elements such as legends or labels when it is difficult to calculate in
+advance where the graphic should be placed.  For example, to place some
+informative text near an outlying point, the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; text(locator(1), "Outlier", adj=0)
+</pre></div>
+
+<p class="calibre1">may be useful.  (<code class="code">locator()</code> will be ignored if the current device,
+such as <code class="code">postscript</code> does not support interactive pointing.)
+</p>
+<dl class="table">
+<dt id="index-identify" class="top-level-extent"><span><code class="code">identify(x, y, labels)</code><a class="pcalibre copiable-link" href="#index-identify"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Allow the user to highlight any of the points defined by <code class="code">x</code> and
+<code class="code">y</code> (using the left mouse button) by plotting the corresponding
+component of <code class="code">labels</code> nearby (or the index number of the point if
+<code class="code">labels</code> is absent).  Returns the indices of the selected points
+when another button is pressed.
+</p></dd>
+</dl>
+
+<p class="calibre1">Sometimes we want to identify particular <em class="emph">points</em> on a plot, rather
+than their positions.  For example, we may wish the user to select some
+observation of interest from a graphical display and then manipulate
+that observation in some way.  Given a number of <em class="emph">(x, y)</em>
+coordinates in two numeric vectors <code class="code">x</code> and <code class="code">y</code>, we could use
+the <code class="code">identify()</code> function as follows:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; plot(x, y)
+&gt; identify(x, y)
+</pre></div>
+
+<p class="calibre1">The <code class="code">identify()</code> functions performs no plotting itself, but simply
+allows the user to move the mouse pointer and click the left mouse
+button near a point.  If there is a point near the mouse pointer it will
+be marked with its index number (that is, its position in the
+<code class="code">x</code>/<code class="code">y</code> vectors) plotted nearby.  Alternatively, you could use
+some informative string (such as a case name) as a highlight by using
+the <code class="code">labels</code> argument to <code class="code">identify()</code>, or disable marking
+altogether with the <code class="code">plot = FALSE</code> argument.  When the process is
+terminated (see above), <code class="code">identify()</code> returns the indices of the
+selected points; you can use these indices to extract the selected
+points from the original vectors <code class="code">x</code> and <code class="code">y</code>.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Using-graphics-parameters">
+<h3 class="section" id="Using-graphics-parameters-1">12.4 Using graphics parameters</h3>
+
+<p class="calibre1">When creating graphics, particularly for presentation or publication
+purposes, R’s defaults do not always produce exactly that which is
+required.  You can, however, customize almost every aspect of the
+display using <em class="emph">graphics parameters</em>.  R maintains a list of a
+large number of graphics parameters which control things such as line
+style, colors, figure arrangement and text justification among many
+others.  Every graphics parameter has a name (such as ‘<code class="code">col</code>’,
+which controls colors,) and a value (a color number, for example.)
+</p>
+<p class="calibre1">A separate list of graphics parameters is maintained for each active
+device, and each device has a default set of parameters when
+initialized.  Graphics parameters can be set in two ways: either
+permanently, affecting all graphics functions which access the current
+device; or temporarily, affecting only a single graphics function call.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="The-par_0028_0029-function">
+<h4 class="subheading" id="Permanent-changes_003a-The-par_0028_0029-function">12.4.1 Permanent changes: The <code class="code">par()</code> function</h4>
+<a id="index-par"></a>
+<a id="index-Graphics-parameters"></a>
+
+<p class="calibre1">The <code class="code">par()</code> function is used to access and modify the list of
+graphics parameters for the current graphics device.
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">par()</code></dt>
+<dd class="calibre11"><p class="calibre1">Without arguments, returns a list of all graphics parameters and their
+values for the current device.
+</p></dd>
+<dt class="top-level-extent"><code class="code">par(c("col", "lty"))</code></dt>
+<dd class="calibre11"><p class="calibre1">With a character vector argument, returns only the named graphics
+parameters (again, as a list.)
+</p></dd>
+<dt class="top-level-extent"><code class="code">par(col=4, lty=2)</code></dt>
+<dd class="calibre11"><p class="calibre1">With named arguments (or a single list argument), sets the values of
+the named graphics parameters, and returns the original values of the
+parameters as a list.
+</p></dd>
+</dl>
+
+<p class="calibre1">Setting graphics parameters with the <code class="code">par()</code> function changes the
+value of the parameters <em class="emph">permanently</em>, in the sense that all future
+calls to graphics functions (on the current device) will be affected by
+the new value.  You can think of setting graphics parameters in this way
+as setting “default” values for the parameters, which will be used by
+all graphics functions unless an alternative value is given.
+</p>
+<p class="calibre1">Note that calls to <code class="code">par()</code> <em class="emph">always</em> affect the global values
+of graphics parameters, even when <code class="code">par()</code> is called from within a
+function.  This is often undesirable behavior—usually we want to set
+some graphics parameters, do some plotting, and then restore the
+original values so as not to affect the user’s R session.  You can
+restore the initial values by saving the result of <code class="code">par()</code> when
+making changes, and restoring the initial values when plotting is
+complete.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; oldpar &lt;- par(col=4, lty=2)
+  <span class="r">… plotting commands …</span>
+&gt; par(oldpar)
+</pre></div>
+
+<p class="calibre1">To save and restore <em class="emph">all</em> settable<a id="DOCF24" href="R-intro_split_022.html#FOOT24"><sup class="calibre2">24</sup></a> graphical parameters use
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; oldpar &lt;- par(no.readonly=TRUE)
+  <span class="r">… plotting commands …</span>
+&gt; par(oldpar)
+</pre></div>
+
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Arguments-to-graphics-functions">
+<h4 class="subheading" id="Temporary-changes_003a-Arguments-to-graphics-functions">12.4.2 Temporary changes: Arguments to graphics functions</h4>
+
+<p class="calibre1">Graphics parameters may also be passed to (almost) any graphics function
+as named arguments.  This has the same effect as passing the arguments
+to the <code class="code">par()</code> function, except that the changes only last for the
+duration of the function call.  For example:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; plot(x, y, pch="+")
+</pre></div>
+
+<p class="calibre1">produces a scatterplot using a plus sign as the plotting character,
+without changing the default plotting character for future plots.
+</p>
+<p class="calibre1">Unfortunately, this is not implemented entirely consistently and it is
+sometimes necessary to set and reset graphics parameters using
+<code class="code">par()</code>.
+</p>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Graphics-parameters">
+<h3 class="section" id="Graphics-parameters-list">12.5 Graphics parameters list</h3>
+
+<p class="calibre1">The following sections detail many of the commonly-used graphical
+parameters.  The R help documentation for the <code class="code">par()</code> function
+provides a more concise summary; this is provided as a somewhat more
+detailed alternative.
+</p>
+<p class="calibre1">Graphics parameters will be presented in the following form:
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code"><var class="emph">name</var>=<var class="emph">value</var></code></dt>
+<dd class="calibre11"><p class="calibre1">A description of the parameter’s effect.  <var class="emph">name</var> is the name of the
+parameter, that is, the argument name to use in calls to <code class="code">par()</code> or
+a graphics function.  <var class="emph">value</var> is a typical value you might use when
+setting the parameter.
+</p></dd>
+</dl>
+
+<p class="calibre1">Note that <code class="code">axes</code> is <strong class="strong">not</strong> a graphics parameter but an
+argument to a few <code class="code">plot</code> methods: see <code class="code">xaxt</code> and <code class="code">yaxt</code>.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Graphical-elements">
+<h4 class="subheading" id="Graphical-elements-1">12.5.1 Graphical elements</h4>
+
+<p class="calibre1">R plots are made up of points, lines, text and polygons (filled
+regions.) Graphical parameters exist which control how these
+<em class="emph">graphical elements</em> are drawn, as follows:
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">pch="+"</code></dt>
+<dd class="calibre11"><p class="calibre1">Character to be used for plotting points.  The default varies with
+graphics drivers, but it is usually
+a circle.
+Plotted points tend to appear slightly above or below the appropriate
+position unless you use <code class="code">"."</code> as the plotting character, which
+produces centered points.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">pch=4</code></dt>
+<dd class="calibre11"><p class="calibre1">When <code class="code">pch</code> is given as an integer between 0 and 25 inclusive, a
+specialized plotting symbol is produced.  To see what the symbols are,
+use the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; legend(locator(1), as.character(0:25), pch = 0:25)
+</pre></div>
+
+<p class="calibre1">Those from 21 to 25 may appear to duplicate earlier symbols, but can be
+coloured in different ways: see the help on <code class="code">points</code> and its
+examples.
+</p>
+<p class="calibre1">In addition, <code class="code">pch</code> can be a character or a number in the range
+<code class="code">32:255</code> representing a character in the current font.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">lty=2</code></dt>
+<dd class="calibre11"><p class="calibre1">Line types.  Alternative line styles are not supported on all graphics
+devices (and vary on those that do) but line type 1 is always a solid
+line, line type 0 is always invisible, and line types 2 and onwards are
+dotted or dashed lines, or some combination of both.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">lwd=2</code></dt>
+<dd class="calibre11"><p class="calibre1">Line widths.  Desired width of lines, in multiples of the “standard”
+line width.  Affects axis lines as well as lines drawn with
+<code class="code">lines()</code>, etc.  Not all devices support this, and some have
+restrictions on the widths that can be used.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">col=2</code></dt>
+<dd class="calibre11"><p class="calibre1">Colors to be used for points, lines, text, filled regions and images.
+A number from the current palette (see <code class="code">?palette</code>) or a named colour.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">col.axis</code></dt>
+<dt class="top-level-extent"><code class="code">col.lab</code></dt>
+<dt class="top-level-extent"><code class="code">col.main</code></dt>
+<dt class="top-level-extent"><code class="code">col.sub</code></dt>
+<dd class="calibre11"><p class="calibre1">The color to be used for axis annotation, <em class="emph">x</em> and <em class="emph">y</em> labels,
+main and sub-titles, respectively.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">font=2</code></dt>
+<dd class="calibre11"><p class="calibre1">An integer which specifies which font to use for text.  If possible,
+device drivers arrange so that <code class="code">1</code> corresponds to plain text,
+<code class="code">2</code> to bold face, <code class="code">3</code> to italic, <code class="code">4</code> to bold italic
+and <code class="code">5</code> to a symbol font (which include Greek letters).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">font.axis</code></dt>
+<dt class="top-level-extent"><code class="code">font.lab</code></dt>
+<dt class="top-level-extent"><code class="code">font.main</code></dt>
+<dt class="top-level-extent"><code class="code">font.sub</code></dt>
+<dd class="calibre11"><p class="calibre1">The font to be used for axis annotation, <em class="emph">x</em> and <em class="emph">y</em> labels,
+main and sub-titles, respectively.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">adj=-0.1</code></dt>
+<dd class="calibre11"><p class="calibre1">Justification of text relative to the plotting position.  <code class="code">0</code> means
+left justify, <code class="code">1</code> means right justify and <code class="code">0.5</code> means to
+center horizontally about the plotting position.  The actual value is
+the proportion of text that appears to the left of the plotting
+position, so a value of <code class="code">-0.1</code> leaves a gap of 10% of the text width
+between the text and the plotting position.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">cex=1.5</code></dt>
+<dd class="calibre11"><p class="calibre1">Character expansion.  The value is the desired size of text characters
+(including plotting characters) relative to the default text size.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">cex.axis</code></dt>
+<dt class="top-level-extent"><code class="code">cex.lab</code></dt>
+<dt class="top-level-extent"><code class="code">cex.main</code></dt>
+<dt class="top-level-extent"><code class="code">cex.sub</code></dt>
+<dd class="calibre11"><p class="calibre1">The character expansion to be used for axis annotation, <em class="emph">x</em> and
+<em class="emph">y</em> labels, main and sub-titles, respectively.
+</p></dd>
+</dl>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Axes-and-tick-marks">
+<h4 class="subheading" id="Axes-and-tick-marks-1">12.5.2 Axes and tick marks</h4>
+
+<p class="calibre1">Many of R’s high-level plots have axes, and you can construct axes
+yourself with the low-level <code class="code">axis()</code> graphics function.  Axes have
+three main components: the <em class="emph">axis line</em> (line style controlled by the
+<code class="code">lty</code> graphics parameter), the <em class="emph">tick marks</em> (which mark off unit
+divisions along the axis line) and the <em class="emph">tick labels</em> (which mark the
+units.) These components can be customized with the following graphics
+parameters.
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">lab=c(5, 7, 12)</code></dt>
+<dd class="calibre11"><p class="calibre1">The first two numbers are the desired number of tick intervals on the
+<em class="emph">x</em> and <em class="emph">y</em> axes respectively.  The third number is the
+desired length of axis labels, in characters (including the decimal
+point.)  Choosing a too-small value for this parameter may result in all
+tick labels being rounded to the same number!
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">las=1</code></dt>
+<dd class="calibre11"><p class="calibre1">Orientation of axis labels.  <code class="code">0</code> means always parallel to axis,
+<code class="code">1</code> means always horizontal, and <code class="code">2</code> means always
+perpendicular to the axis.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">mgp=c(3, 1, 0)</code></dt>
+<dd class="calibre11"><p class="calibre1">Positions of axis components.  The first component is the distance from
+the axis label to the axis position, in text lines.  The second
+component is the distance to the tick labels, and the final component is
+the distance from the axis position to the axis line (usually zero).
+Positive numbers measure outside the plot region, negative numbers
+inside.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">tck=0.01</code></dt>
+<dd class="calibre11"><p class="calibre1">Length of tick marks, as a fraction of the size of the plotting region.
+When <code class="code">tck</code> is small (less than 0.5) the tick marks on the <em class="emph">x</em>
+and <em class="emph">y</em> axes are forced to be the same size.  A value of 1 gives
+grid lines.  Negative values give tick marks outside the plotting
+region.  Use <code class="code">tck=0.01</code> and <code class="code">mgp=c(1,-1.5,0)</code> for internal
+tick marks.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">xaxs="r"</code></dt>
+<dt class="top-level-extent"><code class="code">yaxs="i"</code></dt>
+<dd class="calibre11"><p class="calibre1">Axis styles for the <em class="emph">x</em> and <em class="emph">y</em> axes, respectively.   With
+styles <code class="code">"i"</code> (internal) and <code class="code">"r"</code> (the default) tick marks
+always fall within the range of the data, however style <code class="code">"r"</code>
+leaves a small amount of space at the edges.
+</p>
+</dd>
+</dl>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Figure-margins">
+<h4 class="subheading" id="Figure-margins-1">12.5.3 Figure margins</h4>
+
+
+<p class="calibre1">A single plot in R is known as a <code class="code">figure</code> and comprises a
+<em class="emph">plot region</em> surrounded by margins (possibly containing axis
+labels, titles, etc.) and (usually) bounded by the axes themselves.
+</p>
+<p class="calibre1">A typical figure is
+</p>
+<img class="image" src="fig11.png" alt="images/fig11"/>
+
+<p class="calibre1">Graphics parameters controlling figure layout include:
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">mai=c(1, 0.5, 0.5, 0)</code></dt>
+<dd class="calibre11"><p class="calibre1">Widths of the bottom, left, top and right margins, respectively,
+measured in inches.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">mar=c(4, 2, 2, 1)</code></dt>
+<dd class="calibre11"><p class="calibre1">Similar to <code class="code">mai</code>, except the measurement unit is text lines.
+</p></dd>
+</dl>
+
+<p class="calibre1"><code class="code">mar</code> and <code class="code">mai</code> are equivalent in the sense that setting one
+changes the value of the other.  The default values chosen for this
+parameter are often too large; the right-hand margin is rarely needed,
+and neither is the top margin if no title is being used.  The bottom and
+left margins must be large enough to accommodate the axis and tick
+labels.  Furthermore, the default is chosen without regard to the size
+of the device surface: for example, using the <code class="code">postscript()</code> driver
+with the <code class="code">height=4</code> argument will result in a plot which is about
+50% margin unless <code class="code">mar</code> or <code class="code">mai</code> are set explicitly.  When
+multiple figures are in use (see below) the margins are reduced, however
+this may not be enough when many figures share the same page.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Multiple-figure-environment">
+<h4 class="subheading" id="Multiple-figure-environment-1">12.5.4 Multiple figure environment</h4>
+
+<p class="calibre1">R allows you to create an <em class="emph">n</em> by <em class="emph">m</em> array of figures on a
+single page.  Each figure has its own margins, and the array of figures
+is optionally surrounded by an <em class="emph">outer margin</em>, as shown in the
+following figure.
+</p>
+<img class="image" src="fig12.png" alt="images/fig12"/>
+
+<p class="calibre1">The graphical parameters relating to multiple figures are as follows:
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">mfcol=c(3, 2)</code></dt>
+<dt class="top-level-extent"><code class="code">mfrow=c(2, 4)</code></dt>
+<dd class="calibre11"><p class="calibre1">Set the size of a multiple figure array.  The first value is the number of
+rows; the second is the number of columns.  The only difference between
+these two parameters is that setting <code class="code">mfcol</code> causes figures to be
+filled by column; <code class="code">mfrow</code> fills by rows.
+</p>
+<p class="calibre1">The layout in the Figure could have been created by setting
+<code class="code">mfrow=c(3,2)</code>; the figure shows the page after four plots have
+been drawn.
+</p>
+<p class="calibre1">Setting either of these can reduce the base size of symbols and text
+(controlled by <code class="code">par("cex")</code> and the pointsize of the device).  In a
+layout with exactly two rows and columns the base size is reduced by a
+factor of 0.83: if there are three or more of either rows or columns,
+the reduction factor is 0.66.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">mfg=c(2, 2, 3, 2)</code></dt>
+<dd class="calibre11"><p class="calibre1">Position of the current figure in a multiple figure environment.  The first
+two numbers are the row and column of the current figure; the last two
+are the number of rows and columns in the multiple figure array.  Set
+this parameter to jump between figures in the array.  You can even use
+different values for the last two numbers than the <em class="emph">true</em> values
+for unequally-sized figures on the same page.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">fig=c(4, 9, 1, 4)/10</code></dt>
+<dd class="calibre11"><p class="calibre1">Position of the current figure on the page.  Values are the positions of
+the left, right, bottom and top edges respectively, as a percentage of
+the page measured from the bottom left corner.  The example value would
+be for a figure in the bottom right of the page.  Set this parameter for
+arbitrary positioning of figures within a page.  If you want to add a
+figure to a current page, use <code class="code">new=TRUE</code> as well (unlike S).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">oma=c(2, 0, 3, 0)</code></dt>
+<dt class="top-level-extent"><code class="code">omi=c(0, 0, 0.8, 0)</code></dt>
+<dd class="calibre11"><p class="calibre1">Size of outer margins.  Like <code class="code">mar</code> and <code class="code">mai</code>, the first
+measures in text lines and the second in inches, starting with the
+bottom margin and working clockwise.
+</p>
+</dd>
+</dl>
+
+<p class="calibre1">Outer margins are particularly useful for page-wise titles, etc.  Text
+can be added to the outer margins with the <code class="code">mtext()</code> function with
+argument <code class="code">outer=TRUE</code>.  There are no outer margins by default,
+however, so you must create them explicitly using <code class="code">oma</code> or
+<code class="code">omi</code>.
+</p>
+<p class="calibre1">More complicated arrangements of multiple figures can be produced by the
+<code class="code">split.screen()</code> and <code class="code">layout()</code> functions, as well as by the
+<strong class="strong">grid</strong> and <a href="https://CRAN.R-project.org/package=lattice"><strong class="strong">lattice</strong></a> packages.
+</p>
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Device-drivers">
+<h3 class="section" id="Device-drivers-1">12.6 Device drivers</h3>
+<a id="index-Graphics-device-drivers"></a>
+
+<p class="calibre1">R can generate graphics (of varying levels of quality) on almost any
+type of display or printing device.  Before this can begin, however,
+R needs to be informed what type of device it is dealing with.  This
+is done by starting a <em class="emph">device driver</em>.  The purpose of a device
+driver is to convert graphical instructions from R (“draw a line,”
+for example) into a form that the particular device can understand.
+</p>
+<p class="calibre1">Device drivers are started by calling a device driver function.  There
+is one such function for every device driver: type <code class="code">help(Devices)</code>
+for a list of them all.  For example, issuing the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; postscript()
+</pre></div>
+
+<p class="calibre1">causes all future graphics output to be sent to the printer in
+PostScript format.  Some commonly-used device drivers are:
+</p>
+<dl class="table">
+<dt id="index-X11" class="top-level-extent"><span><code class="code">X11()</code><a class="pcalibre copiable-link" href="#index-X11"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">For use with the X11 window system on Unix-alikes
+</p></dd>
+<dt id="index-windows" class="top-level-extent"><span><code class="code">windows()</code><a class="pcalibre copiable-link" href="#index-windows"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">For use on Windows
+</p></dd>
+<dt id="index-quartz" class="top-level-extent"><span><code class="code">quartz()</code><a class="pcalibre copiable-link" href="#index-quartz"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">For use on macOS
+</p></dd>
+<dt id="index-postscript" class="top-level-extent"><span><code class="code">postscript()</code><a class="pcalibre copiable-link" href="#index-postscript"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">For printing on PostScript printers, or creating PostScript graphics
+files.
+</p></dd>
+<dt id="index-pdf" class="top-level-extent"><span><code class="code">pdf()</code><a class="pcalibre copiable-link" href="#index-pdf"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Produces a PDF file, which can also be included into PDF files.
+</p></dd>
+<dt id="index-png" class="top-level-extent"><span><code class="code">png()</code><a class="pcalibre copiable-link" href="#index-png"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Produces a bitmap PNG file. (Not always available: see its help page.)
+</p></dd>
+<dt id="index-jpeg" class="top-level-extent"><span><code class="code">jpeg()</code><a class="pcalibre copiable-link" href="#index-jpeg"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Produces a bitmap JPEG file, best used for <code class="code">image</code> plots.
+(Not always available: see its help page.)
+</p></dd>
+</dl>
+
+<p class="calibre1">When you have finished with a device, be sure to terminate the device
+driver by issuing the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; dev.off()
+</pre></div>
+
+<p class="calibre1">This ensures that the device finishes cleanly; for example in the case
+of hardcopy devices this ensures that every page is completed and has
+been sent to the printer.  (This will happen automatically at the normal
+end of a session.)
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="PostScript-diagrams-for-typeset-documents">
+<h4 class="subheading" id="PostScript-diagrams-for-typeset-documents-1">12.6.1 PostScript diagrams for typeset documents</h4>
+
+<p class="calibre1">By passing the <code class="code">file</code> argument to the <code class="code">postscript()</code> device
+driver function, you may store the graphics in PostScript format in a
+file of your choice.  The plot will be in landscape orientation unless
+the <code class="code">horizontal=FALSE</code> argument is given, and you can control the
+size of the graphic with the <code class="code">width</code> and <code class="code">height</code> arguments
+(the plot will be scaled as appropriate to fit these dimensions.) For
+example, the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; postscript("file.ps", horizontal=FALSE, height=5, pointsize=10)
+</pre></div>
+
+<p class="calibre1">will produce a file containing PostScript code for a figure five inches
+high, perhaps for inclusion in a document.  It is important to note that
+if the file named in the command already exists, it will be overwritten.
+This is the case even if the file was only created earlier in the same
+R session.
+</p>
+<p class="calibre1">Many usages of PostScript output will be to incorporate the figure in
+another document.  This works best when <em class="emph">encapsulated</em> PostScript
+is produced: R always produces conformant output, but only marks the
+output as such when the <code class="code">onefile=FALSE</code> argument is supplied.  This
+unusual notation stems from S-compatibility: it really means that
+the output will be a single page (which is part of the EPSF
+specification).  Thus to produce a plot for inclusion use something like
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; postscript("plot1.eps", horizontal=FALSE, onefile=FALSE,
+             height=8, width=6, pointsize=10)
+</pre></div>
+
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Multiple-graphics-devices">
+<h4 class="subheading" id="Multiple-graphics-devices-1">12.6.2 Multiple graphics devices</h4>
+
+<p class="calibre1">In advanced use of R it is often useful to have several graphics
+devices in use at the same time.  Of course only one graphics device can
+accept graphics commands at any one time, and this is known as the
+<em class="emph">current device</em>.  When multiple devices are open, they form a
+numbered sequence with names giving the kind of device at any position.
+</p>
+<p class="calibre1">The main commands used for operating with multiple devices, and their
+meanings are as follows:
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">X11()</code></dt>
+<dd class="calibre11"><p class="calibre1">[UNIX]
+</p></dd>
+<dt class="top-level-extent"><code class="code">windows()</code></dt>
+<dt class="top-level-extent"><code class="code">win.printer()</code></dt>
+<dt class="top-level-extent"><code class="code">win.metafile()</code></dt>
+<dd class="calibre11"><p class="calibre1">[Windows]
+</p></dd>
+<dt class="top-level-extent"><code class="code">quartz()</code></dt>
+<dd class="calibre11"><p class="calibre1">[macOS]
+</p></dd>
+<dt class="top-level-extent"><code class="code">postscript()</code></dt>
+<dt class="top-level-extent"><code class="code">pdf()</code></dt>
+<dt class="top-level-extent"><code class="code">png()</code></dt>
+<dt class="top-level-extent"><code class="code">jpeg()</code></dt>
+<dt class="top-level-extent"><code class="code">tiff()</code></dt>
+<dt class="top-level-extent"><code class="code">bitmap()</code></dt>
+<dt class="top-level-extent"><code class="code">…</code></dt>
+<dd class="calibre11"><p class="calibre1">Each new call to a device driver function opens a new graphics device,
+thus extending by one the device list.  This device becomes the current
+device, to which graphics output will be sent.
+</p>
+</dd>
+<dt id="index-dev_002elist" class="top-level-extent"><span><code class="code">dev.list()</code><a class="pcalibre copiable-link" href="#index-dev_002elist"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Returns the number and name of all active devices.  The device at
+position 1 on the list is always the <em class="emph">null device</em> which does not
+accept graphics commands at all.
+</p>
+</dd>
+<dt id="index-dev_002enext" class="top-level-extent"><span><code class="code">dev.next()</code><a class="pcalibre copiable-link" href="#index-dev_002enext"> ¶</a></span></dt>
+<dt class="top-level-extent"><code class="code">dev.prev()</code></dt>
+<dd class="calibre11"><a id="index-dev_002eprev"></a>
+<p class="calibre1">Returns the number and name of the graphics device next to, or previous
+to the current device, respectively.
+</p>
+</dd>
+<dt id="index-dev_002eset" class="top-level-extent"><span><code class="code">dev.set(which=<var class="emph">k</var>)</code><a class="pcalibre copiable-link" href="#index-dev_002eset"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Can be used to change the current graphics device to the one at position
+<var class="emph">k</var> of the device list.  Returns the number and label of the device.
+</p>
+</dd>
+<dt id="index-dev_002eoff" class="top-level-extent"><span><code class="code">dev.off(<var class="emph">k</var>)</code><a class="pcalibre copiable-link" href="#index-dev_002eoff"> ¶</a></span></dt>
+<dd class="calibre11"><p class="calibre1">Terminate the graphics device at point <var class="emph">k</var> of the device list.  For
+some devices, such as <code class="code">postscript</code> devices, this will either print
+the file immediately or correctly complete the file for later printing,
+depending on how the device was initiated.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">dev.copy(device, …, which=<var class="emph">k</var>)</code></dt>
+<dt class="top-level-extent"><code class="code">dev.print(device, …, which=<var class="emph">k</var>)</code></dt>
+<dd class="calibre11"><p class="calibre1">Make a copy of the device <var class="emph">k</var>.  Here <code class="code">device</code> is a device
+function, such as <code class="code">postscript</code>, with extra arguments, if needed,
+specified by ‘<samp class="code">…</samp>’.  <code class="code">dev.print</code> is similar, but the
+copied device is immediately closed, so that end actions, such as
+printing hardcopies, are immediately performed.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">graphics.off()</code></dt>
+<dd class="calibre11"><p class="calibre1">Terminate all graphics devices on the list, except the null device.
+</p></dd>
+</dl>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Dynamic-graphics">
+<h3 class="section" id="Dynamic-graphics-1">12.7 Dynamic graphics</h3>
+<a id="index-Dynamic-graphics"></a>
+
+<p class="calibre1">R does not have builtin capabilities for dynamic or
+interactive graphics, e.g. rotating point clouds or to “brushing”
+(interactively highlighting) points. However, extensive dynamic graphics
+facilities are available in the system GGobi by Swayne, Cook and Buja
+available from
+</p>
+<blockquote class="quotation">
+<p class="calibre1"><a href="http://ggobi.org/">http://ggobi.org/</a>
+</p></blockquote>
+
+<p class="calibre1">and these can be accessed from R via the package <a href="https://CRAN.R-project.org/package=rggobi"><strong class="strong">rggobi</strong></a>, described at
+<a href="http://ggobi.org/rggobi.html">http://ggobi.org/rggobi.html</a>.
+</p>
+<p class="calibre1">Also, package <a href="https://CRAN.R-project.org/package=rgl"><strong class="strong">rgl</strong></a> provides ways to interact with 3D plots, for example
+of surfaces.
+</p>
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Packages">
+<div class="calibre5" id="calibre_pb_27"></div>
+</div>
+</div>
+</body></html>

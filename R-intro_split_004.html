@@ -1,0 +1,612 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Simple-manipulations-numbers-and-vectors">
+<h2 class="contents-heading" id="Simple-manipulations_003b-numbers-and-vectors">2 Simple manipulations; numbers and vectors</h2>
+<a id="index-Vectors"></a>
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Vectors-and-assignment">
+<h3 class="section" id="Vectors-and-assignment-1">2.1 Vectors and assignment</h3>
+
+<p class="calibre1">R operates on named <em class="emph">data structures</em>.  The simplest such
+structure is the numeric <em class="emph">vector</em>, which is a single entity
+consisting of an ordered collection of numbers.  To set up a vector
+named <code class="code">x</code>, say, consisting of five numbers, namely 10.4, 5.6, 3.1,
+6.4 and 21.7, use the R command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; x &lt;- c(10.4, 5.6, 3.1, 6.4, 21.7)
+</pre></div>
+<a id="index-c"></a>
+<a id="index-vector"></a>
+
+<p class="calibre1">This is an <em class="emph">assignment</em> statement using the <em class="emph">function</em>
+<code class="code">c()</code> which in this context can take an arbitrary number of vector
+<em class="emph">arguments</em> and whose value is a vector got by concatenating its
+arguments end to end.<a id="DOCF7" href="R-intro_split_022.html#FOOT7"><sup class="calibre2">7</sup></a>
+</p>
+<p class="calibre1">A number occurring by itself in an expression is taken as a vector of
+length one.
+</p>
+<p class="calibre1">Notice that the assignment operator (‘<samp class="code"><code class="code">&lt;-</code></samp>’), which consists
+of the two characters ‘<samp class="code"><code class="code">&lt;</code></samp>’ (“less than”) and
+‘<samp class="code"><code class="code">-</code></samp>’ (“minus”) occurring strictly side-by-side and it
+‘points’ to the object receiving the value of the expression.
+In most contexts the ‘<samp class="code"><code class="code">=</code></samp>’ operator can be used as an alternative.
+<a id="index-Assignment"></a>
+</p>
+<p class="calibre1">Assignment can also be made using the function <code class="code">assign()</code>.  An
+equivalent way of making the same assignment as above is with:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; assign("x", c(10.4, 5.6, 3.1, 6.4, 21.7))
+</pre></div>
+
+<p class="calibre1">The usual operator, <code class="code">&lt;-</code>, can be thought of as a syntactic
+short-cut to this.
+</p>
+<p class="calibre1">Assignments can also be made in the other direction, using the obvious
+change in the assignment operator.  So the same assignment could be made
+using
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; c(10.4, 5.6, 3.1, 6.4, 21.7) -&gt; x
+</pre></div>
+
+<p class="calibre1">If an expression is used as a complete command, the value is printed
+<em class="emph">and lost</em><a id="DOCF8" href="R-intro_split_022.html#FOOT8"><sup class="calibre2">8</sup></a>.  So now if we
+were to use the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; 1/x
+</pre></div>
+
+<p class="calibre1">the reciprocals of the five values would be printed at the terminal (and
+the value of <code class="code">x</code>, of course, unchanged).
+</p>
+<p class="calibre1">The further assignment
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; y &lt;- c(x, 0, x)
+</pre></div>
+
+<p class="calibre1">would create a vector <code class="code">y</code> with 11 entries consisting of two copies
+of <code class="code">x</code> with a zero in the middle place.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Vector-arithmetic">
+<h3 class="section" id="Vector-arithmetic-1">2.2 Vector arithmetic</h3>
+
+<p class="calibre1">Vectors can be used in arithmetic expressions, in which case the
+operations are performed element by element.  Vectors occurring in the
+same expression need not all be of the same length.  If they are not,
+the value of the expression is a vector with the same length as the
+longest vector which occurs in the expression.  Shorter vectors in the
+expression are <em class="emph">recycled</em> as often as need be (perhaps
+fractionally) until they match the length of the longest vector.  In
+particular a constant is simply repeated.  So with the above assignments
+the command
+<a id="index-Recycling-rule"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; v &lt;- 2*x + y + 1
+</pre></div>
+
+<p class="calibre1">generates a new vector <code class="code">v</code> of length 11 constructed by adding
+together, element by element, <code class="code">2*x</code> repeated 2.2 times, <code class="code">y</code>
+repeated just once, and <code class="code">1</code> repeated 11 times.
+</p>
+<a id="index-Arithmetic-functions-and-operators"></a>
+<p class="calibre1">The elementary arithmetic operators are the usual <code class="code">+</code>, <code class="code">-</code>,
+<code class="code">*</code>, <code class="code">/</code> and <code class="code">^</code> for raising to a power.
+<a id="index-_002b"></a>
+<a id="index-_002d"></a>
+<a id="index-_002a"></a>
+<a id="index-_002f"></a>
+<a id="index-_005e"></a>
+In addition all of the common arithmetic functions are available.
+<code class="code">log</code>, <code class="code">exp</code>, <code class="code">sin</code>, <code class="code">cos</code>, <code class="code">tan</code>, <code class="code">sqrt</code>,
+and so on, all have their usual meaning.
+<a id="index-log"></a>
+<a id="index-exp"></a>
+<a id="index-sin"></a>
+<a id="index-cos"></a>
+<a id="index-tan"></a>
+<a id="index-sqrt"></a>
+<code class="code">max</code> and <code class="code">min</code> select the largest and smallest elements of a
+vector respectively.
+<a id="index-max"></a>
+<a id="index-min"></a>
+<code class="code">range</code> is a function whose value is a vector of length two, namely
+<code class="code">c(min(x), max(x))</code>.
+<a id="index-range"></a>
+<code class="code">length(x)</code> is the number of elements in <code class="code">x</code>,
+<a id="index-length"></a>
+<code class="code">sum(x)</code> gives the total of the elements in <code class="code">x</code>,
+<a id="index-sum"></a>
+and <code class="code">prod(x)</code> their product.
+<a id="index-prod"></a>
+</p>
+<p class="calibre1">Two statistical functions are <code class="code">mean(x)</code> which calculates the sample
+mean, which is the same as <code class="code">sum(x)/length(x)</code>,
+<a id="index-mean"></a>
+and <code class="code">var(x)</code> which gives
+</p>
+<div class="example">
+<pre class="example-preformatted">sum((x-mean(x))^2)/(length(x)-1)
+</pre></div>
+<a id="index-var"></a>
+
+<p class="calibre1">or sample variance.  If the argument to <code class="code">var()</code> is an
+<em class="emph">n</em>-by-<em class="emph">p</em> matrix the value is a <em class="emph">p</em>-by-<em class="emph">p</em> sample
+covariance matrix got by regarding the rows as independent
+<em class="emph">p</em>-variate sample vectors.
+</p>
+<p class="calibre1"><code class="code">sort(x)</code> returns a vector of the same size as <code class="code">x</code> with the
+elements arranged in increasing order; however there are other more
+flexible sorting facilities available (see <code class="code">order()</code> or
+<code class="code">sort.list()</code> which produce a permutation to do the sorting).
+<a id="index-sort"></a>
+<a id="index-order"></a>
+</p>
+<p class="calibre1">Note that <code class="code">max</code> and <code class="code">min</code> select the largest and smallest
+values in their arguments, even if they are given several vectors.  The
+<em class="emph">parallel</em> maximum and minimum functions <code class="code">pmax</code> and
+<code class="code">pmin</code> return a vector (of length equal to their longest argument)
+that contains in each element the largest (smallest) element in that
+position in any of the input vectors.
+<a id="index-pmax"></a>
+<a id="index-pmin"></a>
+</p>
+<p class="calibre1">For most purposes the user will not be concerned if the “numbers” in a
+numeric vector are integers, reals or even complex.  Internally
+calculations are done as double precision real numbers, or double
+precision complex numbers if the input data are complex.
+</p>
+<p class="calibre1">To work with complex numbers, supply an explicit complex part.  Thus
+</p>
+<div class="example">
+<pre class="example-preformatted">sqrt(-17)
+</pre></div>
+
+<p class="calibre1">will give <code class="code">NaN</code> and a warning, but
+</p>
+<div class="example">
+<pre class="example-preformatted">sqrt(-17+0i)
+</pre></div>
+
+<p class="calibre1">will do the computations as complex numbers.
+</p>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Generating-regular-sequences">
+<h3 class="section" id="Generating-regular-sequences-1">2.3 Generating regular sequences</h3>
+<a id="index-Regular-sequences"></a>
+
+<p class="calibre1">R has a number of facilities for generating commonly used sequences
+of numbers.  For example <code class="code">1:30</code> is the vector <code class="code">c(1, 2,
+…, 29, 30)</code>.
+<a id="index-_003a"></a>
+The colon operator has high priority within an expression, so, for
+example <code class="code">2*1:15</code> is the vector <code class="code">c(2, 4, …, 28, 30)</code>.
+Put <code class="code">n &lt;- 10</code> and compare the sequences <code class="code">1:n-1</code> and
+<code class="code">1:(n-1)</code>.
+</p>
+<p class="calibre1">The construction <code class="code">30:1</code> may be used to generate a sequence
+backwards.
+</p>
+<a id="index-seq"></a>
+<p class="calibre1">The function <code class="code">seq()</code> is a more general facility for generating
+sequences.  It has five arguments, only some of which may be specified
+in any one call.  The first two arguments, if given, specify the
+beginning and end of the sequence, and if these are the only two
+arguments given the result is the same as the colon operator.  That is
+<code class="code">seq(2,10)</code> is the same vector as <code class="code">2:10</code>.
+</p>
+<p class="calibre1">Arguments to <code class="code">seq()</code>, and to many other R functions, can also
+be given in named form, in which case the order in which they appear is
+irrelevant.  The first two arguments may be named
+<code class="code">from=<var class="emph">value</var></code> and <code class="code">to=<var class="emph">value</var></code>; thus
+<code class="code">seq(1,30)</code>, <code class="code">seq(from=1, to=30)</code> and <code class="code">seq(to=30,
+from=1)</code> are all the same as <code class="code">1:30</code>.  The next two arguments to
+<code class="code">seq()</code> may be named <code class="code">by=<var class="emph">value</var></code> and
+<code class="code">length=<var class="emph">value</var></code>, which specify a step size and a length for
+the sequence respectively.  If neither of these is given, the default
+<code class="code">by=1</code> is assumed.
+</p>
+<p class="calibre1">For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; seq(-5, 5, by=.2) -&gt; s3
+</pre></div>
+
+<p class="calibre1">generates in <code class="code">s3</code> the vector <code class="code">c(-5.0, -4.8, -4.6, …,
+4.6, 4.8, 5.0)</code>.  Similarly
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; s4 &lt;- seq(length=51, from=-5, by=.2)
+</pre></div>
+
+<p class="calibre1">generates the same vector in <code class="code">s4</code>.
+</p>
+<p class="calibre1">The fifth argument may be named <code class="code">along=<var class="emph">vector</var></code>, which is
+normally used as the only argument to create the sequence <code class="code">1, 2,
+…, length(<var class="emph">vector</var>)</code>, or the empty sequence if the vector is
+empty (as it can be).
+</p>
+<p class="calibre1">A related function is <code class="code">rep()</code>
+<a id="index-rep"></a>
+which can be used for replicating an object in various complicated ways.
+The simplest form is
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; s5 &lt;- rep(x, times=5)
+</pre></div>
+
+<p class="calibre1">which will put five copies of <code class="code">x</code> end-to-end in <code class="code">s5</code>.  Another
+useful version is
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; s6 &lt;- rep(x, each=5)
+</pre></div>
+
+<p class="calibre1">which repeats each element of <code class="code">x</code> five times before moving on to
+the next.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Logical-vectors">
+<h3 class="section" id="Logical-vectors-1">2.4 Logical vectors</h3>
+
+<p class="calibre1">As well as numerical vectors, R allows manipulation of logical
+quantities.  The elements of a logical vector can have the values
+<code class="code">TRUE</code>, <code class="code">FALSE</code>, and <code class="code">NA</code> (for “not available”, see
+below).  The first two are often abbreviated as <code class="code">T</code> and <code class="code">F</code>,
+respectively.  Note however that <code class="code">T</code> and <code class="code">F</code> are just
+variables which are set to <code class="code">TRUE</code> and <code class="code">FALSE</code> by default, but
+are not reserved words and hence can be overwritten by the user.  Hence,
+you should always use <code class="code">TRUE</code> and <code class="code">FALSE</code>.
+<a id="index-FALSE"></a>
+<a id="index-TRUE"></a>
+<a id="index-F"></a>
+<a id="index-T"></a>
+</p>
+<p class="calibre1">Logical vectors are generated by <em class="emph">conditions</em>.  For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; temp &lt;- x &gt; 13
+</pre></div>
+
+<p class="calibre1">sets <code class="code">temp</code> as a vector of the same length as <code class="code">x</code> with values
+<code class="code">FALSE</code> corresponding to elements of <code class="code">x</code> where the condition
+is <em class="emph">not</em> met and <code class="code">TRUE</code> where it is.
+</p>
+<p class="calibre1">The logical operators are <code class="code">&lt;</code>, <code class="code">&lt;=</code>, <code class="code">&gt;</code>, <code class="code">&gt;=</code>,
+<code class="code">==</code> for exact equality and <code class="code">!=</code> for inequality.
+<a id="index-_003c"></a>
+<a id="index-_003c_003d"></a>
+<a id="index-_003e"></a>
+<a id="index-_003e_003d"></a>
+<a id="index-_003d_003d"></a>
+<a id="index-_0021_003d"></a>
+In addition if <code class="code">c1</code> and <code class="code">c2</code> are logical expressions, then
+<code class="code">c1 &amp; c2</code><!-- /@w --> is their intersection (<em class="emph">“and”</em>), <code class="code">c1 | c2</code><!-- /@w -->
+is their union (<em class="emph">“or”</em>), and <code class="code">!c1</code> is the negation of
+<code class="code">c1</code>.
+<a id="index-_0021"></a>
+<a id="index-_007c"></a>
+<a id="index-_0026"></a>
+</p>
+<p class="calibre1">Logical vectors may be used in ordinary arithmetic, in which case they
+are <em class="emph">coerced</em> into numeric vectors, <code class="code">FALSE</code> becoming <code class="code">0</code>
+and <code class="code">TRUE</code> becoming <code class="code">1</code>.  However there are situations where
+logical vectors and their coerced numeric counterparts are not
+equivalent, for example see the next subsection.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Missing-values">
+<h3 class="section" id="Missing-values-1">2.5 Missing values</h3>
+<a id="index-Missing-values"></a>
+
+<p class="calibre1">In some cases the components of a vector may not be completely
+known.  When an element or value is “not available” or a “missing
+value” in the statistical sense, a place within a vector may be
+reserved for it by assigning it the special value <code class="code">NA</code>.
+<a id="index-NA"></a>
+In general any operation on an <code class="code">NA</code> becomes an <code class="code">NA</code>.  The
+motivation for this rule is simply that if the specification of an
+operation is incomplete, the result cannot be known and hence is not
+available.
+</p>
+<a id="index-is_002ena"></a>
+<p class="calibre1">The function <code class="code">is.na(x)</code> gives a logical vector of the same size as
+<code class="code">x</code> with value <code class="code">TRUE</code> if and only if the corresponding element
+in <code class="code">x</code> is <code class="code">NA</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; z &lt;- c(1:3,NA);  ind &lt;- is.na(z)
+</pre></div>
+
+<p class="calibre1">Notice that the logical expression <code class="code">x == NA</code> is quite different
+from <code class="code">is.na(x)</code> since <code class="code">NA</code> is not really a value but a marker
+for a quantity that is not available.  Thus <code class="code">x == NA</code> is a vector
+of the same length as <code class="code">x</code> <em class="emph">all</em> of whose values are <code class="code">NA</code>
+as the logical expression itself is incomplete and hence undecidable.
+</p>
+<p class="calibre1">Note that there is a second kind of “missing” values which are
+produced by numerical computation, the so-called <em class="emph">Not a Number</em>,
+<code class="code">NaN</code>,
+<a id="index-NaN"></a>
+values.  Examples are
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; 0/0
+</pre></div>
+
+<p class="calibre1">or
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; Inf - Inf
+</pre></div>
+
+<p class="calibre1">which both give <code class="code">NaN</code> since the result cannot be defined sensibly.
+</p>
+<p class="calibre1">In summary, <code class="code">is.na(xx)</code> is <code class="code">TRUE</code> <em class="emph">both</em> for <code class="code">NA</code>
+and <code class="code">NaN</code> values.  To differentiate these, <code class="code">is.nan(xx)</code> is only
+<code class="code">TRUE</code> for <code class="code">NaN</code>s.
+<a id="index-is_002enan"></a>
+</p>
+<p class="calibre1">Missing values are sometimes printed as <code class="code">&lt;NA&gt;</code> when character
+vectors are printed without quotes.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Character-vectors">
+<h3 class="section" id="Character-vectors-1">2.6 Character vectors</h3>
+<a id="index-Character-vectors"></a>
+
+<p class="calibre1">Character quantities and character vectors are used frequently in R,
+for example as plot labels.  Where needed they are denoted by a sequence
+of characters delimited by the double quote character, e.g.,
+<code class="code">"x-values"</code>, <code class="code">"New iteration results"</code>.
+</p>
+<p class="calibre1">Character strings are entered using either matching double (<code class="code">"</code>) or
+single (<code class="code">'</code>) quotes, but are printed using double quotes (or
+sometimes without quotes).  They use C-style escape sequences, using
+<code class="code">\</code> as the escape character, so <code class="code">\</code> is entered and printed as
+<code class="code">\\</code>, and inside double quotes <code class="code">"</code> is entered as <code class="code">\"</code>.
+Other useful escape sequences are <code class="code">\n</code>, newline, <code class="code">\t</code>, tab and
+<code class="code">\b</code>, backspace—see <code class="code">?Quotes</code> for a full list.
+</p>
+<p class="calibre1">Character vectors may be concatenated into a vector by the <code class="code">c()</code>
+function; examples of their use will emerge frequently.
+<a id="index-c-1"></a>
+</p>
+<a id="index-paste"></a>
+<p class="calibre1">The <code class="code">paste()</code> function takes an arbitrary number of arguments and
+concatenates them one by one into character strings.  Any numbers given
+among the arguments are coerced into character strings in the evident
+way, that is, in the same way they would be if they were printed.  The
+arguments are by default separated in the result by a single blank
+character, but this can be changed by the named argument,
+<code class="code">sep=<var class="emph">string</var></code>, which changes it to <code class="code"><var class="emph">string</var></code>,
+possibly empty.
+</p>
+<p class="calibre1">For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; labs &lt;- paste(c("X","Y"), 1:10, sep="")
+</pre></div>
+
+<p class="calibre1">makes <code class="code">labs</code> into the character vector
+</p>
+<div class="example">
+<pre class="example-preformatted">c("X1", "Y2", "X3", "Y4", "X5", "Y6", "X7", "Y8", "X9", "Y10")
+</pre></div>
+
+<p class="calibre1">Note particularly that recycling of short lists takes place here too;
+thus <code class="code">c("X", "Y")</code> is repeated 5 times to match the sequence
+<code class="code">1:10</code>.
+<a id="DOCF9" href="R-intro_split_022.html#FOOT9"><sup class="calibre2">9</sup></a>
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Index-vectors">
+<h3 class="section" id="Index-vectors_003b-selecting-and-modifying-subsets-of-a-data-set">2.7 Index vectors; selecting and modifying subsets of a data set</h3>
+<a id="index-Indexing-vectors"></a>
+
+<p class="calibre1">Subsets of the elements of a vector may be selected by appending to the
+name of the vector an <em class="emph">index vector</em> in square brackets.  More
+generally any expression that evaluates to a vector may have subsets of
+its elements similarly selected by appending an index vector in square
+brackets immediately after the expression.
+</p>
+
+<p class="calibre1">Such index vectors can be any of four distinct types.
+</p>
+<ol class="enumerate">
+<li class="calibre3"> <strong class="strong">A logical vector</strong>.  In this case the index vector is recycled to the
+same length as the vector from which elements are to be selected.
+Values corresponding to <code class="code">TRUE</code> in the index vector are selected and
+those corresponding to <code class="code">FALSE</code> are omitted.  For example
+
+<div class="example">
+<pre class="example-preformatted">&gt; y &lt;- x[!is.na(x)]
+</pre></div>
+
+<p class="calibre1">creates (or re-creates) an object <code class="code">y</code> which will contain the
+non-missing values of <code class="code">x</code>, in the same order.  Note that if
+<code class="code">x</code> has missing values, <code class="code">y</code> will be shorter than <code class="code">x</code>.
+Also
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; (x+1)[(!is.na(x)) &amp; x&gt;0] -&gt; z
+</pre></div>
+
+<p class="calibre1">creates an object <code class="code">z</code> and places in it the values of the vector
+<code class="code">x+1</code> for which the corresponding value in <code class="code">x</code> was both
+non-missing and positive.
+</p>
+</li><li class="calibre3"> <strong class="strong">A vector of positive integral quantities</strong>.  In this case the
+values in the index vector must lie in the set {1, 2, …,
+<code class="code">length(x)</code>}.  The corresponding elements of the vector are
+selected and concatenated, <em class="emph">in that order</em>, in the result.  The
+index vector can be of any length and the result is of the same length
+as the index vector.  For example <code class="code">x[6]</code> is the sixth component of
+<code class="code">x</code> and
+
+<div class="example">
+<pre class="example-preformatted">&gt; x[1:10]
+</pre></div>
+
+<p class="calibre1">selects the first 10 elements of <code class="code">x</code> (assuming <code class="code">length(x)</code> is
+not less than 10).  Also
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; c("x","y")[rep(c(1,2,2,1), times=4)]
+</pre></div>
+
+<p class="calibre1">(an admittedly unlikely thing to do) produces a character vector of
+length 16 consisting of <code class="code">"x", "y", "y", "x"</code> repeated four times.
+</p>
+</li><li class="calibre3"> <strong class="strong">A vector of negative integral quantities</strong>.  Such an index vector
+specifies the values to be <em class="emph">excluded</em> rather than included.  Thus
+
+<div class="example">
+<pre class="example-preformatted">&gt; y &lt;- x[-(1:5)]
+</pre></div>
+
+<p class="calibre1">gives <code class="code">y</code> all but the first five elements of <code class="code">x</code>.
+</p>
+</li><li class="calibre3"> <strong class="strong">A vector of character strings</strong>.  This possibility only applies
+where an object has a <code class="code">names</code> attribute to identify its components.
+In this case a sub-vector of the names vector may be used in the same way
+as the positive integral labels in item 2 further above.
+
+<div class="example">
+<pre class="example-preformatted">&gt; fruit &lt;- c(5, 10, 1, 20)
+&gt; names(fruit) &lt;- c("orange", "banana", "apple", "peach")
+&gt; lunch &lt;- fruit[c("apple","orange")]
+</pre></div>
+
+<p class="calibre1">The advantage is that alphanumeric <em class="emph">names</em> are often easier to
+remember than <em class="emph">numeric indices</em>.  This option is particularly
+useful in connection with data frames, as we shall see later.
+</p>
+</li></ol>
+
+<p class="calibre1">An indexed expression can also appear on the receiving end of an
+assignment, in which case the assignment operation is performed
+<em class="emph">only on those elements of the vector</em>.  The expression must be of
+the form <code class="code">vector[<var class="emph">index_vector</var>]</code> as having an arbitrary
+expression in place of the vector name does not make much sense here.
+</p>
+<p class="calibre1">For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; x[is.na(x)] &lt;- 0
+</pre></div>
+
+<p class="calibre1">replaces any missing values in <code class="code">x</code> by zeros and
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; y[y &lt; 0] &lt;- -y[y &lt; 0]
+</pre></div>
+
+<p class="calibre1">has the same effect as
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; y &lt;- abs(y)
+</pre></div>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Other-types-of-objects">
+<h3 class="section" id="Other-types-of-objects-1">2.8 Other types of objects</h3>
+
+<p class="calibre1">Vectors are the most important type of object in R, but there are
+several others which we will meet more formally in later sections.
+</p>
+<ul class="itemize">
+<li class="calibre3"><em class="emph">matrices</em> or more generally <em class="emph">arrays</em> are multi-dimensional
+generalizations of vectors.  In fact, they <em class="emph">are</em> vectors that can
+be indexed by two or more indices and will be printed in special ways.
+See <a href="R-intro_split_006.html#Arrays-and-matrices">Arrays and matrices</a>.
+
+</li><li class="calibre3"><em class="emph">factors</em> provide compact ways to handle categorical data.
+See <a href="R-intro_split_005.html#Factors">Ordered and unordered factors</a>.
+
+</li><li class="calibre3"><em class="emph">lists</em> are a general form of vector in which the various elements
+need not be of the same type, and are often themselves vectors or lists.
+Lists provide a convenient way to return the results of a statistical
+computation.  See <a href="R-intro_split_008.html#Lists">Lists</a>.
+
+</li><li class="calibre3"><em class="emph">data frames</em> are matrix-like structures, in which the columns can
+be of different types.  Think of data frames as ‘data matrices’ with one
+row per observational unit but with (possibly) both numerical and
+categorical variables.  Many experiments are best described by data
+frames: the treatments are categorical but the response is numeric.
+See <a href="R-intro_split_008.html#Data-frames">Data frames</a>.
+
+</li><li class="calibre3"><em class="emph">functions</em> are themselves objects in R which can be stored in
+the project’s workspace.  This provides a simple and convenient way to
+extend R.  See <a href="R-intro_split_011.html#Writing-your-own-functions">Writing your own functions</a>.
+
+</li></ul>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Objects">
+<div class="calibre5" id="calibre_pb_7"></div>
+</div>
+</div>
+</body></html>

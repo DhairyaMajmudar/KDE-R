@@ -1,0 +1,380 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Lists-and-data-frames">
+<h2 class="contents-heading" id="Lists-and-data-frames-1">6 Lists and data frames</h2>
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Lists">
+<h3 class="section" id="Lists-1">6.1 Lists</h3>
+<a id="index-Lists"></a>
+
+<p class="calibre1">An R <em class="emph">list</em> is an object consisting of an ordered collection of
+objects known as its <em class="emph">components</em>.
+</p>
+<p class="calibre1">There is no particular need for the components to be of the same mode or
+type, and, for example, a list could consist of a numeric vector, a
+logical value, a matrix, a complex vector, a character array, a
+function, and so on.  Here is a simple example of how to make a list:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; Lst &lt;- list(name="Fred", wife="Mary", no.children=3,
+              child.ages=c(4,7,9))
+</pre></div>
+<a id="index-list"></a>
+
+<p class="calibre1">Components are always <em class="emph">numbered</em> and may always be referred to as
+such.  Thus if <code class="code">Lst</code> is the name of a list with four components,
+these may be individually referred to as <code class="code">Lst[[1]]</code>,
+<code class="code">Lst[[2]]</code>, <code class="code">Lst[[3]]</code> and <code class="code">Lst[[4]]</code>.  If, further,
+<code class="code">Lst[[4]]</code> is a vector subscripted array then <code class="code">Lst[[4]][1]</code> is
+its first entry.
+</p>
+<p class="calibre1">If <code class="code">Lst</code> is a list, then the function <code class="code">length(Lst)</code> gives the
+number of (top level) components it has.
+</p>
+<p class="calibre1">Components of lists may also be <em class="emph">named</em>, and in this case the
+component may be referred to either by giving the component name as a
+character string in place of the number in double square brackets, or,
+more conveniently, by giving an expression of the form
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; <var class="emph">name</var>$<var class="emph">component_name</var>
+</pre></div>
+
+<p class="calibre1">for the same thing.
+</p>
+<p class="calibre1">This is a very useful convention as it makes it easier to get the right
+component if you forget the number.
+</p>
+<p class="calibre1">So in the simple example given above:
+</p>
+<p class="calibre1"><code class="code">Lst$name</code> is the same as <code class="code">Lst[[1]]</code> and is the string
+<code class="code">"Fred"</code>,
+</p>
+<p class="calibre1"><code class="code">Lst$wife</code> is the same as <code class="code">Lst[[2]]</code> and is the string
+<code class="code">"Mary"</code>,
+</p>
+<p class="calibre1"><code class="code">Lst$child.ages[1]</code> is the same as <code class="code">Lst[[4]][1]</code> and is the
+number <code class="code">4</code>.
+</p>
+<p class="calibre1">Additionally, one can also use the names of the list components in
+double square brackets, i.e., <code class="code">Lst[["name"]]</code> is the same as
+<code class="code">Lst$name</code>.  This is especially useful, when the name of the
+component to be extracted is stored in another variable as in
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; x &lt;- "name"; Lst[[x]]
+</pre></div>
+
+<p class="calibre1">It is very important to distinguish <code class="code">Lst[[1]]</code> from <code class="code">Lst[1]</code>.
+‘<samp class="code"><code class="code">[[<var class="emph">…</var>]]</code></samp>’ is the operator used to select a single
+element, whereas ‘<samp class="code"><code class="code">[<var class="emph">…</var>]</code></samp>’ is a general subscripting
+operator.  Thus the former is the <em class="emph">first object in the list</em>
+<code class="code">Lst</code>, and if it is a named list the name is <em class="emph">not</em> included.
+The latter is a <em class="emph">sublist of the list <code class="code">Lst</code> consisting of the
+first entry only.  If it is a named list, the names are transferred to
+the sublist.</em>
+</p>
+<p class="calibre1">The names of components may be abbreviated down to the minimum number of
+letters needed to identify them uniquely.  Thus <code class="code">Lst$coefficients</code>
+may be minimally specified as <code class="code">Lst$coe</code> and <code class="code">Lst$covariance</code>
+as <code class="code">Lst$cov</code>.
+</p>
+<p class="calibre1">The vector of names is in fact simply an attribute of the list like any
+other and may be handled as such.  Other structures besides lists may,
+of course, similarly be given a <em class="emph">names</em> attribute also.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Constructing-and-modifying-lists">
+<h3 class="section" id="Constructing-and-modifying-lists-1">6.2 Constructing and modifying lists</h3>
+
+<p class="calibre1">New lists may be formed from existing objects by the function
+<code class="code">list()</code>.  An assignment of the form
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; Lst &lt;- list(<var class="emph">name_1</var>=<var class="emph">object_1</var>, <var class="emph">…</var>, <var class="emph">name_m</var>=<var class="emph">object_m</var>)
+</pre></div>
+
+<p class="calibre1">sets up a list <code class="code">Lst</code> of <em class="emph">m</em> components using <var class="emph">object_1</var>,
+…, <var class="emph">object_m</var> for the components and giving them names as
+specified by the argument names, (which can be freely chosen).  If these
+names are omitted, the components are numbered only.  The components
+used to form the list are <em class="emph">copied</em> when forming the new list and
+the originals are not affected.
+</p>
+<p class="calibre1">Lists, like any subscripted object, can be extended by specifying
+additional components.  For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; Lst[5] &lt;- list(matrix=Mat)
+</pre></div>
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Concatenating-lists">
+<h4 class="subheading" id="Concatenating-lists-1">6.2.1 Concatenating lists</h4>
+<a id="index-Concatenating-lists"></a>
+
+<a id="index-c-3"></a>
+<p class="calibre1">When the concatenation function <code class="code">c()</code> is given list arguments, the
+result is an object of mode list also, whose components are those of the
+argument lists joined together in sequence.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; list.ABC &lt;- c(list.A, list.B, list.C)
+</pre></div>
+
+<p class="calibre1">Recall that with vector objects as arguments the concatenation function
+similarly joined together all arguments into a single vector structure.
+In this case all other attributes, such as <code class="code">dim</code> attributes, are
+discarded.
+</p>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Data-frames">
+<h3 class="section" id="Data-frames-1">6.3 Data frames</h3>
+<a id="index-Data-frames"></a>
+
+<p class="calibre1">A <em class="emph">data frame</em> is a list with class <code class="code">"data.frame"</code>.  There are
+restrictions on lists that may be made into data frames, namely
+</p>
+<ul class="itemize">
+<li class="calibre3">The components must be vectors (numeric, character, or logical),
+factors, numeric matrices, lists, or other data frames.
+</li><li class="calibre3">Matrices, lists, and data frames provide as many variables to the new
+data frame as they have columns, elements, or variables, respectively.
+</li><li class="calibre3">Vector structures appearing as variables of the data frame must all have
+the <em class="emph">same length</em>, and matrix structures must all have the
+<em class="emph">same number of rows</em>.
+</li></ul>
+
+<p class="calibre1">A data frame may for many purposes be regarded as a matrix with columns
+possibly of differing modes and attributes.  It may be displayed in
+matrix form, and its rows and columns extracted using matrix indexing
+conventions.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Making-data-frames">
+<h4 class="subheading" id="Making-data-frames-1">6.3.1 Making data frames</h4>
+
+<p class="calibre1">Objects satisfying the restrictions placed on the columns (components)
+of a data frame may be used to form one using the function
+<code class="code">data.frame</code>:
+<a id="index-data_002eframe"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; accountants &lt;- data.frame(home=statef, loot=incomes, shot=incomef)
+</pre></div>
+
+<p class="calibre1">A list whose components conform to the restrictions of a data frame may
+be <em class="emph">coerced</em> into a data frame using the function
+<code class="code">as.data.frame()</code>
+<a id="index-as_002edata_002eframe"></a>
+</p>
+<p class="calibre1">The simplest way to construct a data frame from scratch is to use the
+<code class="code">read.table()</code> function to read an entire data frame from an
+external file.  This is discussed further in <a href="#Reading-data-from-files">Reading data from files</a>.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="attach_0028_0029-and-detach_0028_0029">
+<h4 class="subheading" id="attach_0028_0029-and-detach_0028_0029-1">6.3.2 <code class="code">attach()</code> and <code class="code">detach()</code></h4>
+<a id="index-attach"></a>
+<a id="index-detach"></a>
+
+<p class="calibre1">The <code class="code">$</code> notation, such as <code class="code">accountants$home</code>, for list
+components is not always very convenient.  A useful facility would be
+somehow to make the components of a list or data frame temporarily
+visible as variables under their component name, without the need to
+quote the list name explicitly each time.
+</p>
+<p class="calibre1">The <code class="code">attach()</code> function takes a ‘database’ such as a list or data
+frame as its argument.  Thus suppose <code class="code">lentils</code> is a
+data frame with three variables <code class="code">lentils$u</code>, <code class="code">lentils$v</code>,
+<code class="code">lentils$w</code>.  The attach
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; attach(lentils)
+</pre></div>
+
+<p class="calibre1">places the data frame in the search path at position 2<!-- /@w -->, and provided
+there are no variables <code class="code">u</code>, <code class="code">v</code> or <code class="code">w</code> in position 1<!-- /@w -->,
+<code class="code">u</code>, <code class="code">v</code> and <code class="code">w</code> are available as variables from the data
+frame in their own right.  At this point an assignment such as
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; u &lt;- v+w
+</pre></div>
+
+<p class="calibre1">does not replace the component <code class="code">u</code> of the data frame, but rather
+masks it with another variable <code class="code">u</code> in the workspace at
+position 1<!-- /@w --> on the search path.  To make a permanent change to the
+data frame itself, the simplest way is to resort once again to the
+<code class="code">$</code> notation:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; lentils$u &lt;- v+w
+</pre></div>
+
+<p class="calibre1">However the new value of component <code class="code">u</code> is not visible until the
+data frame is detached and attached again.
+</p>
+<p class="calibre1">To detach a data frame, use the function
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; detach()
+</pre></div>
+
+<p class="calibre1">More precisely, this statement detaches from the search path the entity
+currently at position 2<!-- /@w -->.  Thus in the present context the variables
+<code class="code">u</code>, <code class="code">v</code> and <code class="code">w</code> would be no longer visible, except under
+the list notation as <code class="code">lentils$u</code> and so on.  Entities at positions
+greater than 2 on the search path can be detached by giving their number
+to <code class="code">detach</code>, but it is much safer to always use a name, for example
+by <code class="code">detach(lentils)</code> or <code class="code">detach("lentils")</code>
+</p>
+<blockquote class="quotation">
+<p class="calibre1"><b class="strong">Note:</b> In R lists and data frames can only be attached at position 2 or
+above, and what is attached is a <em class="emph">copy</em> of the original object.
+You can alter the attached values <em class="emph">via</em> <code class="code">assign</code>, but the
+original list or data frame is unchanged.
+</p></blockquote>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Working-with-data-frames">
+<h4 class="subheading" id="Working-with-data-frames-1">6.3.3 Working with data frames</h4>
+
+<p class="calibre1">A useful convention that allows you to work with many different problems
+comfortably together in the same workspace is
+</p>
+<ul class="itemize">
+<li class="calibre3">gather together all variables for any well defined and separate problem
+in a data frame under a suitably informative name;
+</li><li class="calibre3">when working with a problem attach the appropriate data frame at
+position 2<!-- /@w -->, and use the workspace at level 1<!-- /@w --> for
+operational quantities and temporary variables;
+</li><li class="calibre3">before leaving a problem, add any variables you wish to keep for future
+reference to the data frame using the <code class="code">$</code> form of assignment, and
+then <code class="code">detach()</code>;
+</li><li class="calibre3">finally remove all unwanted variables from the workspace and
+keep it as clean of left-over temporary variables as possible.
+</li></ul>
+
+<p class="calibre1">In this way it is quite simple to work with many problems in the same
+directory, all of which have variables named <code class="code">x</code>, <code class="code">y</code> and
+<code class="code">z</code>, for example.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Attaching-arbitrary-lists">
+<h4 class="subheading" id="Attaching-arbitrary-lists-1">6.3.4 Attaching arbitrary lists</h4>
+
+<p class="calibre1"><code class="code">attach()</code> is a generic function that allows not only directories
+and data frames to be attached to the search path, but other classes of
+object as well.  In particular any object of mode <code class="code">"list"</code> may be
+attached in the same way:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; attach(any.old.list)
+</pre></div>
+
+<p class="calibre1">Anything that has been attached can be detached by <code class="code">detach</code>, by
+position number or, preferably, by name.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Managing-the-search-path">
+<h4 class="subheading" id="Managing-the-search-path-1">6.3.5 Managing the search path</h4>
+<a id="index-search"></a>
+<a id="index-Search-path"></a>
+
+<p class="calibre1">The function <code class="code">search</code> shows the current search path and so is
+a very useful way to keep track of which data frames and lists (and
+packages) have been attached and detached.  Initially it gives
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; search()
+[1] ".GlobalEnv"   "Autoloads"    "package:base"
+</pre></div>
+<p class="calibre1">where <code class="code">.GlobalEnv</code> is the workspace.<a id="DOCF18" href="R-intro_split_022.html#FOOT18"><sup class="calibre2">18</sup></a>
+</p>
+<p class="calibre1">After <code class="code">lentils</code> is attached we have
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; search()
+[1] ".GlobalEnv"   "lentils"      "Autoloads"    "package:base"
+&gt; ls(2)
+[1] "u" "v" "w"
+</pre></div>
+
+<p class="calibre1">and as we see <code class="code">ls</code> (or <code class="code">objects</code>) can be used to examine the
+contents of any position on the search path.
+</p>
+<p class="calibre1">Finally, we detach the data frame and confirm it has been removed from
+the search path.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; detach("lentils")
+&gt; search()
+[1] ".GlobalEnv"   "Autoloads"    "package:base"
+</pre></div>
+
+<hr class="calibre4"/>
+</div>
+</div>
+</div>
+<div class="top-level-extent" id="Reading-data-from-files">
+<div class="calibre5" id="calibre_pb_15"></div>
+</div>
+</div>
+</body></html>

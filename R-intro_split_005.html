@@ -1,0 +1,257 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Objects">
+<h2 class="contents-heading" id="Objects_002c-their-modes-and-attributes">3 Objects, their modes and attributes</h2>
+<a id="index-Objects"></a>
+<a id="index-Attributes"></a>
+
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="The-intrinsic-attributes-mode-and-length">
+<h3 class="section" id="Intrinsic-attributes_003a-mode-and-length">3.1 Intrinsic attributes: mode and length</h3>
+
+<p class="calibre1">The entities R operates on are technically known as <em class="emph">objects</em>.
+Examples are vectors of numeric (real) or complex values, vectors of
+logical values and vectors of character strings.  These are known as
+“atomic” structures since their components are all of the same type,
+or <em class="emph">mode</em>, namely <em class="emph">numeric</em><a id="DOCF10" href="R-intro_split_022.html#FOOT10"><sup class="calibre2">10</sup></a>, <em class="emph">complex</em>,
+<em class="emph">logical</em>, <em class="emph">character</em> and <em class="emph">raw</em>.
+</p>
+<p class="calibre1">Vectors must have their values <em class="emph">all of the same mode</em>.  Thus any
+given vector must be unambiguously either <em class="emph">logical</em>,
+<em class="emph">numeric</em>, <em class="emph">complex</em>, <em class="emph">character</em> or <em class="emph">raw</em>.  (The
+only apparent exception to this rule is the special “value” listed as
+<code class="code">NA</code> for quantities not available, but in fact there are several
+types of <code class="code">NA</code>).  Note that a vector can be empty and still have a
+mode.  For example the empty character string vector is listed as
+<code class="code">character(0)</code> and the empty numeric vector as <code class="code">numeric(0)</code>.
+</p>
+<p class="calibre1">R also operates on objects called <em class="emph">lists</em>, which are of mode
+<em class="emph">list</em>.  These are ordered sequences of objects which individually
+can be of any mode.  <em class="emph">lists</em> are known as “recursive” rather than
+atomic structures since their components can themselves be lists in
+their own right.
+</p>
+<p class="calibre1">The other recursive structures are those of mode <em class="emph">function</em> and
+<em class="emph">expression</em>.  Functions are the objects that form part of the R
+system along with similar user written functions, which we discuss in
+some detail later.  Expressions as objects form an
+advanced part of R which will not be discussed in this guide, except
+indirectly when we discuss <em class="emph">formulae</em> used with modeling in R.
+</p>
+<p class="calibre1">By the <em class="emph">mode</em> of an object we mean the basic type of its
+fundamental constituents.  This is a special case of a “property”
+of an object.  Another property of every object is its <em class="emph">length</em>.  The
+functions <code class="code">mode(<var class="emph">object</var>)</code> and <code class="code">length(<var class="emph">object</var>)</code> can be
+used to find out the mode and length of any defined structure
+<a id="DOCF11" href="R-intro_split_022.html#FOOT11"><sup class="calibre2">11</sup></a>.
+</p>
+<p class="calibre1">Further properties of an object are usually provided by
+<code class="code">attributes(<var class="emph">object</var>)</code>, see <a href="#Getting-and-setting-attributes">Getting and setting attributes</a>.
+Because of this, <em class="emph">mode</em> and <em class="emph">length</em> are also called “intrinsic
+attributes” of an object.
+<a id="index-mode"></a>
+<a id="index-length-1"></a>
+</p>
+<p class="calibre1">For example, if <code class="code">z</code> is a complex vector of length 100, then in an
+expression <code class="code">mode(z)</code> is the character string <code class="code">"complex"</code> and
+<code class="code">length(z)</code> is <code class="code">100</code>.
+</p>
+<p class="calibre1">R caters for changes of mode almost anywhere it could be considered
+sensible to do so, (and a few where it might not be).  For example with
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; z &lt;- 0:9
+</pre></div>
+
+<p class="calibre1">we could put
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; digits &lt;- as.character(z)
+</pre></div>
+
+<p class="calibre1">after which <code class="code">digits</code> is the character vector <code class="code">c("0", "1", "2",
+…, "9")</code>.  A further <em class="emph">coercion</em>, or change of mode,
+reconstructs the numerical vector again:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; d &lt;- as.integer(digits)
+</pre></div>
+
+<p class="calibre1">Now <code class="code">d</code> and <code class="code">z</code> are the same.<a id="DOCF12" href="R-intro_split_022.html#FOOT12"><sup class="calibre2">12</sup></a>  There is a
+large collection of functions of the form <code class="code">as.<var class="emph">something</var>()</code>
+for either coercion from one mode to another, or for investing an object
+with some other attribute it may not already possess.  The reader should
+consult the different help files to become familiar with them.
+</p>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Changing-the-length-of-an-object">
+<h3 class="section" id="Changing-the-length-of-an-object-1">3.2 Changing the length of an object</h3>
+
+<p class="calibre1">An “empty” object may still have a mode.  For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; e &lt;- numeric()
+</pre></div>
+
+<p class="calibre1">makes <code class="code">e</code> an empty vector structure of mode numeric.  Similarly
+<code class="code">character()</code> is a empty character vector, and so on.  Once an
+object of any size has been created, new components may be added to it
+simply by giving it an index value outside its previous range.  Thus
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; e[3] &lt;- 17
+</pre></div>
+
+<p class="calibre1">now makes <code class="code">e</code> a vector of length 3, (the first two components of
+which are at this point both <code class="code">NA</code>).  This applies to any structure
+at all, provided the mode of the additional component(s) agrees with the
+mode of the object in the first place.
+</p>
+<p class="calibre1">This automatic adjustment of lengths of an object is used often, for
+example in the <code class="code">scan()</code> function for input.  (see <a href="R-intro_split_009.html#The-scan_0028_0029-function">The <code class="code">scan()</code> function</a>.)
+</p>
+<p class="calibre1">Conversely to truncate the size of an object requires only an assignment
+to do so.  Hence if <code class="code">alpha</code> is an object of length 10, then
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; alpha &lt;- alpha[2 * 1:5]
+</pre></div>
+
+<p class="calibre1">makes it an object of length 5 consisting of just the former components
+with even index.  (The old indices are not retained, of course.)  We can
+then retain just the first three values by
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; length(alpha) &lt;- 3
+</pre></div>
+
+<p class="calibre1">and vectors can be extended (by missing values) in the same way.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Getting-and-setting-attributes">
+<h3 class="section" id="Getting-and-setting-attributes-1">3.3 Getting and setting attributes</h3>
+<a id="index-attr"></a>
+<a id="index-attributes"></a>
+
+<p class="calibre1">The function <code class="code">attributes(<var class="emph">object</var>)</code>
+<a id="index-attributes-1"></a>
+returns a list of all the non-intrinsic attributes currently defined for
+that object.  The function <code class="code">attr(<var class="emph">object</var>, <var class="emph">name</var>)</code>
+<a id="index-attr-1"></a>
+can be used to select a specific attribute.  These functions are rarely
+used, except in rather special circumstances when some new attribute is
+being created for some particular purpose, for example to associate a
+creation date or an operator with an R object.  The concept, however,
+is very important.
+</p>
+<p class="calibre1">Some care should be exercised when assigning or deleting attributes
+since they are an integral part of the object system used in R.
+</p>
+<p class="calibre1">When it is used on the left hand side of an assignment it can be used
+either to associate a new attribute with <code class="code"><var class="emph">object</var></code> or to
+change an existing one.  For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; attr(z, "dim") &lt;- c(10,10)
+</pre></div>
+
+<p class="calibre1">allows R to treat <code class="code">z</code> as if it were a 10-by-10 matrix.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="The-class-of-an-object">
+<h3 class="section" id="The-class-of-an-object-1">3.4 The class of an object</h3>
+<a id="index-Classes"></a>
+
+<p class="calibre1">All objects in R have a <em class="emph">class</em>, reported by the function
+<code class="code">class</code>.  For simple vectors this is just the mode, for example
+<code class="code">"numeric"</code>, <code class="code">"logical"</code>, <code class="code">"character"</code> or <code class="code">"list"</code>,
+but <code class="code">"matrix"</code>, <code class="code">"array"</code>, <code class="code">"factor"</code> and
+<code class="code">"data.frame"</code> are other possible values.
+</p>
+<p class="calibre1">A special attribute known as the <em class="emph">class</em> of the object is used to
+allow for an object-oriented style<a id="DOCF13" href="R-intro_split_022.html#FOOT13"><sup class="calibre2">13</sup></a> of
+programming in R.  For example if an object has class
+<code class="code">"data.frame"</code>, it will be printed in a certain way, the
+<code class="code">plot()</code> function will display it graphically in a certain way, and
+other so-called generic functions such as <code class="code">summary()</code> will react to
+it as an argument in a way sensitive to its class.
+</p>
+<p class="calibre1">To remove temporarily the effects of class, use the function
+<code class="code">unclass()</code>.
+<a id="index-unclass"></a>
+For example if <code class="code">winter</code> has the class <code class="code">"data.frame"</code> then
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; winter
+</pre></div>
+
+<p class="calibre1">will print it in data frame form, which is rather like a matrix, whereas
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; unclass(winter)
+</pre></div>
+
+<p class="calibre1">will print it as an ordinary list.  Only in rather special situations do
+you need to use this facility, but one is when you are learning to come
+to terms with the idea of class and generic functions.
+</p>
+<p class="calibre1">Generic functions and classes will be discussed further in <a href="R-intro_split_012.html#Object-orientation">Classes, generic functions and object orientation</a>, but only briefly.
+</p>
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Factors">
+<div class="calibre5" id="calibre_pb_9"></div>
+</div>
+</div>
+</body></html>

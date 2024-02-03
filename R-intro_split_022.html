@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="References">
+<h2 class="contents-heading" id="References-1">Appendix F References</h2>
+
+<p class="calibre1">D. M. Bates and  D. G. Watts (1988), <em class="emph">Nonlinear Regression
+Analysis and Its Applications.</em> John Wiley &amp; Sons, New York.
+</p>
+<p class="calibre1">Richard A. Becker, John M. Chambers and Allan R. Wilks (1988),
+<em class="emph">The New S Language.</em> Chapman &amp; Hall, New York.
+This book is often called the “<em class="emph">Blue Book</em>”.
+</p>
+<p class="calibre1">John M. Chambers and Trevor J. Hastie eds. (1992),
+<em class="emph">Statistical Models in S.</em> Chapman &amp; Hall, New York.
+This is also called the “<em class="emph">White Book</em>”.
+</p>
+<p class="calibre1">John M. Chambers (1998)
+<em class="emph">Programming with Data</em>. Springer, New York.
+This is also called the “<em class="emph">Green Book</em>”.
+</p>
+<p class="calibre1">A. C. Davison and D. V. Hinkley (1997), <em class="emph">Bootstrap Methods
+and Their Applications</em>, Cambridge University Press.
+</p>
+<p class="calibre1">Annette J. Dobson (1990), <em class="emph">An Introduction to Generalized Linear
+Models</em>, Chapman and Hall, London.
+</p>
+<p class="calibre1">Peter McCullagh and John A. Nelder (1989), <em class="emph">Generalized Linear
+Models.</em> Second edition, Chapman and Hall, London.
+</p>
+<p class="calibre1">John A. Rice (1995), <em class="emph">Mathematical Statistics and Data Analysis.</em>
+Second edition.  Duxbury Press, Belmont, CA.
+</p>
+<p class="calibre1">S. D. Silvey (1970), <em class="emph">Statistical Inference.</em> Penguin, London.
+</p>
+</div>
+</div>
+<div class="top-level-extent">
+<hr class="calibre4"/>
+<h4 class="subheading">Footnotes</h4>
+
+<h5 class="footnote-body-heading"><a id="FOOT1" href="R-intro_split_000.html#DOCF1">(1)</a></h5>
+<p class="calibre1">ACM Software Systems award, 1998:
+<a href="https://awards.acm.org/award_winners/chambers_6640862.cfm">https://awards.acm.org/award_winners/chambers_6640862.cfm</a>.</p>
+<h5 class="footnote-body-heading"><a id="FOOT2" href="R-intro_split_003.html#DOCF2">(2)</a></h5>
+<p class="calibre1">For portable R code (including that to
+be used in R packages) only A–Za–z0–9 should be used.</p>
+<h5 class="footnote-body-heading"><a id="FOOT3" href="R-intro_split_003.html#DOCF3">(3)</a></h5>
+<p class="calibre1"><strong class="strong">not</strong> inside strings,
+nor within the argument list of a function definition</p>
+<h5 class="footnote-body-heading"><a id="FOOT4" href="R-intro_split_003.html#DOCF4">(4)</a></h5>
+<p class="calibre1">some of the
+consoles will not allow you to enter more, and amongst those which do
+some will silently discard the excess and some will use it as the start
+of the next line.</p>
+<h5 class="footnote-body-heading"><a id="FOOT5" href="R-intro_split_003.html#DOCF5">(5)</a></h5>
+<p class="calibre1">of unlimited length.</p>
+<h5 class="footnote-body-heading"><a id="FOOT6" href="R-intro_split_003.html#DOCF6">(6)</a></h5>
+<p class="calibre1">The leading “dot” in
+this file name makes it <em class="emph">invisible</em> in normal file listings in
+UNIX, and in default GUI file listings on macOS and Windows.</p>
+<h5 class="footnote-body-heading"><a id="FOOT7" href="R-intro_split_004.html#DOCF7">(7)</a></h5>
+<p class="calibre1">With other than vector types of argument,
+such as <code class="code">list</code> mode arguments, the action of <code class="code">c()</code> is rather
+different.  See <a href="R-intro_split_008.html#Concatenating-lists">Concatenating lists</a>.</p>
+<h5 class="footnote-body-heading"><a id="FOOT8" href="R-intro_split_004.html#DOCF8">(8)</a></h5>
+<p class="calibre1">Actually, it is still available as
+<code class="code">.Last.value</code> before any other statements are executed.</p>
+<h5 class="footnote-body-heading"><a id="FOOT9" href="R-intro_split_004.html#DOCF9">(9)</a></h5>
+<p class="calibre1"><code class="code">paste(..., collapse=<var class="emph">ss</var>)</code> joins the
+arguments into a single character string putting <var class="emph">ss</var> in between, e.g.,
+<code class="code">ss &lt;- "|"</code>.  There are more tools for character manipulation, see the help
+for <code class="code">sub</code> and <code class="code">substring</code>.</p>
+<h5 class="footnote-body-heading"><a id="FOOT10" href="R-intro_split_005.html#DOCF10">(10)</a></h5>
+<p class="calibre1"><em class="emph">numeric</em> mode is
+actually an amalgam of two distinct modes, namely <em class="emph">integer</em> and
+<em class="emph">double</em> precision, as explained in the manual.</p>
+<h5 class="footnote-body-heading"><a id="FOOT11" href="R-intro_split_005.html#DOCF11">(11)</a></h5>
+<p class="calibre1">Note however that <code class="code">length(<var class="emph">object</var>)</code> does not always
+contain intrinsic useful information, e.g., when <code class="code"><var class="emph">object</var></code> is a
+function.</p>
+<h5 class="footnote-body-heading"><a id="FOOT12" href="R-intro_split_005.html#DOCF12">(12)</a></h5>
+<p class="calibre1">In general, coercion
+from numeric to character and back again will not be exactly reversible,
+because of roundoff errors in the character representation.</p>
+<h5 class="footnote-body-heading"><a id="FOOT13" href="R-intro_split_005.html#DOCF13">(13)</a></h5>
+<p class="calibre1">A different style using
+‘formal’ or ‘S4’ classes is provided in package <code class="code">methods</code>.</p>
+<h5 class="footnote-body-heading"><a id="FOOT14" href="R-intro_split_006.html#DOCF14">(14)</a></h5>
+<p class="calibre1">Readers should note
+that there are eight states and territories in Australia, namely the
+Australian Capital Territory, New South Wales, the Northern Territory,
+Queensland, South Australia, Tasmania, Victoria and Western Australia.</p>
+<h5 class="footnote-body-heading"><a id="FOOT15" href="R-intro_split_006.html#DOCF15">(15)</a></h5>
+<p class="calibre1">Note that <code class="code">tapply()</code> also works in this case
+when its second argument is not a factor, e.g.,
+‘<samp class="code"><code class="code">tapply(incomes, state)</code></samp>’, and this is true for quite a few
+other functions, since arguments are <em class="emph">coerced</em> to factors when
+necessary (using <code class="code">as.factor()</code>).</p>
+<h5 class="footnote-body-heading"><a id="FOOT16" href="R-intro_split_007.html#DOCF16">(16)</a></h5>
+<p class="calibre1">Note that <code class="code">x %*% x</code> is ambiguous, as
+it could mean either x’x or x x’, where x is the
+column form.  In such cases the smaller matrix seems implicitly to be
+the interpretation adopted, so the scalar x’x is in this case the
+result.  The matrix x x’ may be calculated either by <code class="code">cbind(x)
+%*% x</code> or <code class="code">x %*% rbind(x)</code> since the result of <code class="code">rbind()</code> or
+<code class="code">cbind()</code> is always a matrix.  However, the best way to compute
+x’x or x x’ is <code class="code">crossprod(x)</code> or <code class="code">x %o% x</code> respectively.</p>
+<h5 class="footnote-body-heading"><a id="FOOT17" href="R-intro_split_007.html#DOCF17">(17)</a></h5>
+<p class="calibre1">Even better would be to form a matrix square
+root B with A = BB’ and find the squared length
+of the solution of By = x , perhaps using the Cholesky or
+eigen decomposition of A.  </p>
+<h5 class="footnote-body-heading"><a id="FOOT18" href="R-intro_split_008.html#DOCF18">(18)</a></h5>
+<p class="calibre1">See the on-line help
+for <code class="code">autoload</code> for the meaning of the second term.</p>
+<h5 class="footnote-body-heading"><a id="FOOT19" href="R-intro_split_009.html#DOCF19">(19)</a></h5>
+<p class="calibre1">Under UNIX, the utilities
+<code class="code">sed</code> or <code class="code">awk</code> can be used.</p>
+<h5 class="footnote-body-heading"><a id="FOOT20" href="R-intro_split_011.html#DOCF20">(20)</a></h5>
+<p class="calibre1">to be
+discussed later, or use <code class="code">xyplot</code> from package <a href="https://CRAN.R-project.org/package=lattice"><strong class="strong">lattice</strong></a>.</p>
+<h5 class="footnote-body-heading"><a id="FOOT21" href="R-intro_split_012.html#DOCF21">(21)</a></h5>
+<p class="calibre1">See also the methods described in <a href="R-intro_split_012.html#Statistical-models-in-R">Statistical models in R</a></p>
+<h5 class="footnote-body-heading"><a id="FOOT22" href="R-intro_split_012.html#DOCF22">(22)</a></h5>
+<p class="calibre1">In some sense this
+mimics the behavior in <small class="sc">S-PLUS</small> since in <small class="sc">S-PLUS</small> this operator always
+creates or assigns to a global variable.</p>
+<h5 class="footnote-body-heading"><a id="FOOT23" href="R-intro_split_012.html#DOCF23">(23)</a></h5>
+<p class="calibre1">So it is hidden under
+UNIX.</p>
+<h5 class="footnote-body-heading"><a id="FOOT24" href="R-intro_split_014.html#DOCF24">(24)</a></h5>
+<p class="calibre1">Some graphics
+parameters such as the size of the current device are for information
+only.</p>
+<h5 class="footnote-body-heading"><a id="FOOT25" href="R-intro_split_019.html#DOCF25">(25)</a></h5>
+<p class="calibre1">The
+‘Emacs Speaks Statistics’ package; see the <abbr>URL</abbr>
+<a href="https://ESS.R-project.org/">https://ESS.R-project.org/</a></p>
+<h5 class="footnote-body-heading"><a id="FOOT26" href="R-intro_split_019.html#DOCF26">(26)</a></h5>
+<p class="calibre1">It is possible to build R using an
+emulation of GNU <strong class="strong">readline</strong>, such as one based on NetBSD’s
+<strong class="strong">editline</strong> (also known as <strong class="strong">libedit</strong>), in which case only a
+subset of the capabilities may be provided.</p>
+<h5 class="footnote-body-heading"><a id="FOOT27" href="R-intro_split_019.html#DOCF27">(27)</a></h5>
+<p class="calibre1">On a PC keyboard this is usually the
+Alt key, occasionally the ‘Windows’ key.  On a Mac keyboard normally no
+meta key is available.</p>
+<h5 class="footnote-body-heading"><a id="FOOT28" href="R-intro_split_019.html#DOCF28">(28)</a></h5>
+<p class="calibre1">In particular, not versions 6.3 or
+later: this is worked around as from R 3.4.0.</p>
+</div>
+
+
+
+
+
+</body></html>

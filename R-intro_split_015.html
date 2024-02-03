@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Packages">
+<h2 class="contents-heading" id="Packages-1">13 Packages</h2>
+<a id="index-Packages-1"></a>
+
+<p class="calibre1">All R functions and datasets are stored in <em class="emph">packages</em>.  Only
+when a package is loaded are its contents available.  This is done both
+for efficiency (the full list would take more memory and would take
+longer to search than a subset), and to aid package developers, who are
+protected from name clashes with other code.  The process of developing
+packages is described in <a data-manual="R-exts" href="./R-exts.html#Creating-R-packages">Creating R
+packages</a> in <cite class="emph">Writing R Extensions</cite>.  Here, we will describe them
+from a user’s point of view.
+</p>
+<p class="calibre1">To see which packages are installed at your site, issue the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; library()
+</pre></div>
+
+<p class="calibre1">with no arguments.  To load a particular package (e.g., the <a href="https://CRAN.R-project.org/package=boot"><strong class="strong">boot</strong></a>
+package containing functions from Davison &amp; Hinkley (1997)), use a
+command like
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; library(boot)
+</pre></div>
+
+<p class="calibre1">Users connected to the Internet can use the <code class="code">install.packages()</code>
+and <code class="code">update.packages()</code> functions (available through the
+<code class="code">Packages</code> menu in the Windows and macOS GUIs, see <a data-manual="R-admin" href="./R-admin.html#Installing-packages">Installing
+packages</a> in <cite class="emph">R Installation and Administration</cite>) to install
+and update packages.
+</p>
+<p class="calibre1">To see which packages are currently loaded, use
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; search()
+</pre></div>
+
+<p class="calibre1">to display the search list.  Some packages may be loaded but not
+available on the search list (see <a href="#Namespaces">Namespaces</a>): these will be
+included in the list given by
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; loadedNamespaces()
+</pre></div>
+
+
+<p class="calibre1">To see a list of all available help topics in an installed package,
+use
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; help.start()
+</pre></div>
+
+<p class="calibre1">to start the <abbr>HTML</abbr> help system, and then navigate to the package
+listing in the <code class="code">Reference</code> section.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Standard-packages">
+<h3 class="section" id="Standard-packages-1">13.1 Standard packages</h3>
+
+<p class="calibre1">The standard (or <em class="emph">base</em>) packages are considered part of the R
+source code.  They contain the basic functions that allow R to work,
+and the datasets and standard statistical and graphical functions that
+are described in this manual.  They should be automatically available in
+any R installation.  See <a data-manual="R-FAQ" href="R-FAQ.html#Which-add_002don-packages-exist-for-R_003f">R
+packages</a> in <cite class="emph">R FAQ</cite>, for a complete list.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Contributed-packages-and-CRAN">
+<h3 class="section" id="Contributed-packages-and-CRAN-1">13.2 Contributed packages and <abbr class="acronym">CRAN</abbr></h3>
+<a id="index-CRAN"></a>
+
+<p class="calibre1">There are thousands of contributed packages for R, written by many
+different authors.  Some of these packages implement specialized
+statistical methods, others give access to data or hardware, and others
+are designed to complement textbooks.  Some (the <em class="emph">recommended</em>
+packages) are distributed with every binary distribution of R.  Most
+are available for download from <abbr>CRAN</abbr>
+(<a href="https://CRAN.R-project.org/">https://CRAN.R-project.org/</a> and its mirrors) and other
+repositories such as Bioconductor (<a href="https://www.bioconductor.org/">https://www.bioconductor.org/</a>).
+The <em class="emph">R FAQ</em>
+contains a list of CRAN packages current at the time of release, but the
+collection of available packages changes very frequently.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Namespaces">
+<h3 class="section" id="Namespaces-1">13.3 Namespaces</h3>
+<a id="index-Namespace"></a>
+<a id="index-_003a_003a"></a>
+<a id="index-_003a_003a_003a"></a>
+
+<p class="calibre1">Packages have <em class="emph">namespaces</em>, which do three things: they allow the
+package writer to hide functions and data that are meant only for
+internal use, they prevent functions from breaking when a user (or other
+package writer) picks a name that clashes with one in the package, and
+they provide a way to refer to an object within a particular package.
+</p>
+<p class="calibre1">For example, <code class="code">t()</code> is the transpose function in R, but users
+might define their own function named <code class="code">t</code>.  Namespaces prevent
+the user’s definition from taking precedence, and breaking every
+function that tries to transpose a matrix.
+</p>
+<p class="calibre1">There are two operators that work with namespaces.  The double-colon
+operator <code class="code">::</code> selects definitions from a particular namespace.
+In the example above, the transpose function will always be available
+as <code class="code">base::t</code>, because it is defined in the <code class="code">base</code> package.
+Only functions that are exported from the package can be retrieved in
+this way.
+</p>
+<p class="calibre1">The triple-colon operator <code class="code">:::</code> may be seen in a few places in R
+code: it acts like the double-colon operator but also allows access to
+hidden objects.  Users are more likely to use the <code class="code">getAnywhere()</code>
+function, which searches multiple packages.
+</p>
+<p class="calibre1">Packages are often inter-dependent, and loading one may cause others to
+be automatically loaded.  The colon operators described above will also
+cause automatic loading of the associated package.  When packages with
+namespaces are loaded automatically they are not added to the search
+list.
+</p>
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="OS-facilities">
+<div class="calibre5" id="calibre_pb_29"></div>
+</div>
+</div>
+</body></html>

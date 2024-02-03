@@ -1,0 +1,212 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="The-command_002dline-editor">
+<h2 class="contents-heading" id="The-command_002dline-editor-1">Appendix C The command-line editor</h2>
+
+<div class="top-level-extent" id="Preliminaries">
+<h3 class="section">C.1 Preliminaries</h3>
+
+<p class="calibre1">When the <abbr>GNU</abbr> <strong class="strong">readline</strong> library is available at the
+time R is configured for compilation under UNIX, an inbuilt command
+line editor allowing recall, editing and re-submission of prior commands
+is used.  Note that other versions of <strong class="strong">readline</strong> exist and may be
+used by the inbuilt command line editor: this is most common on macOS.
+You can find out which version (if any) is available by running
+<code class="code">extSoftVersion()</code> in an R session.
+</p>
+<p class="calibre1">It can be disabled (useful for usage with <abbr>ESS</abbr> <a id="DOCF25" href="R-intro_split_022.html#FOOT25"><sup class="calibre2">25</sup></a>) using the startup option
+<samp class="code">--no-readline</samp>.
+</p>
+<p class="calibre1">Windows versions of R have somewhat simpler command-line editing: see
+‘<samp class="code">Console</samp>’ under the ‘<samp class="code">Help</samp>’ menu of the <abbr>GUI</abbr>, and the
+file <samp class="code">README.Rterm</samp> for command-line editing under
+<code class="code">Rterm.exe</code>.
+</p>
+<p class="calibre1">When using R with GNU<a id="DOCF26" href="R-intro_split_022.html#FOOT26"><sup class="calibre2">26</sup></a> <strong class="strong">readline</strong>
+capabilities, the functions described below are available, as well as
+others (probably) documented in <code class="code">man readline</code> or <code class="code">info
+readline</code> on your system.
+</p>
+<p class="calibre1">Many of these use either Control or Meta characters.  Control
+characters, such as <kbd class="kbd">Control-m</kbd>, are obtained by holding the
+<kbd class="key">CTRL</kbd> down while you press the <kbd class="key">m</kbd> key, and are written as
+<kbd class="kbd">C-m</kbd> below.  Meta characters, such as <kbd class="kbd">Meta-b</kbd>, are typed by
+holding down <kbd class="key">META</kbd><a id="DOCF27" href="R-intro_split_022.html#FOOT27"><sup class="calibre2">27</sup></a> and pressing <kbd class="key">b</kbd>, and written as <kbd class="kbd">M-b</kbd>
+in the following.  If your terminal does not have a <kbd class="key">META</kbd> key
+enabled, you can still type Meta characters using two-character
+sequences starting with <kbd class="kbd">ESC</kbd>.  Thus, to enter <kbd class="kbd">M-b</kbd>, you could
+type <kbd class="key">ESC</kbd><kbd class="key">b</kbd>.  The <kbd class="kbd">ESC</kbd> character sequences are also
+allowed on terminals with real Meta keys.  Note that case is significant
+for Meta characters.
+</p>
+<p class="calibre1">Some but not all versions<a id="DOCF28" href="R-intro_split_022.html#FOOT28"><sup class="calibre2">28</sup></a> of <strong class="strong">readline</strong>
+will recognize resizing of the terminal window so this is best avoided.
+</p>
+</div>
+<div class="top-level-extent" id="Editing-actions">
+<h3 class="section">C.2 Editing actions</h3>
+
+<p class="calibre1">The R program keeps a history of the command lines you type,
+including the erroneous lines, and commands in your history may be
+recalled, changed if necessary, and re-submitted as new commands.  In
+Emacs-style command-line editing any straight typing you do while in
+this editing phase causes the characters to be inserted in the command
+you are editing, displacing any characters to the right of the cursor.
+In <em class="emph">vi</em> mode character insertion mode is started by <kbd class="kbd">M-i</kbd> or
+<kbd class="kbd">M-a</kbd>, characters are typed and insertion mode is finished by typing
+a further <kbd class="key">ESC</kbd>.  (The default is Emacs-style, and only that is
+described here: for <em class="emph">vi</em> mode see the <strong class="strong">readline</strong>
+documentation.)
+</p>
+<p class="calibre1">Pressing the <kbd class="key">RET</kbd> command at any time causes the command to be
+re-submitted.
+</p>
+<p class="calibre1">Other editing actions are summarized in the following table.
+</p>
+</div>
+<div class="top-level-extent" id="Command_002dline-editor-summary">
+<h3 class="section">C.3 Command-line editor summary</h3>
+
+<h4 class="subheading" id="Command-recall-and-vertical-motion">Command recall and vertical motion</h4>
+
+<dl class="table">
+<dt class="top-level-extent"><kbd class="kbd">C-p</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go to the previous command (backwards in the history).
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-n</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go to the next command (forwards in the history).
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-r <var class="emph">text</var></kbd></dt>
+<dd class="calibre11"><p class="calibre1">Find the last command with the <var class="emph">text</var> string in it.  This can be
+cancelled by <code class="code">C-g</code> (and on some versions of R by <code class="code">C-c</code>).
+</p></dd>
+</dl>
+
+<p class="calibre1">On most terminals, you can also use the up and down arrow keys instead
+of <kbd class="kbd">C-p</kbd> and <kbd class="kbd">C-n</kbd>, respectively.
+</p>
+<h4 class="subheading" id="Horizontal-motion-of-the-cursor">Horizontal motion of the cursor</h4>
+
+<dl class="table">
+<dt class="top-level-extent"><kbd class="kbd">C-a</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go to the beginning of the command.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-e</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go to the end of the line.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">M-b</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go back one word.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">M-f</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go forward one word.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-b</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go back one character.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-f</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Go forward one character.
+</p></dd>
+</dl>
+
+<p class="calibre1">On most terminals, you can also use the left and right arrow keys
+instead of <kbd class="kbd">C-b</kbd> and <kbd class="kbd">C-f</kbd>, respectively.
+</p>
+<h4 class="subheading" id="Editing-and-re_002dsubmission">Editing and re-submission</h4>
+
+<dl class="table">
+<dt class="top-level-extent"><kbd class="kbd"><var class="emph">text</var></kbd></dt>
+<dd class="calibre11"><p class="calibre1">Insert <var class="emph">text</var> at the cursor.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-f <var class="emph">text</var></kbd></dt>
+<dd class="calibre11"><p class="calibre1">Append <var class="emph">text</var> after the cursor.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd"><kbd class="key">DEL</kbd></kbd></dt>
+<dd class="calibre11"><p class="calibre1">Delete the previous character (left of the cursor).
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-d</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Delete the character under the cursor.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">M-d</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Delete the rest of the word under the cursor, and “save” it.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-k</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Delete from cursor to end of command, and “save” it.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-y</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Insert (yank) the last “saved” text here.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">C-t</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Transpose the character under the cursor with the next.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">M-l</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Change the rest of the word to lower case.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd">M-c</kbd></dt>
+<dd class="calibre11"><p class="calibre1">Change the rest of the word to upper case.
+</p></dd>
+<dt class="top-level-extent"><kbd class="kbd"><kbd class="key">RET</kbd></kbd></dt>
+<dd class="calibre11"><p class="calibre1">Re-submit the command to R.
+</p></dd>
+</dl>
+
+<p class="calibre1">The final <kbd class="key">RET</kbd> terminates the command line editing sequence.
+</p>
+<p class="calibre1">The <strong class="strong">readline</strong> key bindings can be customized in the usual way
+<em class="emph">via</em> a <samp class="code">~/.inputrc</samp> file.  These customizations can be
+conditioned on application <code class="code">R</code>, that is by including a section like
+</p>
+<div class="example">
+<pre class="example-preformatted">$if R
+  "\C-xd": "q('no')\n"
+$endif
+</pre></div>
+
+<hr class="calibre4"/>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Factors">
+<h2 class="contents-heading" id="Ordered-and-unordered-factors">4 Ordered and unordered factors</h2>
+<a id="index-Factors"></a>
+<a id="index-Ordered-factors"></a>
+
+<p class="calibre1">A <em class="emph">factor</em> is a vector object used to specify a discrete
+classification (grouping) of the components of other vectors of the same length.
+R provides both <em class="emph">ordered</em> and <em class="emph">unordered</em> factors.
+While the “real” application of factors is with model formulae
+(see <a href="R-intro_split_013.html#Contrasts">Contrasts</a>), we here look at a specific example.
+</p>
+<div class="top-level-extent" id="A-specific-example">
+<h3 class="section">4.1 A specific example</h3>
+
+<p class="calibre1">Suppose, for example, we have a sample of 30 tax accountants from all
+the states and territories of Australia<a id="DOCF14" href="R-intro_split_022.html#FOOT14"><sup class="calibre2">14</sup></a>
+and their individual state of origin is specified by a character vector
+of state mnemonics as
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; state &lt;- c("tas", "sa",  "qld", "nsw", "nsw", "nt",  "wa",  "wa",
+             "qld", "vic", "nsw", "vic", "qld", "qld", "sa",  "tas",
+             "sa",  "nt",  "wa",  "vic", "qld", "nsw", "nsw", "wa",
+             "sa",  "act", "nsw", "vic", "vic", "act")
+</pre></div>
+
+<p class="calibre1">Notice that in the case of a character vector, “sorted” means sorted
+in alphabetical order.
+</p>
+<p class="calibre1">A <em class="emph">factor</em> is similarly created using the <code class="code">factor()</code> function:
+<a id="index-factor"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; statef &lt;- factor(state)
+</pre></div>
+
+<p class="calibre1">The <code class="code">print()</code> function handles factors slightly differently from
+other objects:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; statef
+ [1] tas sa  qld nsw nsw nt  wa  wa  qld vic nsw vic qld qld sa
+[16] tas sa  nt  wa  vic qld nsw nsw wa  sa  act nsw vic vic act
+Levels:  act nsw nt qld sa tas vic wa
+</pre></div>
+
+<p class="calibre1">To find out the levels of a factor the function <code class="code">levels()</code> can be
+used.
+<a id="index-levels"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; levels(statef)
+[1] "act" "nsw" "nt"  "qld" "sa"  "tas" "vic" "wa"
+</pre></div>
+
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="The-function-tapply_0028_0029-and-ragged-arrays">
+<h3 class="section" id="The-function-tapply_0028_0029-and-ragged-arrays-1">4.2 The function <code class="code1">tapply()</code> and ragged arrays</h3>
+<a id="index-tapply"></a>
+
+<p class="calibre1">To continue the previous example, suppose we have the incomes of the
+same tax accountants in another vector (in suitably large units of
+money)
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; incomes &lt;- c(60, 49, 40, 61, 64, 60, 59, 54, 62, 69, 70, 42, 56,
+               61, 61, 61, 58, 51, 48, 65, 49, 49, 41, 48, 52, 46,
+               59, 46, 58, 43)
+</pre></div>
+
+<p class="calibre1">To calculate the sample mean income for each state we can now use the
+special function <code class="code">tapply()</code>:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; incmeans &lt;- tapply(incomes, statef, mean)
+</pre></div>
+
+<p class="calibre1">giving a means vector with the components labelled by the levels
+</p>
+<div class="example">
+<pre class="example-preformatted">   act    nsw     nt    qld     sa    tas    vic     wa
+44.500 57.333 55.500 53.600 55.000 60.500 56.000 52.250
+</pre></div>
+
+<p class="calibre1">The function <code class="code">tapply()</code> is used to apply a function, here
+<code class="code">mean()</code>, to each group of components of the first argument, here
+<code class="code">incomes</code>, defined by the levels of the second component, here
+<code class="code">statef</code><a id="DOCF15" href="R-intro_split_022.html#FOOT15"><sup class="calibre2">15</sup></a>, as if they were separate vector
+structures.  The result is a structure of the same length as the levels
+attribute of the factor containing the results.  The reader should
+consult the help document for more details.
+</p>
+<p class="calibre1">Suppose further we needed to calculate the standard errors of the state
+income means.  To do this we need to write an R function to calculate
+the standard error for any given vector.  Since there is an builtin
+function <code class="code">var()</code> to calculate the sample variance, such a function
+is a very simple one liner, specified by the assignment:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; stdError &lt;- function(x) sqrt(var(x)/length(x))
+</pre></div>
+
+<p class="calibre1">(Writing functions will be considered later in <a href="R-intro_split_011.html#Writing-your-own-functions">Writing your own functions</a>.  Note that R’s a builtin function <code class="code">sd()</code> is something different.)
+<a id="index-sd"></a>
+<a id="index-var-1"></a>
+After this assignment, the standard errors are calculated by
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; incster &lt;- tapply(incomes, statef, stdError)
+</pre></div>
+
+<p class="calibre1">and the values calculated are then
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; incster
+act    nsw  nt    qld     sa tas   vic     wa
+1.5 4.3102 4.5 4.1061 2.7386 0.5 5.244 2.6575
+</pre></div>
+
+<p class="calibre1">As an exercise you may care to find the usual 95% confidence limits for
+the state mean incomes.  To do this you could use <code class="code">tapply()</code> once
+more with the <code class="code">length()</code> function to find the sample sizes, and the
+<code class="code">qt()</code> function to find the percentage points of the appropriate
+<em class="emph">t</em>-distributions.  (You could also investigate R’s facilities
+for <em class="emph">t</em>-tests.)
+</p>
+<p class="calibre1">The function <code class="code">tapply()</code> can also be used to handle more complicated
+indexing of a vector by multiple categories.  For example, we might wish
+to split the tax accountants by both state and sex.  However in this
+simple instance (just one factor) what happens can be thought of as
+follows.  The values in the vector are collected into groups
+corresponding to the distinct entries in the factor.  The function is
+then applied to each of these groups individually.  The value is a
+vector of function results, labelled by the <code class="code">levels</code> attribute of
+the factor.
+</p>
+<p class="calibre1">The combination of a vector and a labelling factor is an example of what
+is sometimes called a <em class="emph">ragged array</em>, since the subclass sizes are
+possibly irregular.  When the subclass sizes are all the same the
+indexing may be done implicitly and much more efficiently, as we see in
+the next section.
+</p>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Ordered-factors">
+<h3 class="section" id="Ordered-factors-1">4.3 Ordered factors</h3>
+<a id="index-ordered"></a>
+
+<p class="calibre1">The levels of factors are stored in alphabetical order, or in the order
+they were specified to <code class="code">factor</code> if they were specified explicitly.
+</p>
+<p class="calibre1">Sometimes the levels will have a natural ordering that we want to record
+and want our statistical analysis to make use of.  The <code class="code">ordered()</code>
+<a id="index-ordered-1"></a>
+function creates such ordered factors but is otherwise identical to
+<code class="code">factor</code>.  For most purposes the only difference between ordered
+and unordered factors is that the former are printed showing the
+ordering of the levels, but the contrasts generated for them in fitting
+linear models are different.
+</p>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Arrays-and-matrices">
+<div class="calibre5" id="calibre_pb_11"></div>
+</div>
+</div>
+</body></html>

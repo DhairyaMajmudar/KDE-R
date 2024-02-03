@@ -1,0 +1,469 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Introduction-and-preliminaries">
+<h2 class="contents-heading" id="Introduction-and-preliminaries-1">1 Introduction and preliminaries</h2>
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="The-R-environment">
+<h3 class="section" id="The-R-environment-1">1.1 The R environment</h3>
+
+<p class="calibre1">R is an integrated suite of software facilities for data
+manipulation, calculation and graphical display.  Among other things it
+has
+</p>
+<ul class="itemize">
+<li class="calibre3">an effective data handling and storage facility,
+</li><li class="calibre3">a suite of operators for calculations on arrays, in particular matrices,
+</li><li class="calibre3">a large, coherent, integrated collection of intermediate tools for data
+analysis,
+</li><li class="calibre3">graphical facilities for data analysis and display either directly at
+the computer or on hardcopy, and
+</li><li class="calibre3">a well developed, simple and effective programming language (called ‘S’)
+which includes conditionals, loops, user defined recursive functions and
+input and output facilities.  (Indeed most of the system supplied
+functions are themselves written in the S language.)
+</li></ul>
+
+<p class="calibre1">The term “environment” is intended to characterize it as a fully
+planned and coherent system, rather than an incremental accretion of
+very specific and inflexible tools, as is frequently the case with other
+data analysis software.
+</p>
+<p class="calibre1">R is very much a vehicle for newly developing methods of interactive
+data analysis.  It has developed rapidly, and has been extended by a
+large collection of <em class="emph">packages</em>.  However, most programs written in
+R are essentially ephemeral, written for a single piece of data
+analysis.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Related-software-and-documentation">
+<h3 class="section" id="Related-software-and-documentation-1">1.2 Related software and documentation</h3>
+
+<p class="calibre1">R can be regarded as an implementation of the S language which
+was developed at Bell Laboratories by Rick Becker, John Chambers and
+Allan Wilks, and also forms the basis of the <small class="sc">S-PLUS</small> systems.
+</p>
+<p class="calibre1">The evolution of the S language is characterized by four books by
+John Chambers and coauthors.  For R, the basic reference is <em class="emph">The
+New S Language: A Programming Environment for Data Analysis and
+Graphics</em> by Richard A. Becker, John M. Chambers and Allan R.
+Wilks.  The new features of the 1991 release of S
+are covered in <em class="emph">Statistical Models in S</em> edited by John M.
+Chambers and Trevor J. Hastie.  The formal methods and classes of the
+<strong class="strong">methods</strong> package are based on those described in <em class="emph">Programming
+with Data</em> by John M. Chambers.  See <a href="R-intro_split_022.html#References">References</a>, for precise
+references.
+</p>
+<p class="calibre1">There are now a number of books which describe how to use R for data
+analysis and statistics, and documentation for S/<small class="sc">S-PLUS</small> can
+typically be used with R, keeping the differences between the S
+implementations in mind.  See <a data-manual="R-FAQ" href="R-FAQ.html#What-documentation-exists-for-R_003f">What documentation exists for R?</a> in <cite class="emph">The R statistical system FAQ</cite>.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="R-and-statistics">
+<h3 class="section" id="R-and-statistics-1">1.3 R and statistics</h3>
+<a id="index-Packages"></a>
+
+<p class="calibre1">Our introduction to the R environment did not mention
+<em class="emph">statistics</em>, yet many people use R as a statistics system.  We
+prefer to think of it of an environment within which many classical and
+modern statistical techniques have been implemented.  A few of these are
+built into the base R environment, but many are supplied as
+<em class="emph">packages</em>.  There are about 25 packages supplied with R (called
+“standard” and “recommended” packages) and many more are available
+through the <abbr>CRAN</abbr> family of Internet sites (via
+<a href="https://CRAN.R-project.org">https://CRAN.R-project.org</a>) and elsewhere.  More details on
+packages are given later (see <a href="R-intro_split_014.html#Packages">Packages</a>).
+</p>
+<p class="calibre1">Most classical statistics and much of the latest methodology is
+available for use with R, but users may need to be prepared to do a
+little work to find it.
+</p>
+<p class="calibre1">There is an important difference in philosophy between S (and hence
+R) and the other main statistical systems.  In S a statistical
+analysis is normally done as a series of steps, with intermediate
+results being stored in objects.  Thus whereas SAS and SPSS will give
+copious output from a regression or discriminant analysis, R will
+give minimal output and store the results in a fit object for subsequent
+interrogation by further R functions.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="R-and-the-window-system">
+<h3 class="section" id="R-and-the-window-system-1">1.4 R and the window system</h3>
+
+<p class="calibre1">The most convenient way to use R is at a graphics workstation running
+a windowing system.  This guide is aimed at users who have this
+facility.  In particular we will occasionally refer to the use of R
+on an X window system although the vast bulk of what is said applies
+generally to any implementation of the R environment.
+</p>
+<p class="calibre1">Most users will find it necessary to interact directly with the
+operating system on their computer from time to time.  In this guide, we
+mainly discuss interaction with the operating system on UNIX machines.
+If you are running R under Windows or macOS you will need to make
+some small adjustments.
+</p>
+<p class="calibre1">Setting up a workstation to take full advantage of the customizable
+features of R is a straightforward if somewhat tedious procedure, and
+will not be considered further here.  Users in difficulty should seek
+local expert help.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Using-R-interactively">
+<h3 class="section" id="Using-R-interactively-1">1.5 Using R interactively</h3>
+
+<p class="calibre1">When you use the R program it issues a prompt when it expects input
+commands.  The default prompt is ‘<samp class="code"><code class="code">&gt;</code></samp>’, which on UNIX might be
+the same as the shell prompt, and so it may appear that nothing is
+happening.  However, as we shall see, it is easy to change to a
+different R prompt if you wish.  We will assume that the UNIX shell
+prompt is ‘<samp class="code"><code class="code">$</code></samp>’.
+</p>
+<p class="calibre1">In using R under UNIX the suggested procedure for the first occasion
+is as follows:
+</p>
+<ol class="enumerate">
+<li class="calibre3"> Create a separate sub-directory, say <samp class="code">work</samp>, to hold data files on
+which you will use R for this problem.  This will be the working
+directory whenever you use R for this particular problem.
+
+<div class="example">
+<pre class="example-preformatted">$ mkdir work
+$ cd work
+</pre></div>
+
+</li><li class="calibre3"> Start the R program with the command
+
+<div class="example">
+<pre class="example-preformatted">$ R
+</pre></div>
+
+</li><li class="calibre3"> At this point R commands may be issued (see later).
+
+</li><li class="calibre3"> To quit the R program the command is
+
+<div class="example">
+<pre class="example-preformatted">&gt; q()
+</pre></div>
+
+<p class="calibre1">At this point you will be asked whether you want to save the data from
+your R session.  On some systems this will bring up a dialog box, and
+on others you will receive a text prompt to which you can respond
+<kbd class="kbd">yes</kbd>, <kbd class="kbd">no</kbd> or <kbd class="kbd">cancel</kbd> (a single letter abbreviation will
+do) to save the data before quitting, quit without saving, or return to
+the R session.  Data which is saved will be available in future R
+sessions.
+</p>
+</li></ol>
+
+<p class="calibre1">Further R sessions are simple.
+</p>
+<ol class="enumerate">
+<li class="calibre3"> Make <samp class="code">work</samp> the working directory and start the program as before:
+
+<div class="example">
+<pre class="example-preformatted">$ cd work
+$ R
+</pre></div>
+
+</li><li class="calibre3"> Use the R program, terminating with the <code class="code">q()</code> command at the end
+of the session.
+
+</li></ol>
+
+<p class="calibre1">To use R under Windows the procedure to
+follow is basically the same.  Create a folder as the working directory,
+and set that in the <samp class="code">Start In</samp> field in your R shortcut.
+Then launch R by double clicking on the icon.
+</p>
+</div>
+<div class="top-level-extent" id="An-introductory-session">
+<h3 class="section">1.6 An introductory session</h3>
+
+<p class="calibre1">Readers wishing to get a feel for R at a computer before proceeding
+are strongly advised to work through the introductory session
+given in <a href="R-intro_split_017.html#A-sample-session">A sample session</a>.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Getting-help">
+<h3 class="section" id="Getting-help-with-functions-and-features">1.7 Getting help with functions and features</h3>
+<a id="index-help"></a>
+
+<p class="calibre1">R has an inbuilt help facility similar to the <code class="code">man</code> facility of
+UNIX.  To get more information on any specific named function, for
+example <code class="code">solve</code>, the command is
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; help(solve)
+</pre></div>
+<a id="index-help-1"></a>
+
+<p class="calibre1">An alternative is
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; ?solve
+</pre></div>
+<a id="index-_003f"></a>
+
+<p class="calibre1">For a feature specified by special characters, the argument must be
+enclosed in double or single quotes, making it a “character string”:
+This is also necessary for a few words with syntactic meaning including
+<code class="code">if</code>, <code class="code">for</code> and <code class="code">function</code>.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; help("[[")
+</pre></div>
+
+<p class="calibre1">Either form of quote mark may be used to escape the other, as in the
+string <code class="code">"It's important"</code>.  Our convention is to use
+double quote marks for preference.
+</p>
+<p class="calibre1">On most R installations help is available in <abbr>HTML</abbr> format by
+running
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; help.start()
+</pre></div>
+<a id="index-help_002estart"></a>
+
+<p class="calibre1">which will launch a Web browser that allows the help pages to be browsed
+with hyperlinks.  On UNIX, subsequent help requests are sent to the
+<abbr>HTML</abbr>-based help system.  The ‘Search Engine and Keywords’ link in the
+page loaded by <code class="code">help.start()</code> is particularly useful as it is
+contains a high-level concept list which searches though available
+functions.  It can be a great way to get your bearings quickly and to
+understand the breadth of what R has to offer.
+</p>
+<a id="index-help_002esearch"></a>
+<p class="calibre1">The <code class="code">help.search</code> command (alternatively <code class="code">??</code>) 
+allows searching for help in various
+ways. For example,
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; ??solve
+</pre></div>
+<a id="index-_003f_003f"></a>
+
+<p class="calibre1">Try <code class="code">?help.search</code> for details and more examples.
+</p>
+<p class="calibre1">The examples on a help topic can normally be run by
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; example(<var class="emph">topic</var>)
+</pre></div>
+<a id="index-example"></a>
+
+<p class="calibre1">Windows versions of R have other optional help systems: use
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; ?help
+</pre></div>
+
+<p class="calibre1">for further details.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="R-commands_003b-case-sensitivity-etc">
+<h3 class="section" id="R-commands_002c-case-sensitivity_002c-etc_002e">1.8 R commands, case sensitivity, etc.</h3>
+
+<p class="calibre1">Technically R is an <em class="emph">expression language</em> with a very simple
+syntax.  It is <em class="emph">case sensitive</em> as are most UNIX based packages, so
+<code class="code">A</code> and <code class="code">a</code> are different symbols and would refer to different
+variables.  The set of symbols which can be used in R names depends
+on the operating system and country within which R is being run
+(technically on the <em class="emph">locale</em> in use).  Normally all alphanumeric
+symbols are allowed<a id="DOCF2" href="R-intro_split_022.html#FOOT2"><sup class="calibre2">2</sup></a> (and in
+some countries this includes accented letters) plus ‘<samp class="code"><code class="code">.</code></samp>’ and
+‘<samp class="code"><code class="code">_</code></samp>’, with the restriction that a name must start with
+‘<samp class="code"><code class="code">.</code></samp>’ or a letter, and if it starts with ‘<samp class="code"><code class="code">.</code></samp>’ the
+second character must not be a digit.  Names are effectively
+unlimited in length.
+</p>
+<p class="calibre1">Elementary commands consist of either <em class="emph">expressions</em> or
+<em class="emph">assignments</em>.  If an expression is given as a command, it is
+evaluated, printed (unless specifically made invisible), and the value
+is lost.  An assignment also evaluates an expression and passes the
+value to a variable but the result is not automatically printed.
+</p>
+<p class="calibre1">Commands are separated either by a semi-colon (‘<samp class="code"><code class="code">;</code></samp>’), or by a
+newline.  Elementary commands can be grouped together into one compound
+expression by braces (‘<samp class="code"><code class="code">{</code></samp>’ and ‘<samp class="code"><code class="code">}</code></samp>’).
+<em class="emph">Comments</em> can be put almost<a id="DOCF3" href="R-intro_split_022.html#FOOT3"><sup class="calibre2">3</sup></a> anywhere,
+starting with a hashmark (‘<samp class="code"><code class="code">#</code></samp>’), everything to the end of the
+line is a comment.
+</p>
+<p class="calibre1">If a command is not complete at the end of a line, R will
+give a different prompt, by default
+</p>
+<div class="example">
+<pre class="example-preformatted">+
+</pre></div>
+
+<p class="calibre1">on second and subsequent lines and continue to read input until the
+command is syntactically complete.  This prompt may be changed by the
+user.  We will generally omit the continuation prompt
+and indicate continuation by simple indenting.
+</p>
+<p class="calibre1">Command lines entered at the console are limited<a id="DOCF4" href="R-intro_split_022.html#FOOT4"><sup class="calibre2">4</sup></a> to about 4095 bytes (not characters).
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Recall-and-correction-of-previous-commands">
+<h3 class="section" id="Recall-and-correction-of-previous-commands-1">1.9 Recall and correction of previous commands</h3>
+
+<p class="calibre1">Under many versions of UNIX and on Windows, R provides a mechanism
+for recalling and re-executing previous commands.  The vertical arrow
+keys on the keyboard can be used to scroll forward and backward through
+a <em class="emph">command history</em>.  Once a command is located in this way, the
+cursor can be moved within the command using the horizontal arrow keys,
+and characters can be removed with the <kbd class="key">DEL</kbd> key or added with the
+other keys.  More details are provided later: see <a href="R-intro_split_019.html#The-command_002dline-editor">The command-line editor</a>.
+</p>
+<p class="calibre1">The recall and editing capabilities under UNIX are highly customizable.
+You can find out how to do this by reading the manual entry for the
+<strong class="strong">readline</strong> library.
+</p>
+<p class="calibre1">Alternatively, the Emacs text editor provides more general support
+mechanisms (via <abbr>ESS</abbr>, <em class="emph">Emacs Speaks Statistics</em>) for
+working interactively with R.  See <a data-manual="R-FAQ" href="R-FAQ.html#R-and-Emacs">R and Emacs</a> in <cite class="emph">The R
+statistical system FAQ</cite>.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Executing-commands-from-or-diverting-output-to-a-file">
+<h3 class="section" id="Executing-commands-from-or-diverting-output-to-a-file-1">1.10 Executing commands from or diverting output to a file</h3>
+<a id="index-Diverting-input-and-output"></a>
+
+<p class="calibre1">If commands<a id="DOCF5" href="R-intro_split_022.html#FOOT5"><sup class="calibre2">5</sup></a> are stored in an external
+file, say <samp class="code">commands.R</samp> in the working directory <samp class="code">work</samp>, they
+may be executed at any time in an R session with the command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; source("commands.R")
+</pre></div>
+<a id="index-source"></a>
+
+<p class="calibre1">For Windows <strong class="strong">Source</strong> is also available on the
+<strong class="strong">File</strong> menu.  The function <code class="code">sink</code>,
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; sink("record.lis")
+</pre></div>
+<a id="index-sink"></a>
+
+<p class="calibre1">will divert all subsequent output from the console to an external file,
+<samp class="code">record.lis</samp>.  The command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; sink()
+</pre></div>
+
+<p class="calibre1">restores it to the console once again.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Data-permanency-and-removing-objects">
+<h3 class="section" id="Data-permanency-and-removing-objects-1">1.11 Data permanency and removing objects</h3>
+
+<p class="calibre1">The entities that R creates and manipulates are known as
+<em class="emph">objects</em>.  These may be variables, arrays of numbers, character
+strings, functions, or more general structures built from such
+components.
+</p>
+<p class="calibre1">During an R session, objects are created and stored by name (we
+discuss this process in the next section).  The R command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; objects()
+</pre></div>
+
+<p class="calibre1">(alternatively, <code class="code">ls()</code>) can be used to display the names of (most
+of) the objects which are currently stored within R.  The collection
+of objects currently stored is called the <em class="emph">workspace</em>.
+<a id="index-Workspace"></a>
+</p>
+<p class="calibre1">To remove objects the function <code class="code">rm</code> is available:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; rm(x, y, z, ink, junk, temp, foo, bar)
+</pre></div>
+<a id="index-rm"></a>
+<a id="index-Removing-objects"></a>
+
+<p class="calibre1">All objects created during an R session can be stored permanently in
+a file for use in future R sessions.  At the end of each R session
+you are given the opportunity to save all the currently available
+objects.  If you indicate that you want to do this, the objects are
+written to a file called <samp class="code">.RData</samp><a id="DOCF6" href="R-intro_split_022.html#FOOT6"><sup class="calibre2">6</sup></a> in the
+current directory, and the command lines used in the session are saved
+to a file called <samp class="code">.Rhistory</samp>.
+</p>
+<p class="calibre1">When R is started at later time from the same directory it reloads
+the workspace from this file.  At the same time the associated commands
+history is reloaded.
+</p>
+<p class="calibre1">It is recommended that you should use separate working directories for
+analyses conducted with R.  It is quite common for objects with names
+<code class="code">x</code> and <code class="code">y</code> to be created during an analysis.  Names like this
+are often meaningful in the context of a single analysis, but it can be
+quite hard to decide what they might be when the several analyses have
+been conducted in the same directory.
+</p>
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Simple-manipulations-numbers-and-vectors">
+<div class="calibre5" id="calibre_pb_5"></div>
+</div>
+</div>
+</body></html>

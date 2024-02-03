@@ -1,0 +1,321 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="A-sample-session">
+<h2 class="contents-heading" id="A-sample-session-1">Appendix A A sample session</h2>
+
+<p class="calibre1">The following session is intended to introduce to you some features of
+the R environment by using them.  Many features of the system will be
+unfamiliar and puzzling at first, but this puzzlement will soon
+disappear.
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">Start R appropriately for your platform (see <a href="R-intro_split_018.html#Invoking-R">Invoking R</a>).</code></dt>
+<dd class="calibre11">
+<p class="calibre1">The R program begins, with a banner.
+</p>
+<p class="calibre1">(Within R code, the prompt on the left hand side will not be shown to
+avoid confusion.)
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">help.start()</code></dt>
+<dd class="calibre11"><p class="calibre1">Start the <abbr>HTML</abbr> interface to on-line help (using a web browser
+available at your machine).  You should briefly explore the features of
+this facility with the mouse.
+</p>
+<p class="calibre1">Iconify the help window and move on to the next part.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">x &lt;- rnorm(50)</code></dt>
+<dt class="top-level-extent"><code class="code">y &lt;- rnorm(x)</code></dt>
+<dd class="calibre11"><p class="calibre1">Generate two pseudo-random normal vectors of <em class="emph">x</em>- and
+<em class="emph">y</em>-coordinates.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(x, y)</code></dt>
+<dd class="calibre11"><p class="calibre1">Plot the points in the plane.  A graphics window will appear automatically.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">ls()</code></dt>
+<dd class="calibre11"><p class="calibre1">See which R objects are now in the R workspace.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">rm(x, y)</code></dt>
+<dd class="calibre11"><p class="calibre1">Remove objects no longer needed. (Clean up).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">x &lt;- 1:20</code></dt>
+<dd class="calibre11"><p class="calibre1">Make <em class="emph">x = (1, 2, …, 20)</em>.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">w &lt;- 1 + sqrt(x)/2</code></dt>
+<dd class="calibre11"><p class="calibre1">A ‘weight’ vector of standard deviations.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">dummy &lt;- data.frame(x=x, y= x + rnorm(x)*w)</code></dt>
+<dt class="top-level-extent"><code class="code">dummy</code></dt>
+<dd class="calibre11"><p class="calibre1">Make a <em class="emph">data frame</em> of two columns, <em class="emph">x</em> and <em class="emph">y</em>, and look
+at it.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">fm &lt;- lm(y ~ x, data=dummy)</code></dt>
+<dt class="top-level-extent"><code class="code">summary(fm)</code></dt>
+<dd class="calibre11"><p class="calibre1">Fit a simple linear regression and look at the
+analysis.  With <code class="code">y</code> to the left of the tilde,
+we are modelling <em class="emph">y</em> dependent on <em class="emph">x</em>.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">fm1 &lt;- lm(y ~ x, data=dummy, weight=1/w^2)</code></dt>
+<dt class="top-level-extent"><code class="code">summary(fm1)</code></dt>
+<dd class="calibre11"><p class="calibre1">Since we know the standard deviations, we can do a weighted regression.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">attach(dummy)</code></dt>
+<dd class="calibre11"><p class="calibre1">Make the columns in the data frame visible as variables.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">lrf &lt;- lowess(x, y)</code></dt>
+<dd class="calibre11"><p class="calibre1">Make a nonparametric local regression function.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(x, y)</code></dt>
+<dd class="calibre11"><p class="calibre1">Standard point plot.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">lines(x, lrf$y)</code></dt>
+<dd class="calibre11"><p class="calibre1">Add in the local regression.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">abline(0, 1, lty=3)</code></dt>
+<dd class="calibre11"><p class="calibre1">The true regression line: (intercept 0, slope 1).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">abline(coef(fm))</code></dt>
+<dd class="calibre11"><p class="calibre1">Unweighted regression line.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">abline(coef(fm1), col = "red")</code></dt>
+<dd class="calibre11"><p class="calibre1">Weighted regression line.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">detach()</code></dt>
+<dd class="calibre11"><p class="calibre1">Remove data frame from the search path.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(fitted(fm), resid(fm),</code></dt>
+<dt class="top-level-extent"><code class="code">     xlab="Fitted values"<!-- /@w -->,</code></dt>
+<dt class="top-level-extent"><code class="code">     ylab="Residuals"<!-- /@w -->,</code></dt>
+<dt class="top-level-extent"><code class="code">     main="Residuals vs Fitted")<!-- /@w --></code></dt>
+<dd class="calibre11"><p class="calibre1">A standard regression diagnostic plot to check for heteroscedasticity.
+Can you see it?
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">qqnorm(resid(fm), main="Residuals Rankit Plot")</code></dt>
+<dd class="calibre11"><p class="calibre1">A normal scores plot to check for skewness, kurtosis and outliers.  (Not
+very useful here.)
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">rm(fm, fm1, lrf, x, dummy)</code></dt>
+<dd class="calibre11"><p class="calibre1">Clean up again.
+</p></dd>
+</dl>
+
+<p class="calibre1">The next section will look at data from the classical experiment of
+Michelson to measure the speed of light.  This dataset is available in
+the <code class="code">morley</code> object, but we will read it to illustrate the
+<code class="code">read.table</code> function.
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">filepath &lt;- system.file("data", "morley.tab" , package="datasets")</code></dt>
+<dt class="top-level-extent"><code class="code">filepath</code></dt>
+<dd class="calibre11"><p class="calibre1">Get the path to the data file.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">file.show(filepath)</code></dt>
+<dd class="calibre11"><p class="calibre1">Optional.  Look at the file.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">mm &lt;- read.table(filepath)</code></dt>
+<dt class="top-level-extent"><code class="code">mm</code></dt>
+<dd class="calibre11"><p class="calibre1">Read in the Michelson data as a data frame, and look at it.
+There are five experiments (column <code class="code">Expt</code>) and each has 20 runs
+(column <code class="code">Run</code>) and <code class="code">sl</code> is the recorded speed of light,
+suitably coded.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">mm$Expt &lt;- factor(mm$Expt)</code></dt>
+<dt class="top-level-extent"><code class="code">mm$Run &lt;- factor(mm$Run)</code></dt>
+<dd class="calibre11"><p class="calibre1">Change <code class="code">Expt</code> and <code class="code">Run</code> into factors.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">attach(mm)</code></dt>
+<dd class="calibre11"><p class="calibre1">Make the data frame visible at position 2 (the default).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(Expt, Speed, main="Speed of Light Data", xlab="Experiment No.")</code></dt>
+<dd class="calibre11"><p class="calibre1">Compare the five experiments with simple boxplots.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">fm &lt;- aov(Speed ~ Run + Expt, data=mm)</code></dt>
+<dt class="top-level-extent"><code class="code">summary(fm)</code></dt>
+<dd class="calibre11"><p class="calibre1">Analyze as a randomized block, with ‘runs’ and ‘experiments’ as factors.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">fm0 &lt;- update(fm, . ~ . - Run)</code></dt>
+<dt class="top-level-extent"><code class="code">anova(fm0, fm)</code></dt>
+<dd class="calibre11"><p class="calibre1">Fit the sub-model omitting ‘runs’, and compare using a formal analysis
+of variance.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">detach()</code></dt>
+<dt class="top-level-extent"><code class="code">rm(fm, fm0)</code></dt>
+<dd class="calibre11"><p class="calibre1">Clean up before moving on.
+</p>
+</dd>
+</dl>
+
+<p class="calibre1">We now look at some more graphical features: contour and image plots.
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">x &lt;- seq(-pi, pi, len=50)</code></dt>
+<dt class="top-level-extent"><code class="code">y &lt;- x</code></dt>
+<dd class="calibre11"><p class="calibre1"><em class="emph">x</em> is a vector of 50 equally spaced values in
+the interval [-pi\, pi].
+<em class="emph">y</em> is the same.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">f &lt;- outer(x, y, function(x, y) cos(y)/(1 + x^2))</code></dt>
+<dd class="calibre11"><p class="calibre1"><em class="emph">f</em> is a square matrix, with rows and columns indexed by <em class="emph">x</em>
+and <em class="emph">y</em> respectively, of values of the function
+cos(y)/(1 + x^2).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">oldpar &lt;- par(no.readonly = TRUE)</code></dt>
+<dt class="top-level-extent"><code class="code">par(pty="s")</code></dt>
+<dd class="calibre11"><p class="calibre1">Save the plotting parameters and set the plotting region to “square”.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">contour(x, y, f)</code></dt>
+<dt class="top-level-extent"><code class="code">contour(x, y, f, nlevels=15, add=TRUE)</code></dt>
+<dd class="calibre11"><p class="calibre1">Make a contour map of <em class="emph">f</em>; add in more lines for more detail.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">fa &lt;- (f-t(f))/2</code></dt>
+<dd class="calibre11"><p class="calibre1"><code class="code">fa</code> is the “asymmetric part” of <em class="emph">f</em>.  (<code class="code">t()</code> is
+transpose).
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">contour(x, y, fa, nlevels=15)</code></dt>
+<dd class="calibre11"><p class="calibre1">Make a contour plot, …
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">par(oldpar)</code></dt>
+<dd class="calibre11"><p class="calibre1">… and restore the old graphics parameters.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">image(x, y, f)</code></dt>
+<dt class="top-level-extent"><code class="code">image(x, y, fa)</code></dt>
+<dd class="calibre11"><p class="calibre1">Make some high density image plots, (of which you can get
+hardcopies if you wish), …
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">objects(); rm(x, y, f, fa)</code></dt>
+<dd class="calibre11"><p class="calibre1">… and clean up before moving on.
+</p></dd>
+</dl>
+
+<p class="calibre1">R can do complex arithmetic, also.
+</p>
+<dl class="table">
+<dt class="top-level-extent"><code class="code">th &lt;- seq(-pi, pi, len=100)</code></dt>
+<dt class="top-level-extent"><code class="code">z &lt;- exp(1i*th)</code></dt>
+<dd class="calibre11"><p class="calibre1"><code class="code">1i</code> is used for the complex number <em class="emph">i</em>.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">par(pty="s")</code></dt>
+<dt class="top-level-extent"><code class="code">plot(z, type="l")</code></dt>
+<dd class="calibre11"><p class="calibre1">Plotting complex arguments means plot imaginary versus real parts.  This
+should be a circle.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">w &lt;- rnorm(100) + rnorm(100)*1i</code></dt>
+<dd class="calibre11"><p class="calibre1">Suppose we want to sample points within the unit circle.  One method
+would be to take complex numbers with standard normal real and imaginary
+parts …
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">w &lt;- ifelse(Mod(w) &gt; 1, 1/w, w)</code></dt>
+<dd class="calibre11"><p class="calibre1">… and to map any outside the circle onto their reciprocal.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">plot(w, xlim=c(-1,1), ylim=c(-1,1), pch="+",xlab="x", ylab="y")</code></dt>
+<dt class="top-level-extent"><code class="code">lines(z)</code></dt>
+<dd class="calibre11"><p class="calibre1">All points are inside the unit circle, but the distribution is not
+uniform.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">w &lt;- sqrt(runif(100))*exp(2*pi*runif(100)*1i)</code></dt>
+<dt class="top-level-extent"><code class="code">plot(w, xlim=c(-1,1), ylim=c(-1,1), pch="+", xlab="x", ylab="y")</code></dt>
+<dt class="top-level-extent"><code class="code">lines(z)</code></dt>
+<dd class="calibre11"><p class="calibre1">The second method uses the uniform distribution.  The points should now
+look more evenly spaced over the disc.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">rm(th, w, z)</code></dt>
+<dd class="calibre11"><p class="calibre1">Clean up again.
+</p>
+</dd>
+<dt class="top-level-extent"><code class="code">q()</code></dt>
+<dd class="calibre11"><p class="calibre1">Quit the R program.  You will be asked if you want to save the R
+workspace, and for an exploratory session like this, you probably do not
+want to save it.
+</p></dd>
+</dl>
+
+<hr class="calibre4"/>
+</div>
+</div>
+</body></html>

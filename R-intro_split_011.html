@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Loops-and-conditional-execution">
+<h2 class="contents-heading" id="Grouping_002c-loops-and-conditional-execution">9 Grouping, loops and conditional execution</h2>
+<a id="index-Loops-and-conditional-execution"></a>
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Grouped-expressions">
+<h3 class="section" id="Grouped-expressions-1">9.1 Grouped expressions</h3>
+<a id="index-Grouped-expressions"></a>
+
+<p class="calibre1">R is an expression language in the sense that its only command type
+is a function or expression which returns a result.  Even an assignment
+is an expression whose result is the value assigned, and it may be used
+wherever any expression may be used; in particular multiple assignments
+are possible.
+</p>
+<p class="calibre1">Commands may be grouped together in braces, <code class="code">{<var class="emph">expr_1</var>;
+<var class="emph">…</var>; <var class="emph">expr_m</var>}</code>, in which case the value of the group
+is the result of the last expression in the group evaluated.  Since such
+a group is also an expression it may, for example, be itself included in
+parentheses and used as part of an even larger expression, and so on.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Control-statements">
+<h3 class="section" id="Control-statements-1">9.2 Control statements</h3>
+<a id="index-Control-statements"></a>
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Conditional-execution">
+<h4 class="subheading" id="Conditional-execution_003a-if-statements">9.2.1 Conditional execution: <code class="code">if</code> statements</h4>
+<a id="index-if"></a>
+
+<p class="calibre1">The language has available a conditional construction of the form
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; if (<var class="emph">expr_1</var>) <var class="emph">expr_2</var> else <var class="emph">expr_3</var>
+</pre></div>
+<a id="index-if-1"></a>
+<a id="index-else"></a>
+
+<p class="calibre1">where <var class="emph">expr_1</var> must evaluate to a single logical value and the
+result of the entire expression is then evident.
+</p>
+<a id="index-_0026_0026"></a>
+<a id="index-_007c_007c"></a>
+<p class="calibre1">The “short-circuit” operators <code class="code">&amp;&amp;</code> and <code class="code">||</code> are often used
+as part of the condition in an <code class="code">if</code> statement.  Whereas <code class="code">&amp;</code>
+and <code class="code">|</code> apply element-wise to vectors, <code class="code">&amp;&amp;</code> and <code class="code">||</code>
+apply to vectors of length one, and only evaluate their second argument
+if necessary.
+</p>
+<a id="index-ifelse"></a>
+<p class="calibre1">There is a vectorized version of the <code class="code">if</code>/<code class="code">else</code> construct,
+the <code class="code">ifelse</code> function.  This has the form <code class="code">ifelse(condition, a,
+b)</code> and returns a vector of the same length as <code class="code">condition</code>, with
+elements <code class="code">a[i]</code> if <code class="code">condition[i]</code> is true, otherwise
+<code class="code">b[i]</code> (where <code class="code">a</code> and <code class="code">b</code> are recycled as necessary).
+</p>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Repetitive-execution">
+<h4 class="subheading" id="Repetitive-execution_003a-for-loops_002c-repeat-and-while">9.2.2 Repetitive execution: <code class="code">for</code> loops, <code class="code">repeat</code> and <code class="code">while</code></h4>
+<a id="index-for"></a>
+
+<p class="calibre1">There is also a <code class="code">for</code> loop construction which has the form
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; for (<code class="code"><var class="emph">name</var></code> in <var class="emph">expr_1</var>) <var class="emph">expr_2</var>
+</pre></div>
+
+<p class="calibre1">where <code class="code"><var class="emph">name</var></code> is the loop variable.  <var class="emph">expr_1</var> is a
+vector expression, (often a sequence like <code class="code">1:20</code>), and
+<var class="emph">expr_2</var> is often a grouped expression with its sub-expressions
+written in terms of the dummy <em class="emph">name</em>.  <var class="emph">expr_2</var> is repeatedly
+evaluated as <var class="emph">name</var> ranges through the values in the vector result
+of <var class="emph">expr_1</var>.
+</p>
+<p class="calibre1">As an example, suppose <code class="code">ind</code> is a vector of class indicators and we
+wish to produce separate plots of <code class="code">y</code> versus <code class="code">x</code> within
+classes.  One possibility here is to use <code class="code">coplot()</code>,<a id="DOCF20" href="R-intro_split_022.html#FOOT20"><sup class="calibre2">20</sup></a>
+which will produce an array of plots corresponding to each level of the
+factor.  Another way to do this, now putting all plots on the one
+display, is as follows:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; xc &lt;- split(x, ind)
+&gt; yc &lt;- split(y, ind)
+&gt; for (i in 1:length(yc)) {
+    plot(xc[[i]], yc[[i]])
+    abline(lsfit(xc[[i]], yc[[i]]))
+  }
+</pre></div>
+
+<a id="index-split"></a>
+
+<p class="calibre1">(Note the function <code class="code">split()</code> which produces a list of vectors
+obtained by splitting a larger vector according to the classes specified
+by a factor.  This is a useful function, mostly used in connection
+with boxplots.  See the <code class="code">help</code> facility for further details.)
+</p>
+<blockquote class="quotation">
+<p class="calibre1"><strong class="strong">Warning</strong>: <code class="code">for()</code> loops are used in R code much less
+often than in compiled languages.  Code that takes a ‘whole object’ view
+is likely to be both clearer and faster in R.
+</p></blockquote>
+
+<p class="calibre1">Other looping facilities include the
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; repeat <var class="emph">expr</var>
+</pre></div>
+<a id="index-repeat"></a>
+
+<p class="calibre1">statement and the
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; while (<var class="emph">condition</var>) <var class="emph">expr</var>
+</pre></div>
+<a id="index-while"></a>
+
+<p class="calibre1">statement.
+</p>
+<p class="calibre1">The <code class="code">break</code> statement can be used to terminate any loop, possibly
+abnormally.  This is the only way to terminate <code class="code">repeat</code> loops.
+<a id="index-break"></a>
+</p>
+<p class="calibre1">The <code class="code">next</code> statement can be used to discontinue one particular
+cycle and skip to the “next”.
+<a id="index-next"></a>
+</p>
+<p class="calibre1">Control statements are most often used in connection with
+<em class="emph">functions</em> which are discussed in <a href="#Writing-your-own-functions">Writing your own functions</a>, and where more examples will emerge.
+</p>
+
+<hr class="calibre4"/>
+</div>
+</div>
+</div>
+<div class="top-level-extent" id="Writing-your-own-functions">
+<div class="calibre5" id="calibre_pb_21"></div>
+</div>
+</div>
+</body></html>

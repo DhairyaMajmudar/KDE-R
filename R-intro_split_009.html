@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Reading-data-from-files">
+<h2 class="contents-heading" id="Reading-data-from-files-1">7 Reading data from files</h2>
+<a id="index-Reading-data-from-files"></a>
+
+<p class="calibre1">Large data objects will usually be read as values from external files
+rather than entered during an R session at the keyboard.  R input
+facilities are simple and their requirements are fairly strict and even
+rather inflexible.  There is a clear presumption by the designers of
+R that you will be able to modify your input files using other tools,
+such as file editors or Perl<a id="DOCF19" href="R-intro_split_022.html#FOOT19"><sup class="calibre2">19</sup></a> to fit in with the
+requirements of R.  Generally this is very simple.
+</p>
+<p class="calibre1">If variables are to be held mainly in data frames, as we strongly
+suggest they should be, an entire data frame can be read directly with
+the <code class="code">read.table()</code> function.  There is also a more primitive input
+function, <code class="code">scan()</code>, that can be called directly.
+</p>
+<p class="calibre1">For more details on importing data into R and also exporting data,
+see the <em class="emph">R Data Import/Export</em> manual.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="The-read_002etable_0028_0029-function">
+<h3 class="section" id="The-read_002etable_0028_0029-function-1">7.1 The <code class="code1">read.table()</code> function</h3>
+<a id="index-read_002etable"></a>
+
+<p class="calibre1">To read an entire data frame directly, the external file will normally
+have a special form.
+</p>
+<ul class="itemize">
+<li class="calibre3">The first line of the file should have a <em class="emph">name</em> for each variable
+in the data frame.
+
+</li><li class="calibre3">Each additional line of the file has as its first item a <em class="emph">row label</em>
+and the values for each variable.
+</li></ul>
+
+<p class="calibre1">If the file has one fewer item in its first line than in its second, this
+arrangement is presumed to be in force.  So the first few lines of a file
+to be read as a data frame might look as follows.
+</p>
+<blockquote class="quotation">
+<table summary="" class="cartouche" border="1"><tbody class="calibre6"><tr class="calibre7"><td class="calibre8">
+<div class="example">
+<pre class="example-preformatted"><span class="r">Input file form with names and row labels:</span>
+
+     Price    Floor     Area   Rooms     Age  Cent.heat
+01   52.00    111.0      830     5       6.2      no
+02   54.75    128.0      710     5       7.5      no
+03   57.50    101.0     1000     5       4.2      no
+04   57.50    131.0      690     6       8.8      no
+05   59.75     93.0      900     5       1.9     yes
+...
+</pre></div>
+</td></tr></tbody></table>
+</blockquote>
+
+<p class="calibre1">By default numeric items (except row labels) are read as numeric
+variables and non-numeric variables, such as <code class="code">Cent.heat</code> in the
+example, as character variables.  This can be changed if necessary.
+</p>
+<p class="calibre1">The function <code class="code">read.table()</code> can then be used to read the data frame
+directly
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; HousePrice &lt;- read.table("houses.data")
+</pre></div>
+
+<p class="calibre1">Often you will want to omit including the row labels directly and use the
+default labels.  In this case the file may omit the row label column as in
+the following.
+</p>
+<blockquote class="quotation">
+<table summary="" class="cartouche" border="1"><tbody class="calibre6"><tr class="calibre7"><td class="calibre8">
+<div class="example">
+<pre class="example-preformatted"><span class="r">Input file form without row labels:</span>
+
+Price    Floor     Area   Rooms     Age  Cent.heat
+52.00    111.0      830     5       6.2      no
+54.75    128.0      710     5       7.5      no
+57.50    101.0     1000     5       4.2      no
+57.50    131.0      690     6       8.8      no
+59.75     93.0      900     5       1.9     yes
+...
+</pre></div>
+</td></tr></tbody></table>
+</blockquote>
+
+<p class="calibre1">The data frame may then be read as
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; HousePrice &lt;- read.table("houses.data", header=TRUE)
+</pre></div>
+
+<p class="calibre1">where the <code class="code">header=TRUE</code> option specifies that the first line is a
+line of headings, and hence, by implication from the form of the file,
+that no explicit row labels are given.
+</p>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="The-scan_0028_0029-function">
+<h3 class="section" id="The-scan_0028_0029-function-1">7.2 The <code class="code1">scan()</code> function</h3>
+<a id="index-scan"></a>
+
+<p class="calibre1">Suppose the data vectors are of equal length and are to be read in
+parallel.  Further suppose that there are three vectors, the first of
+mode character and the remaining two of mode numeric, and the file is
+<samp class="code">input.dat</samp>.  The first step is to use <code class="code">scan()</code> to read in the
+three vectors as a list, as follows
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; inp &lt;- scan("input.dat", list("",0,0))
+</pre></div>
+
+<p class="calibre1">The second argument is a dummy list structure that establishes the mode
+of the three vectors to be read.  The result, held in <code class="code">inp</code>, is a
+list whose components are the three vectors read in.  To separate the
+data items into three separate vectors, use assignments like
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; label &lt;- inp[[1]]; x &lt;- inp[[2]]; y &lt;- inp[[3]]
+</pre></div>
+
+<p class="calibre1">More conveniently, the dummy list can have named components, in which
+case the names can be used to access the vectors read in.  For example
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; inp &lt;- scan("input.dat", list(id="", x=0, y=0))
+</pre></div>
+
+<p class="calibre1">If you wish to access the variables separately they may either be
+re-assigned to variables in the working frame:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; label &lt;- inp$id; x &lt;- inp$x; y &lt;- inp$y
+</pre></div>
+
+<p class="calibre1">or the list may be attached at position 2<!-- /@w --> of the search path
+(see <a href="R-intro_split_008.html#Attaching-arbitrary-lists">Attaching arbitrary lists</a>).
+</p>
+<p class="calibre1">If the second argument is a single value and not a list, a single vector
+is read in, all components of which must be of the same mode as the
+dummy value.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; X &lt;- matrix(scan("light.dat", 0), ncol=5, byrow=TRUE)
+</pre></div>
+
+<p class="calibre1">There are more elaborate input facilities available and these are
+detailed in the manuals.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Accessing-builtin-datasets">
+<h3 class="section" id="Accessing-builtin-datasets-1">7.3 Accessing builtin datasets</h3>
+<a id="index-Accessing-builtin-datasets"></a>
+<a id="index-data"></a>
+
+<p class="calibre1">Around 100 datasets are supplied with R (in package <strong class="strong">datasets</strong>),
+and others are available in packages (including the recommended packages
+supplied with R).  To see the list of datasets currently available
+use
+</p>
+<div class="example">
+<pre class="example-preformatted">data()
+</pre></div>
+
+<p class="calibre1">All the datasets supplied with R are available directly by name.
+However, many packages still use the obsolete convention in which
+<code class="code">data</code> was also used to load datasets into R, for example
+</p>
+<div class="example">
+<pre class="example-preformatted">data(infert)
+</pre></div>
+
+<p class="calibre1">and this can still be used with the standard packages (as in this
+example).  In most cases this will load an R object of the same name.
+However, in a few cases it loads several objects, so see the on-line
+help for the object to see what to expect.
+</p>
+<div class="top-level-extent" id="Loading-data-from-other-R-packages">
+<h4 class="subheading">7.3.1 Loading data from other R packages</h4>
+
+<p class="calibre1">To access data from a particular package, use the <code class="code">package</code>
+argument, for example
+</p>
+<div class="example">
+<pre class="example-preformatted">data(package="rpart")
+data(Puromycin, package="datasets")
+</pre></div>
+
+<p class="calibre1">If a package has been attached by <code class="code">library</code>, its datasets are
+automatically included in the search.
+</p>
+<p class="calibre1">User-contributed packages can be a rich source of datasets.
+</p>
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Editing-data">
+<h3 class="section" id="Editing-data-1">7.4 Editing data</h3>
+
+<a id="index-edit"></a>
+<p class="calibre1">When invoked on a data frame or matrix, <code class="code">edit</code> brings up a separate
+spreadsheet-like environment for editing.  This is useful for making
+small changes once a data set has been read.  The command
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; xnew &lt;- edit(xold)
+</pre></div>
+
+<p class="calibre1">will allow you to edit your data set <code class="code">xold</code>, and on completion the
+changed object is assigned to <code class="code">xnew</code>.  If you want to alter the
+original dataset <code class="code">xold</code>, the simplest way is to use
+<code class="code">fix(xold)</code>, which is equivalent to <code class="code">xold &lt;- edit(xold)</code>.
+</p>
+<p class="calibre1">Use
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; xnew &lt;- edit(data.frame())
+</pre></div>
+
+<p class="calibre1">to enter new data via the spreadsheet interface.
+</p>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Probability-distributions">
+<div class="calibre5" id="calibre_pb_17"></div>
+</div>
+</div>
+</body></html>

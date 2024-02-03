@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="OS-facilities">
+<h2 class="contents-heading" id="OS-facilities-1">14 OS facilities</h2>
+
+<p class="calibre1">R has quite extensive facilities to access the OS under which it is
+running: this allows it to be used as a scripting language and that
+ability is much used by R itself, for example to install packages.
+</p>
+<p class="calibre1">Because R’s own scripts need to work across all platforms,
+considerable effort has gone into make the scripting facilities as
+platform-independent as is feasible.
+</p>
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="Files-and-directories">
+<h3 class="section" id="Files-and-directories-1">14.1 Files and directories</h3>
+
+<p class="calibre1">There are many functions to manipulate files and directories. Here are
+pointers to some of the more commonly used ones.
+</p>
+<p class="calibre1">To create an (empty) file or directory, use <code class="code">file.create</code> or
+<code class="code">dir.create</code>.  (These are the analogues of the POSIX utilities
+<code class="code">touch</code> and <code class="code">mkdir</code>.)  For temporary files and
+directories in the R session directory see <code class="code">tempfile</code>.
+</p>
+<p class="calibre1">Files can be removed by either <code class="code">file.remove</code> or <code class="code">unlink</code>: the
+latter can remove directory trees.
+</p>
+<p class="calibre1">For directory listings use <code class="code">list.files</code> (also available as
+<code class="code">dir</code>) or <code class="code">list.dirs</code>. These can select files using a regular
+expression: to select by wildcards use <code class="code">Sys.glob</code>.
+</p>
+<p class="calibre1">Many types of information on a filepath (including for example if it is
+a file or directory) can be found by <code class="code">file.info</code>.
+</p>
+<p class="calibre1">There are several ways to find out if a file ‘exists’ (a file can
+exist on the filesystem and not be visible to the current user).
+There are functions <code class="code">file.exists</code>, <code class="code">file.access</code> and
+<code class="code">file_test</code> with various versions of this test: <code class="code">file_test</code> is
+a version of the POSIX <code class="code">test</code> command for those familiar with
+shell scripting.
+</p>
+<p class="calibre1">Function <code class="code">file.copy</code> is the R analogue of the POSIX command
+<code class="code">cp</code>.
+</p>
+<p class="calibre1">Choosing files can be done interactively by <code class="code">file.choose</code>: the
+Windows port has the more versatile functions <code class="code">choose.files</code> and
+<code class="code">choose.dir</code> and there are similar functions in the <strong class="strong">tcltk</strong>
+package: <code class="code">tk_choose.files</code> and <code class="code">tk_choose.dir</code>.
+</p>
+<p class="calibre1">Functions <code class="code">file.show</code> and <code class="code">file.edit</code> will display and edit
+one or more files in a way appropriate to the R port, using the
+facilities of a console (such as RGui on Windows or R.app on macOS) if
+one is in use.
+</p>
+<p class="calibre1">There is some support for <em class="emph">links</em> in the filesystem: see functions
+<code class="code">file.link</code> and <code class="code">Sys.readlink</code>.
+</p>
+
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Filepaths">
+<h3 class="section" id="Filepaths-1">14.2 Filepaths</h3>
+
+<p class="calibre1">With a few exceptions, R relies on the underlying OS functions to
+manipulate filepaths.  Some aspects of this are allowed to depend on the
+OS, and do, even down to the version of the OS.  There are POSIX
+standards for how OSes should interpret filepaths and many R users
+assume POSIX compliance: but Windows does not claim to be compliant and
+other OSes may be less than completely compliant.
+</p>
+<p class="calibre1">The following are some issues which have been encountered with filepaths.
+</p>
+<ul class="itemize">
+<li class="calibre3">POSIX filesystems are case-sensitive, so <samp class="code">foo.png</samp> and
+<samp class="code">Foo.PNG</samp> are different files.  However, the defaults on Windows
+and macOS are to be case-insensitive, and FAT filesystems (commonly used
+on removable storage) are not normally case-sensitive (and all filepaths
+may be mapped to lower case).
+
+</li><li class="calibre3">Almost all the Windows’ OS services support the use of slash or
+backslash as the filepath separator, and R converts the known
+exceptions to the form required by Windows.
+
+</li><li class="calibre3">The behaviour of filepaths with a trailing slash is OS-dependent.  Such
+paths are not valid on Windows and should not be expected to work.
+POSIX-2008 requires such paths to match only directories, but earlier
+versions allowed them to also match files.  So they are best avoided.
+
+</li><li class="calibre3">Multiple slashes in filepaths such as <samp class="code">/abc//def</samp> are valid on
+POSIX filesystems and treated as if there was only one slash.  They are
+<em class="emph">usually</em> accepted by Windows’ OS functions.  However, leading
+double slashes may have a different meaning.
+
+</li><li class="calibre3">Windows’ UNC filepaths (such as <samp class="code">\\server\dir1\dir2\file</samp> and
+<samp class="code">\\?\UNC\server\dir1\dir2\file</samp>) are not supported, but they may
+work in some R functions.  POSIX filesystems are allowed to treat a
+leading double slash specially.
+
+</li><li class="calibre3">Windows allows filepaths containing drives and relative to the current
+directory on a drive, e.g. <samp class="code">d:foo/bar</samp> refers to
+<samp class="code">d:/a/b/c/foo/bar</samp> if the current directory <em class="emph">on drive
+<samp class="code">d:</samp></em> is <samp class="code">/a/b/c</samp>.  It is intended that these work, but the
+use of absolute paths is safer.
+</li></ul>
+
+<p class="calibre1">Functions <code class="code">basename</code> and <code class="code">dirname</code> select parts of a file
+path: the recommended way to assemble a file path from components is
+<code class="code">file.path</code>.  Function <code class="code">pathexpand</code> does ‘tilde expansion’,
+substituting values for home directories (the current user’s, and
+perhaps those of other users).
+</p>
+<p class="calibre1">On filesystems with links, a single file can be referred to by many
+filepaths.  Function <code class="code">normalizePath</code> will find a canonical
+filepath.
+</p>
+<p class="calibre1">Windows has the concepts of short (‘8.3’) and long file names:
+<code class="code">normalizePath</code> will return an absolute path using long file names
+and <code class="code">shortPathName</code> will return a version using short names.  The
+latter does not contain spaces and uses backslash as the separator, so
+is sometimes useful for exporting names from R.
+</p>
+<p class="calibre1">File <em class="emph">permissions</em> are a related topic.  R has support for the
+POSIX concepts of read/write/execute permission for owner/group/all but
+this may be only partially supported on the filesystem, so for example
+on Windows only read-only files (for the account running the R
+session) are recognized.  Access Control Lists (ACLs) are employed on
+several filesystems, but do not have an agreed standard and R has no
+facilities to control them.  Use <code class="code">Sys.chmod</code> to change permissions.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="System-commands">
+<h3 class="section" id="System-commands-1">14.3 System commands</h3>
+
+<p class="calibre1">Functions <code class="code">system</code> and <code class="code">system2</code> are used to invoke a system
+command and optionally collect its output.  <code class="code">system2</code> is a little
+more general but its main advantage is that it is easier to write
+cross-platform code using it.
+</p>
+<p class="calibre1"><code class="code">system</code> behaves differently on Windows from other OSes (because
+the API C call of that name does).  Elsewhere it invokes a shell to run
+the command: the Windows port of R has a function <code class="code">shell</code> to do
+that.
+</p>
+<p class="calibre1">To find out if the OS includes a command, use <code class="code">Sys.which</code>, which
+attempts to do this in a cross-platform way (unfortunately it is not a
+standard OS service).
+</p>
+<p class="calibre1">Function <code class="code">shQuote</code> will quote filepaths as needed for commands in
+the current OS.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Compression-and-Archives">
+<h3 class="section" id="Compression-and-Archives-1">14.4 Compression and Archives</h3>
+
+<p class="calibre1">Recent versions of R have extensive facilities to read and write
+compressed files, often transparently.  Reading of files in R is to a
+very large extent done by <em class="emph">connections</em>, and the <code class="code">file</code>
+function which is used to open a connection to a file (or a URL) and is
+able to identify the compression used from the ‘magic’ header of the
+file.
+</p>
+<p class="calibre1">The type of compression which has been supported for longest is
+<code class="code">gzip</code> compression, and that remains a good general compromise.
+Files compressed by the earlier Unix <code class="code">compress</code> utility can also
+be read, but these are becoming rare.  Two other forms of compression,
+those of the <code class="code">bzip2</code> and <code class="code">xz</code> utilities are also
+available.  These generally achieve higher rates of compression
+(depending on the file, much higher) at the expense of slower
+decompression and much slower compression.
+</p>
+<p class="calibre1">There is some confusion between <code class="code">xz</code> and <code class="code">lzma</code>
+compression (see <a href="https://en.wikipedia.org/wiki/Xz">https://en.wikipedia.org/wiki/Xz</a> and
+<a href="https://en.wikipedia.org/wiki/LZMA">https://en.wikipedia.org/wiki/LZMA</a>): R can read files
+compressed by most versions of either.
+</p>
+<p class="calibre1">File archives are single files which contain a collection of files, the
+most common ones being ‘tarballs’ and zip files as used to distribute
+R packages.  R can list and unpack both (see functions <code class="code">untar</code>
+and <code class="code">unzip</code>) and create both (for <code class="code">zip</code> with the help of an
+external program).
+</p>
+<hr class="calibre4"/>
+</div>
+</div>
+</div>
+</body></html>

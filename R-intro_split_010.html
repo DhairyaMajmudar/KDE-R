@@ -1,0 +1,436 @@
+<?xml version='1.0' encoding='utf-8'?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <!-- Created by GNU Texinfo 7.0.3, https://www.gnu.org/software/texinfo/ --><head>
+    <!-- This manual is for R, version 4.3.2 (2023-10-31).
+
+Copyright © 1990 W. N. Venables
+
+Copyright © 1992 W. N. Venables & D. M. Smith
+
+Copyright © 1997 R. Gentleman & R. Ihaka
+
+Copyright © 1997, 1998 M. Maechler
+
+Copyright © 1999-2023 R Core Team
+
+Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+Permission is granted to copy and distribute modified versions of this
+manual under the conditions for verbatim copying, provided that the
+entire resulting derived work is distributed under the terms of a
+permission notice identical to this one.
+
+Permission is granted to copy and distribute translations of this manual
+into another language, under the above conditions for modified versions,
+except that this permission notice may be stated in a translation
+approved by the R Core Team. -->
+    <title>An Introduction to R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="An Introduction to R"/>
+    <meta name="keywords" content="An Introduction to R"/>
+    <meta name="resource-type" content="document"/>
+    <meta name="distribution" content="global"/>
+    <meta name="Generator" content="texi2any"/>
+    <meta content="width=device-width,initial-scale=1"/>
+    <link href="#Top" rel="start" title="Top"/>
+    <link href="#Function-and-variable-index" rel="index" title="Function and variable index"/>
+    <link href="#SEC_Contents" rel="contents" title="Table of Contents"/>
+    <link href="#Preface" rel="next" title="Preface"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+<link rel="stylesheet" type="text/css" href="page_styles.css"/>
+</head>
+  <body lang="en" class="calibre">
+<div class="top-level-extent" id="Top">
+<div class="top-level-extent" id="Probability-distributions">
+<h2 class="contents-heading" id="Probability-distributions-1">8 Probability distributions</h2>
+<a id="index-Probability-distributions"></a>
+
+
+<hr class="calibre4"/>
+<div class="top-level-extent" id="R-as-a-set-of-statistical-tables">
+<h3 class="section" id="R-as-a-set-of-statistical-tables-1">8.1 R as a set of statistical tables</h3>
+
+<p class="calibre1">One convenient use of R is to provide a comprehensive set of
+statistical tables.  Functions are provided to evaluate the cumulative
+distribution function P(X &lt;= x),
+the probability density function and the quantile function (given
+<em class="emph">q</em>, the smallest <em class="emph">x</em> such that P(X &lt;= x) &gt; q),
+and to simulate from the distribution.
+</p>
+<blockquote class="quotation">
+<table summary="" class="cartouche">
+<thead class="calibre9"><tr class="calibre7"><th class="calibre10">Distribution</th><th class="calibre10">R name</th><th class="calibre10">additional arguments</th></tr></thead>
+<tbody class="calibre6"><tr class="calibre7"><td class="calibre8">beta</td><td class="calibre8"><code class="code">beta</code></td><td class="calibre8"><code class="code">shape1, shape2, ncp</code></td></tr>
+<tr class="calibre7"><td class="calibre8">binomial</td><td class="calibre8"><code class="code">binom</code></td><td class="calibre8"><code class="code">size, prob</code></td></tr>
+<tr class="calibre7"><td class="calibre8">Cauchy</td><td class="calibre8"><code class="code">cauchy</code></td><td class="calibre8"><code class="code">location, scale</code></td></tr>
+<tr class="calibre7"><td class="calibre8">chi-squared</td><td class="calibre8"><code class="code">chisq</code></td><td class="calibre8"><code class="code">df, ncp</code></td></tr>
+<tr class="calibre7"><td class="calibre8">exponential</td><td class="calibre8"><code class="code">exp</code></td><td class="calibre8"><code class="code">rate</code></td></tr>
+<tr class="calibre7"><td class="calibre8">F</td><td class="calibre8"><code class="code">f</code></td><td class="calibre8"><code class="code">df1, df2, ncp</code></td></tr>
+<tr class="calibre7"><td class="calibre8">gamma</td><td class="calibre8"><code class="code">gamma</code></td><td class="calibre8"><code class="code">shape, scale</code></td></tr>
+<tr class="calibre7"><td class="calibre8">geometric</td><td class="calibre8"><code class="code">geom</code></td><td class="calibre8"><code class="code">prob</code></td></tr>
+<tr class="calibre7"><td class="calibre8">hypergeometric</td><td class="calibre8"><code class="code">hyper</code></td><td class="calibre8"><code class="code">m, n, k</code></td></tr>
+<tr class="calibre7"><td class="calibre8">log-normal</td><td class="calibre8"><code class="code">lnorm</code></td><td class="calibre8"><code class="code">meanlog, sdlog</code></td></tr>
+<tr class="calibre7"><td class="calibre8">logistic</td><td class="calibre8"><code class="code">logis</code></td><td class="calibre8"><code class="code">location, scale</code></td></tr>
+<tr class="calibre7"><td class="calibre8">negative binomial</td><td class="calibre8"><code class="code">nbinom</code></td><td class="calibre8"><code class="code">size, prob</code></td></tr>
+<tr class="calibre7"><td class="calibre8">normal</td><td class="calibre8"><code class="code">norm</code></td><td class="calibre8"><code class="code">mean, sd</code></td></tr>
+<tr class="calibre7"><td class="calibre8">Poisson</td><td class="calibre8"><code class="code">pois</code></td><td class="calibre8"><code class="code">lambda</code></td></tr>
+<tr class="calibre7"><td class="calibre8">signed rank</td><td class="calibre8"><code class="code">signrank</code></td><td class="calibre8"><code class="code">n</code></td></tr>
+<tr class="calibre7"><td class="calibre8">Student’s t</td><td class="calibre8"><code class="code">t</code></td><td class="calibre8"><code class="code">df, ncp</code></td></tr>
+<tr class="calibre7"><td class="calibre8">uniform</td><td class="calibre8"><code class="code">unif</code></td><td class="calibre8"><code class="code">min, max</code></td></tr>
+<tr class="calibre7"><td class="calibre8">Weibull</td><td class="calibre8"><code class="code">weibull</code></td><td class="calibre8"><code class="code">shape, scale</code></td></tr>
+<tr class="calibre7"><td class="calibre8">Wilcoxon</td><td class="calibre8"><code class="code">wilcox</code></td><td class="calibre8"><code class="code">m, n</code></td></tr>
+</tbody>
+</table>
+</blockquote>
+
+<p class="calibre1">Prefix the name given here by ‘<samp class="code">d</samp>’ for the density, ‘<samp class="code">p</samp>’ for the
+CDF, ‘<samp class="code">q</samp>’ for the quantile function and ‘<samp class="code">r</samp>’ for simulation
+(<em class="emph">r</em>andom deviates).  The first argument is <code class="code">x</code> for
+<code class="code">d<var class="emph">xxx</var></code>, <code class="code">q</code> for <code class="code">p<var class="emph">xxx</var></code>, <code class="code">p</code> for
+<code class="code">q<var class="emph">xxx</var></code> and <code class="code">n</code> for <code class="code">r<var class="emph">xxx</var></code> (except for
+<code class="code">rhyper</code>, <code class="code">rsignrank</code> and <code class="code">rwilcox</code>, for which it is
+<code class="code">nn</code>).  In not quite all cases is the non-centrality parameter
+<code class="code">ncp</code> currently available: see the on-line help for details.
+</p>
+<p class="calibre1">The <code class="code">p<var class="emph">xxx</var></code> and <code class="code">q<var class="emph">xxx</var></code> functions all have logical
+arguments <code class="code">lower.tail</code> and <code class="code">log.p</code> and the <code class="code">d<var class="emph">xxx</var></code>
+ones have <code class="code">log</code>.  This allows, e.g., getting the cumulative (or
+“integrated”) <em class="emph">hazard</em> function, H(t) = - log(1 - F(t)), by
+</p>
+<div class="example">
+<pre class="example-preformatted"> - p<var class="emph">xxx</var>(t, ..., lower.tail = FALSE, log.p = TRUE)
+</pre></div>
+
+<p class="calibre1">or more accurate log-likelihoods (by <code class="code">d<var class="emph">xxx</var>(..., log =
+TRUE)</code>), directly.
+</p>
+<p class="calibre1">In addition there are functions <code class="code">ptukey</code> and <code class="code">qtukey</code> for the
+distribution of the studentized range of samples from a normal
+distribution, and <code class="code">dmultinom</code> and <code class="code">rmultinom</code> for the
+multinomial distribution. Further distributions are available in
+contributed packages, notably <a href="https://CRAN.R-project.org/package=SuppDists"><strong class="strong">SuppDists</strong></a>.
+</p>
+<p class="calibre1">Here are some examples
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; ## <span class="r">2-tailed p-value for t distribution</span>
+&gt; 2*pt(-2.43, df = 13)
+&gt; ## <span class="r">upper 1% point for an F(2, 7) distribution</span>
+&gt; qf(0.01, 2, 7, lower.tail = FALSE)
+</pre></div>
+
+<p class="calibre1">See the on-line help on <code class="code">RNG</code> for how random-number generation is
+done in R.
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="Examining-the-distribution-of-a-set-of-data">
+<h3 class="section" id="Examining-the-distribution-of-a-set-of-data-1">8.2 Examining the distribution of a set of data</h3>
+
+<p class="calibre1">Given a (univariate) set of data we can examine its distribution in a
+large number of ways.  The simplest is to examine the numbers.  Two
+slightly different summaries are given by <code class="code">summary</code> and
+<code class="code">fivenum</code>
+<a id="index-summary"></a>
+<a id="index-fivenum"></a>
+and a display of the numbers by <code class="code">stem</code> (a “stem and leaf” plot).
+<a id="index-stem"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; attach(faithful)
+&gt; summary(eruptions)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+  1.600   2.163   4.000   3.488   4.454   5.100
+&gt; fivenum(eruptions)
+[1] 1.6000 2.1585 4.0000 4.4585 5.1000
+&gt; stem(eruptions)
+
+  The decimal point is 1 digit(s) to the left of the |
+
+  16 | 070355555588
+  18 | 000022233333335577777777888822335777888
+  20 | 00002223378800035778
+  22 | 0002335578023578
+  24 | 00228
+  26 | 23
+  28 | 080
+  30 | 7
+  32 | 2337
+  34 | 250077
+  36 | 0000823577
+  38 | 2333335582225577
+  40 | 0000003357788888002233555577778
+  42 | 03335555778800233333555577778
+  44 | 02222335557780000000023333357778888
+  46 | 0000233357700000023578
+  48 | 00000022335800333
+  50 | 0370
+</pre></div>
+
+<p class="calibre1">A stem-and-leaf plot is like a histogram, and R has a function
+<code class="code">hist</code> to plot histograms.
+<a id="index-hist"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; hist(eruptions)
+## <span class="r">make the bins smaller, make a plot of density</span>
+&gt; hist(eruptions, seq(1.6, 5.2, 0.2), prob=TRUE)
+&gt; lines(density(eruptions, bw=0.1))
+&gt; rug(eruptions) # <span class="r">show the actual data points</span>
+</pre></div>
+
+<a id="index-density"></a>
+<a id="index-Density-estimation"></a>
+<p class="calibre1">More elegant density plots can be made by <code class="code">density</code>, and we added a
+line produced by <code class="code">density</code> in this example.  The bandwidth
+<code class="code">bw</code> was chosen by trial-and-error as the default gives too much
+smoothing (it usually does for “interesting” densities).  (Better
+automated methods of bandwidth choice are available, and in this example
+<code class="code">bw = "SJ"</code> gives a good result.)
+</p>
+<img class="image" src="hist.png" alt="images/hist"/>
+
+<p class="calibre1">We can plot the empirical cumulative distribution function by using the
+function <code class="code">ecdf</code>.
+<a id="index-ecdf"></a>
+<a id="index-Empirical-CDFs"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; plot(ecdf(eruptions), do.points=FALSE, verticals=TRUE)
+</pre></div>
+
+<p class="calibre1">This distribution is obviously far from any standard distribution.
+How about the right-hand mode, say eruptions of longer than 3 minutes?
+Let us fit a normal distribution and overlay the fitted CDF.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; long &lt;- eruptions[eruptions &gt; 3]
+&gt; plot(ecdf(long), do.points=FALSE, verticals=TRUE)
+&gt; x &lt;- seq(3, 5.4, 0.01)
+&gt; lines(x, pnorm(x, mean=mean(long), sd=sqrt(var(long))), lty=3)
+</pre></div>
+
+<img class="image" src="ecdf.png" alt="images/ecdf"/>
+
+<p class="calibre1">Quantile-quantile (Q-Q) plots can help us examine this more carefully.
+<a id="index-Quantile_002dquantile-plots"></a>
+<a id="index-qqnorm"></a>
+<a id="index-qqline"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">par(pty="s")       # arrange for a square figure region
+qqnorm(long); qqline(long)
+</pre></div>
+
+<p class="calibre1">which shows a reasonable fit but a shorter right tail than one would
+expect from a normal distribution.  Let us compare this with some
+simulated data from a <em class="emph">t</em> distribution
+</p>
+<img class="image" src="QQ.png" alt="images/QQ"/>
+
+<div class="example">
+<pre class="example-preformatted">x &lt;- rt(250, df = 5)
+qqnorm(x); qqline(x)
+</pre></div>
+
+<p class="calibre1">which will usually (if it is a random sample) show longer tails than
+expected for a normal.  We can make a Q-Q plot against the generating
+distribution by
+</p>
+<div class="example">
+<pre class="example-preformatted">qqplot(qt(ppoints(250), df = 5), x, xlab = "Q-Q plot for t dsn")
+qqline(x)
+</pre></div>
+
+<p class="calibre1">Finally, we might want a more formal test of agreement with normality
+(or not).  R provides the Shapiro-Wilk test
+<a id="index-Shapiro_002dWilk-test"></a>
+<a id="index-shapiro_002etest"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; shapiro.test(long)
+
+         Shapiro-Wilk normality test
+
+data:  long
+W = 0.9793, p-value = 0.01052
+</pre></div>
+
+<p class="calibre1">and the Kolmogorov-Smirnov test
+<a id="index-Kolmogorov_002dSmirnov-test"></a>
+<a id="index-ks_002etest"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; ks.test(long, "pnorm", mean = mean(long), sd = sqrt(var(long)))
+
+         One-sample Kolmogorov-Smirnov test
+
+data:  long
+D = 0.0661, p-value = 0.4284
+alternative hypothesis: two.sided
+</pre></div>
+
+<p class="calibre1">(Note that the distribution theory is not valid here as we
+have estimated the parameters of the normal distribution from the same
+sample.)
+</p>
+<hr class="calibre4"/>
+</div>
+<div class="top-level-extent" id="One_002d-and-two_002dsample-tests">
+<h3 class="section" id="One_002d-and-two_002dsample-tests-1">8.3 One- and two-sample tests</h3>
+<a id="index-One_002d-and-two_002dsample-tests"></a>
+
+<p class="calibre1">So far we have compared a single sample to a normal distribution.  A
+much more common operation is to compare aspects of two samples.  Note
+that in R, all “classical” tests including the ones used below are
+in package <strong class="strong">stats</strong> which is normally loaded.
+</p>
+<p class="calibre1">Consider the following sets of data on the latent heat of the fusion of
+ice (<em class="emph">cal/gm</em>) from Rice (1995, p.490)
+</p>
+<div class="example">
+<pre class="example-preformatted">Method A: 79.98 80.04 80.02 80.04 80.03 80.03 80.04 79.97
+          80.05 80.03 80.02 80.00 80.02
+Method B: 80.02 79.94 79.98 79.97 79.97 80.03 79.95 79.97
+</pre></div>
+
+<p class="calibre1">Boxplots provide a simple graphical comparison of the two samples.
+</p>
+<div class="example">
+<pre class="example-preformatted">A &lt;- scan()
+79.98 80.04 80.02 80.04 80.03 80.03 80.04 79.97
+80.05 80.03 80.02 80.00 80.02
+
+B &lt;- scan()
+80.02 79.94 79.98 79.97 79.97 80.03 79.95 79.97
+
+boxplot(A, B)
+</pre></div>
+<a id="index-boxplot"></a>
+<a id="index-Box-plots"></a>
+
+<p class="calibre1">which indicates that the first group tends to give higher results than
+the second.
+</p>
+<img class="image" src="ice.png" alt="images/ice"/>
+
+<p class="calibre1">To test for the equality of the means of the two examples, we can use
+an <em class="emph">unpaired</em> <em class="emph">t</em>-test by
+<a id="index-Student_0027s-t-test"></a>
+<a id="index-t_002etest"></a>
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; t.test(A, B)
+
+         Welch Two Sample t-test
+
+data:  A and B
+t = 3.2499, df = 12.027, p-value = 0.00694
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.01385526 0.07018320
+sample estimates:
+mean of x mean of y
+ 80.02077  79.97875
+</pre></div>
+
+<p class="calibre1">which does indicate a significant difference, assuming normality.  By
+default the R function does not assume equality of variances in the
+two samples.
+We can use the F test to test for equality in the variances,
+provided that the two samples are from normal populations.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; var.test(A, B)
+
+         F test to compare two variances
+
+data:  A and B
+F = 0.5837, num df = 12, denom df =  7, p-value = 0.3938
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.1251097 2.1052687
+sample estimates:
+ratio of variances
+         0.5837405
+</pre></div>
+<a id="index-var_002etest"></a>
+
+<p class="calibre1">which shows no evidence of a significant difference, and so we can use
+the classical <em class="emph">t</em>-test that assumes equality of the variances.
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; t.test(A, B, var.equal=TRUE)
+
+         Two Sample t-test
+
+data:  A and B
+t = 3.4722, df = 19, p-value = 0.002551
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ 0.01669058 0.06734788
+sample estimates:
+mean of x mean of y
+ 80.02077  79.97875
+</pre></div>
+
+<p class="calibre1">All these tests assume normality of the two samples.  The two-sample
+Wilcoxon (or Mann-Whitney) test only assumes a common continuous
+distribution under the null hypothesis.
+</p>
+<a id="index-Wilcoxon-test"></a>
+<a id="index-wilcox_002etest"></a>
+<div class="example">
+<pre class="example-preformatted">&gt; wilcox.test(A, B)
+
+         Wilcoxon rank sum test with continuity correction
+
+data:  A and B
+W = 89, p-value = 0.007497
+alternative hypothesis: true location shift is not equal to 0
+
+Warning message:
+Cannot compute exact p-value with ties in: wilcox.test(A, B)
+</pre></div>
+
+<p class="calibre1">Note the warning: there are several ties in each sample, which suggests
+strongly that these data are from a discrete distribution (probably due
+to rounding).
+</p>
+<p class="calibre1">There are several ways to compare graphically the two samples.  We have
+already seen a pair of boxplots.  The following
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; plot(ecdf(A), do.points=FALSE, verticals=TRUE, xlim=range(A, B))
+&gt; plot(ecdf(B), do.points=FALSE, verticals=TRUE, add=TRUE)
+</pre></div>
+
+<p class="calibre1">will show the two empirical CDFs, and <code class="code">qqplot</code> will perform a Q-Q
+plot of the two samples.  The Kolmogorov-Smirnov test is of the maximal
+vertical distance between the two ecdf’s, assuming a common continuous
+distribution:
+</p>
+<div class="example">
+<pre class="example-preformatted">&gt; ks.test(A, B)
+
+         Two-sample Kolmogorov-Smirnov test
+
+data:  A and B
+D = 0.5962, p-value = 0.05919
+alternative hypothesis: two-sided
+
+Warning message:
+cannot compute correct p-values with ties in: ks.test(A, B)
+</pre></div>
+
+<hr class="calibre4"/>
+</div>
+</div>
+<div class="top-level-extent" id="Loops-and-conditional-execution">
+<div class="calibre5" id="calibre_pb_19"></div>
+</div>
+</div>
+</body></html>
