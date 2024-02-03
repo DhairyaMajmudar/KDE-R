@@ -1,226 +1,43 @@
-.acronym {
-  line-height: 1.2;
-}
-.calibre {
-  display: block;
-  font-size: 1em;
-  padding-left: 0;
-  padding-right: 0;
-  margin: 0 5pt;
-}
-.calibre1 {
-  display: block;
-  margin: 0.6ex 0 1.2ex;
-}
-.calibre2 {
-  font-size: 0.75em;
-  line-height: normal;
-  vertical-align: super;
-}
-.calibre3 {
-  display: list-item;
-  margin-bottom: 0.25ex;
-  margin-top: 0.25ex;
-}
-.calibre4 {
-  color: gray;
-  display: block;
-  height: 2px;
-  margin: 0.5em auto;
-  border: currentColor inset 1px;
-}
-.calibre5 {
-  display: block;
-}
-.calibre6 {
-  display: table-row-group;
-  vertical-align: middle;
-}
-.calibre7 {
-  display: table-row;
-  vertical-align: inherit;
-}
-.calibre8 {
-  display: table-cell;
-  text-align: inherit;
-  vertical-align: inherit;
-  padding: 1px;
-}
-.calibre9 {
-  display: table-header-group;
-  vertical-align: middle;
-}
-.calibre10 {
-  display: table-cell;
-  font-weight: bold;
-  vertical-align: inherit;
-  padding: 1px;
-}
-.calibre11 {
-  display: block;
-  margin-left: 40px;
-}
-.cartouche {
-  border-collapse: separate;
-  border-spacing: 2px;
-  display: table;
-  margin-bottom: 0;
-  margin-top: 0;
-  text-indent: 0;
-}
-.code {
-  font-family: monospace;
-}
-.code1 {
-  font-family: monospace;
-  line-height: 1.2;
-}
-.contents-heading {
-  background: white;
-  color: rgb(40%, 40%, 40%);
-  display: block;
-  font-family: monospace;
-  font-size: 1.41667em;
-  font-weight: bold;
-  line-height: 1.2;
-  text-align: center;
-  margin: 0.83em 0;
-}
-.copiable-link {
-  line-height: 1.2;
-  text-decoration: none;
-  visibility: hidden;
-}
-.display-preformatted {
-  display: block;
-  font-family: inherit;
-  white-space: pre-wrap;
-  margin: 1em 0;
-}
-.emph {
-  font-style: italic;
-}
-.entries-header-printindex {
-  display: table-cell;
-  font-weight: bold;
-  text-align: left;
-  vertical-align: inherit;
-  padding: 1px;
-}
-.enumerate {
-  display: block;
-  list-style-type: decimal;
-  margin-bottom: 1em;
-  margin-right: 0;
-  margin-top: 1em;
-}
-.example {
-  display: block;
-}
-.example-preformatted {
-  display: block;
-  font-family: monospace;
-  white-space: pre-wrap;
-  margin: 1em 0;
-}
-.footnote-body-heading {
-  display: block;
-  font-size: 0.75em;
-  font-weight: bold;
-  margin: 1.67em 0;
-}
-.image {
-  height: auto;
-  width: auto;
-}
-.itemize {
-  display: block;
-  list-style-type: disc;
-  margin-bottom: 0.25ex;
-  margin-right: 0;
-  margin-top: 0.25ex;
-}
-.kbd {
-  font-family: monospace;
-  font-style: oblique;
-}
-.key {
-  font-family: monospace;
-  font-style: normal;
-}
-.printindex-index-entry {
-  display: table-cell;
-  text-align: inherit;
-  vertical-align: top;
-  padding: 1px;
-}
-.quotation {
-  display: block;
-  margin: 1em;
-}
-.r {
-  font-family: initial;
-  font-style: normal;
-  font-weight: normal;
-}
-.sc {
-  font-size: 0.75em;
-}
-.section {
-  background: white;
-  color: rgb(40%, 40%, 40%);
-  display: block;
-  font-family: monospace;
-  font-size: 1.125em;
-  font-weight: bold;
-  line-height: 1.2;
-  margin: 1em 0;
-}
-.strong {
-  font-weight: bold;
-}
-.subheading {
-  background: white;
-  color: rgb(40%, 40%, 40%);
-  display: block;
-  font-family: monospace;
-  font-weight: bold;
-  margin: 1.33em 0;
-}
-.summary-letter-printindex {
-  text-decoration: none;
-}
-.table {
-  display: block;
-  margin: 1em 0;
-}
-.table1 {
-  display: block;
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
   margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
-.toc-numbered-mark {
-  display: block;
-  list-style-image: none;
-  list-style-position: outside;
-  list-style-type: none;
-  margin-bottom: 0.25ex;
-  margin-right: 0;
-  margin-top: 0.25ex;
+
+h1 {
+  color: #444;
 }
-.top {
-  background: white;
-  color: rgb(25%, 25%, 25%);
-  display: block;
-  font-family: monospace;
-  font-size: 1.66667em;
-  font-weight: bold;
-  line-height: 1.2;
-  text-align: center;
-  margin: 0.67em 0;
+
+p {
+  margin-bottom: 20px;
 }
+
+blockquote {
+  border-left: 5px solid #ccc;
+  padding-left: 15px;
+  margin-left: 0;
+  color: #666;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2980b9;
+}
+
+.calibre1 {
+  font-size: 1em;
+}
+
 .top-level-extent {
-  display: block;
-}
-.pcalibre:hover {
-  visibility: visible;
+  margin: 20px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
 }
